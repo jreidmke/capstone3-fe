@@ -17,8 +17,9 @@ function App() {
       if(token) {
         try {
           PrintApi.token = token;
-          const { id } = jwt.decode(token);
-          let currUser = await PrintApi.getCurrentUser(id);
+          const { userId } = jwt.decode(token);
+          console.log(userId);
+          let currUser = await PrintApi.getCurrentUser(userId);
           setCurrentUser(currUser);
         } catch (error) {
           setCurrentUser(null);

@@ -10,7 +10,7 @@ function Routes({ login, register}) {
             </Route>
 
             <Route exact path="/login">
-                <LoginForm/>
+                <LoginForm login={login}/>
             </Route>
         </Switch>
     )
