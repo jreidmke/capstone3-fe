@@ -18,7 +18,6 @@ function App() {
         try {
           PrintApi.token = token;
           const { userId } = jwt.decode(token);
-          console.log(userId);
           let currUser = await PrintApi.getCurrentUser(userId);
           setCurrentUser(currUser);
         } catch (error) {
@@ -51,7 +50,7 @@ function App() {
     }
   };
 
-  if(!infoLoaded) return <h1>Loading...</h1>
+  // if(!infoLoaded) return <h1>Loading...</h1>
 
   return (
     <div className="App">
