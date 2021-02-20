@@ -5,7 +5,10 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import jwt from "jsonwebtoken";
 import PrintApi from './api/api';
 import UserContext from './auth/UserContext';
+
+//Components
 import Routes from './routes-nav/Routes';
+import NavBar from './routes-nav/NavBar';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -50,15 +53,20 @@ function App() {
     }
   };
 
-  // if(!infoLoaded) return <h1>Loading...</h1>
+  function logout() {
+    setCurrentUser(null);
+    setToken(null);
+  }
+
+  if(!infoLoaded) return <h1>Loading...</h1>
 
   return (
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider
           value={{currentUser, setCurrentUser}}>
+            <NavBar logout={logout}/>
             <h1>Welcome</h1>
-            {/* Navbar */}
             <Routes login={login} register={register}/>
           </UserContext.Provider>
       </BrowserRouter>
