@@ -45,7 +45,7 @@ function WriterList() {
                 <select name="city" id="cities" value={formData.city} onChange={handleChange}>
                     <option value={null}></option>
                     {!cities.length ? <option></option> : cities.map(c => {
-                        return <option value={c}>{c}</option>
+                        return <option value={c} key={c}>{c}</option>
                     })}
                 </select>
 
@@ -54,12 +54,12 @@ function WriterList() {
                 <select name="state" id="states" value={formData.state} onChange={handleChange}>
                     <option value={null}></option>
                     {!states.length ? <option></option> : states.map(s => {
-                        return <option value={s}>{s}</option>
+                        return <option value={s} key={s}>{s}</option>
                     })}
                 </select>
                 <button>JFDSK:L</button>
             </form>
-            {!writers.length ? "Loading..." : writers.map(w => <WriterCard key={w.email} writer={w}/>)}
+            {!writers.length ? "Loading..." : writers.map(w => <WriterCard key={w.id} writer={w}/>)}
         </div>
     )
 };
