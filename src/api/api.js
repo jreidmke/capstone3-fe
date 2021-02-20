@@ -56,6 +56,17 @@ class PrintApi {
     static async getWriterById(writerId) {
       let res = await this.request(`writers/${writerId}`);
       return res.writer;
+    };
+
+    ////PORTFOLIO METHODS
+    static async getPortfolioById(portfolioId) {
+      let res = await this.request(`portfolios/${portfolioId}`);
+      return res.portfolio;
+    };
+
+    static async getPieceById(pieceId) {
+      let res = await this.request(`pieces/${pieceId}`);
+      return res.piece;
     }
 };
 

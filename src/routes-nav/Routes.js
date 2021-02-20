@@ -2,6 +2,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from '../auth/LoginForm';
 import UserRegisterForm from "../auth/UserRegisterForm";
 import Homepage from '../homepage/Homepage';
+import PieceDetails from "../pieces/PieceDetails";
+import PortfolioDetails from "../portfolios/PortfolioDetails";
 import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
 import PrivateRoute from './PrivateRoute';
@@ -28,6 +30,15 @@ function Routes({ login, register}) {
             <PrivateRoute path="/writers/:writerId">
                 <WriterDetails/>
             </PrivateRoute>
+
+            <PrivateRoute path="/portfolios/:portfolioId">
+                <PortfolioDetails/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/pieces/:pieceId">
+                <PieceDetails/>
+            </PrivateRoute>
+
         </Switch>
     )
 };
