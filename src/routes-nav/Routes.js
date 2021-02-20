@@ -4,6 +4,7 @@ import UserRegisterForm from "../auth/UserRegisterForm";
 import Homepage from '../homepage/Homepage';
 import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
+import PrivateRoute from './PrivateRoute';
 
 function Routes({ login, register}) {
     return(
@@ -20,13 +21,13 @@ function Routes({ login, register}) {
                 <UserRegisterForm register={register}/>
             </Route>
 
-            <Route exact path="/writers">
+            <PrivateRoute exact path="/writers">
                 <WriterList/>
-            </Route>
+            </PrivateRoute>
 
-            <Route path="/writers/:writerId">
+            <PrivateRoute path="/writers/:writerId">
                 <WriterDetails/>
-            </Route>
+            </PrivateRoute>
         </Switch>
     )
 };
