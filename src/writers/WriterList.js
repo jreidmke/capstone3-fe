@@ -33,10 +33,8 @@ function WriterList() {
 
     async function submit(e) {
         e.preventDefault();
-        history.push(formData);
-        console.log(formData)
         const writerRes = await PrintApi.getWriters(formData);
-        console.log(writerRes);
+        setWriters(writerRes);
     }
 
     return(
@@ -45,7 +43,7 @@ function WriterList() {
                 <label htmlFor="city">Filter By City:</label>
 
                 <select name="city" id="cities" value={formData.city} onChange={handleChange}>
-                    <option value={null}>--</option>
+                    <option value={null}></option>
                     {!cities.length ? <option></option> : cities.map(c => {
                         return <option value={c}>{c}</option>
                     })}
@@ -54,7 +52,7 @@ function WriterList() {
                 <label htmlFor="state">Filter By State:</label>
 
                 <select name="state" id="states" value={formData.state} onChange={handleChange}>
-                    <option value={null}>--</option>
+                    <option value={null}></option>
                     {!states.length ? <option></option> : states.map(s => {
                         return <option value={s}>{s}</option>
                     })}

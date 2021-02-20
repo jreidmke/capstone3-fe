@@ -2,6 +2,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from '../auth/LoginForm';
 import UserRegisterForm from "../auth/UserRegisterForm";
 import Homepage from '../homepage/Homepage';
+import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
 
 function Routes({ login, register}) {
@@ -21,6 +22,10 @@ function Routes({ login, register}) {
 
             <Route exact path="/writers">
                 <WriterList/>
+            </Route>
+
+            <Route path="/writers/:writerId">
+                <WriterDetails/>
             </Route>
         </Switch>
     )

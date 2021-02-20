@@ -47,9 +47,15 @@ class PrintApi {
       return res.token;
     };
 
+    ////WRITER METHODS
     static async getWriters(queryParams) {
       let res = await this.request(`writers`, queryParams);
       return res.writers;
+    };
+
+    static async getWriterById(writerId) {
+      let res = await this.request(`writers/${writerId}`);
+      return res.writer;
     }
 };
 
