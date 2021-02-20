@@ -1,36 +1,37 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
+import "./NavBar.css";
 
 function NavBar({logout}) {
     const { currentUser } = useContext(UserContext);
 
     function authNav() {
         return(
-            <ul>
-                <li>
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
                     <NavLink to="/writers">
-                        Writers
+                        Writers |
                     </NavLink>
                 </li>
-                <li>
+                <li className="nav-item">
                     <NavLink to="/platforms">
-                        Platforms
+                        | Platforms |
                     </NavLink>
                 </li>
-                <li>
+                <li className="nav-item">
                     <NavLink to="/gigs">
-                        Gigs
+                        | Gigs | 
                     </NavLink>
                 </li>
-                <li>
+                <li className="nav-item">
                     <NavLink to="/pieces">
-                        Pieces
+                        | Pieces |
                     </NavLink>
                 </li>
-                <li>
+                <li className="nav-item">
                     <NavLink to="/" onClick={logout}>
-                        Logout 
+                        | Logout 
                     </NavLink>
                 </li>
             </ul>
@@ -38,23 +39,24 @@ function NavBar({logout}) {
     };
 
     function noAuthNav() {
-        <ul>
-            <li>
-                <NavLink to ="/login">
-                    Login
-                </NavLink>
-            </li>
-            <li>
-                <NavLink to="/register">
-                    Register
-                </NavLink>
-            </li>
+        return(
+            <ul className="navbar-nav ml-auto">
+                <li>
+                    <NavLink to ="/login">
+                        Login |
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/register">
+                        | Register
+                    </NavLink>
+                </li>
         </ul>
-    };
+    )};
 
     return(
-        <nav>
-            <Link to="/">
+        <nav className="Navigation navbar navbar-expand-md">
+            <Link className="navbar-brand" to="/">
                 Print
             </Link>
             {currentUser ? authNav() : noAuthNav()}
