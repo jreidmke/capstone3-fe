@@ -38,13 +38,18 @@ class PrintApi {
     static async login(data) {
       let res = await this.request(`auth/login`, data, "post");
       return res.token;
-    }
+    };
 
     /** Signup for site. */
 
     static async register(data) {
       let res = await this.request(`auth/register`, data, "post");
       return res.token;
+    };
+
+    static async getWriters(queryParams) {
+      let res = await this.request(`writers`, queryParams);
+      return res.writers;
     }
 };
 
