@@ -59,6 +59,7 @@ function NavBar({logout}) {
             <Link className="navbar-brand" to="/">
                 Print
             </Link>
+            <button onClick={()=>console.log(currentUser)}>Print User</button>
             {currentUser ? authNav() : noAuthNav()}
         </nav>
     );

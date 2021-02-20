@@ -1,6 +1,6 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from '../auth/LoginForm';
-import WriterRegisterForm from "../auth/WriterRegisterForm";
+import UserRegisterForm from "../auth/UserRegisterForm";
 import Homepage from '../homepage/Homepage';
 
 function Routes({ login, register}) {
@@ -15,7 +15,7 @@ function Routes({ login, register}) {
             </Route>
 
             <Route exact path="/register">
-                <WriterRegisterForm register={register}/>
+                <UserRegisterForm register={register}/>
             </Route>
         </Switch>
     )

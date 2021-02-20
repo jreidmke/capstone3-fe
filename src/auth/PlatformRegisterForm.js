@@ -13,7 +13,7 @@ import useTitle from '../hooks/useTitle';
  * Routed as /login
  */
 
-function WriterRegisterForm({ register }) {
+function PlatformRegisterForm({ register }) {
     const history = useHistory();
     const [formData, setFormData] = useState({
         email: "",
@@ -28,10 +28,8 @@ function WriterRegisterForm({ register }) {
         twitterUsername: "",
         facebookUsername: "",
         youtubeUsername: "",
-        firstName: "",
-        lastName: "",
-        age: "",
-        bio: ""
+        displayName: "",
+        description: ""
     });
 
     const [formErrors, setFormErrors] = useState([]);
@@ -163,34 +161,21 @@ function WriterRegisterForm({ register }) {
                     placeholder="Youtube Username"
                 />
     <br/>
-                <label>First Name</label>
+                <label>Display Name</label>
                 <input 
-                    name="firstName"
+                    name="displayName"
                     value={formData.firstName}
                     onChange={handleChange}
-                    placeholder="First Name"
+                    placeholder="Display Name"
                 />
-                <label>Last Name</label>
+                <label>Description</label>
                 <input
-                    name="lastName"
+                    name="description"
                     value={formData.lastName}
                     onChange={handleChange}
-                    placeholder="Last Name"
+                    placeholder="Description"
                 />
-                <label>Age</label>
-                <input
-                    name="age"
-                    value={formData.age}
-                    onChange={handleChange}
-                    placeholder="Age"
-                />
-                <label>Bio</label>
-                <input
-                    name="bio"
-                    value={formData.bio}
-                    onChange={handleChange}
-                    type="text-area"
-                />
+
             <button>Submit</button>
             </form>
         </div>
@@ -198,4 +183,4 @@ function WriterRegisterForm({ register }) {
 };
 
 
-export default WriterRegisterForm;
+export default PlatformRegisterForm;
