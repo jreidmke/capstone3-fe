@@ -64,9 +64,29 @@ class PrintApi {
       return res.portfolio;
     };
 
+    static async updatePortfolio(portfolioId, writerId, updates) {
+      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}`, updates, "patch");
+      return res.updatedPortfolio;
+    };
+
+    static async addPieceToPortfolio(writerId, portfolioId, pieceId) {
+      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'post');
+      return res;
+    };
+
+    static async removePieceFromPortfolio(writerId, portfolioId, pieceId) {
+      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'delete');
+      return res;
+    }
+
     static async getPieceById(pieceId) {
       let res = await this.request(`pieces/${pieceId}`);
       return res.piece;
+    };
+
+    static async getPiecesByWriterId(writerId) {
+      let res = await this.request(`writers/${writerId}/pieces`);
+      return res.pieces;
     }
 };
 

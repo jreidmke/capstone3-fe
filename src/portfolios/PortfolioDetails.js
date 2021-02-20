@@ -19,13 +19,15 @@ function PortfolioDetails() {
 
     return(
         <div>
-            {portfolio ? <h1>{portfolio.title}</h1> : "Loading"}
+            {portfolio ? <h1>{portfolio.title} </h1> : "Loading"}
+
+            {}
 
             {portfolio ? portfolio.pieces.map(p => <p><Link to={`/pieces/${p.id}`}>{p.title}</Link> {p.text}</p>): "Pieces"}
 
             {portfolio ? portfolio.tags.map(t => <p>{t.title}</p>) : "Tags"}
 
-            {currentUser && portfolio && currentUser.writerId == portfolio.writerId ? "This portfolio belongs to writer" : "This portfolio doesn't belong to writer"}
+            {currentUser && portfolio && currentUser.writerId == portfolio.writerId ? <Link to={`/portfolios/${portfolio.id}/edit`}>Edit</Link> : "This portfolio doesn't belong to writer"}
 
         </div>
     )
