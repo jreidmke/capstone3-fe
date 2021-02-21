@@ -14,11 +14,12 @@ import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
 import WriterPieces from "../writers/WriterPieces";
 
-
 import PrivateRoute from './PrivateRoute';
 import PieceEditForm from "../pieces/PieceEditForm";
 import PieceList from "../pieces/PieceList";
+
 import PlatformList from "../platforms/PlatformList";
+import PlatformDetails from "../platforms/PlatformDetails";
 
 function Routes({ login, register}) {
     return(
@@ -75,11 +76,14 @@ function Routes({ login, register}) {
                 <PieceList/>
             </PrivateRoute>
 
+            <PrivateRoute path="/platforms/:platformId">
+                <PlatformDetails/>
+            </PrivateRoute>
+
             <PrivateRoute path="/platforms">
                 <PlatformList/>
             </PrivateRoute>
             
-
         </Switch>
     )
 };

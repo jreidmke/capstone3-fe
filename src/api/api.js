@@ -143,7 +143,12 @@ class PrintApi {
     static async getAllPlatforms(queryParams) {
       let res = await this.request(`platforms`, queryParams);
       return res.platforms;
-    }
+    };
+
+    static async getPlatformById(platformId) {
+      let res = await this.request(`platforms/${platformId}`);
+      return res.platform;
+    };
 };
 
 export default PrintApi;
