@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
@@ -11,6 +11,7 @@ function PortfolioEditForm() {
     const [portfolio, setPortfolio] = useState();
     const [piecesIn, setPiecesIn] = useState();
     const [piecesOut, setPiecesOut] = useState();
+    const history = useHistory();
     
     const [formData, setFormData] = useState({
         title: ""
@@ -22,6 +23,9 @@ function PortfolioEditForm() {
             const portfolioRes = await PrintApi.getPortfolioById(portfolioId);
             setPortfolio(portfolioRes);
             setPiecesIn(portfolioRes.pieces);
+
+            if(portfolioRes.writerId !== currentUser.writerId) history.push("/login");
+
             const piecesRes = await PrintApi.getPiecesByWriterId(currentUser.writerId);
             setPiecesOut(removeFromArr(piecesRes, portfolioRes.pieces));
         };
