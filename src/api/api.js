@@ -165,6 +165,27 @@ class PrintApi {
       let res = await this.request(`gigs/${gigId}`);
       return res.gig;
     };
+
+    static async updateGig(platformId, gigId, updates) {
+      for(let prop in updates) {
+        if(updates[prop] == "") {
+          delete updates[prop];
+        };
+      };   
+      let res = await this.request(`platforms/${platformId}/gigs/${gigId}`, updates, "patch");
+      return res.updatedGig;
+    };
+
+    static async addTagToGig(platformId, gigId, tagId) {
+      let res = await this.request(`platforms/${platformId}/gigs/${gigId}/tags/${tagId}`, {}, "post");
+      return res.newTag;
+    };
+
+    static async removeTagFromGig(platformId, gigId, tagId) {
+      let res = await this.request(`platforms/${platformId}/gigs/${gigId}/tags/${tagId}`, {}, "delete");
+      return res.removedTag;
+    };
+
 };
 
 export default PrintApi;

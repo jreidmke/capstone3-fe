@@ -4,31 +4,34 @@ import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
 
-function EditPieceForm() {
+function EditGigForm() {
     //what we need: User ID, PortfolioId, list of all user pieces
     const { currentUser } = useContext(UserContext);
-    const {pieceId} = useParams();
-    const [piece, setPiece] = useState();
+    const {gigId} = useParams();
+    const [gig, setGig] = useState();
     const [tagsOn, setTagsOn] = useState();
     const [tagsOff, setTagsOff] = useState();
     const history = useHistory();
     
     const [formData, setFormData] = useState({
         title: "",
-        text: ""
+        description: "",
+        compensation: "",
+        isRemote: "",
+        wordCount: "",
+        isActive: ""
     });
-
 
     useEffect(() => {
         async function getItems() {
-            const pieceRes = await PrintApi.getPieceById(pieceId);
-            setPiece(pieceRes);
-            setTagsOn(pieceRes.tags);
+            const gigRes = await PrintApi.getGigById(gigId);
+            setGig(gigRes);
+            setTagsOn(gigRes.tags);
 
-            if(pieceRes.writerId !== currentUser.writerId) history.push("/login");
+            if(gigRes.platformId !== currentUser.platformId) history.push("/login");
 
             const tagRes = await PrintApi.getAllTags();
-            setTagsOff(removeFromArr(tagRes, pieceRes.tags));
+            setTagsOff(removeFromArr(tagRes, gigRes.tags));
         };
         getItems();
     }, []);
@@ -43,37 +46,42 @@ function EditPieceForm() {
 
     async function submit(e) {
         e.preventDefault();
-        let result = await PrintApi.updatePiece(piece.writerId, pieceId, formData);
+        let result = await PrintApi.updateGig(currentUser.platformId, gigId, formData);
         setFormData({
             title: result.title,
-            text: result.text
+            description: result.description,
+            compensation: result.compensation,
+            isRemote: result.isRemote,
+            wordCount: result.wordCount,
+            isActive: result.isActive
         });
+        history.push(`/gigs/${gigId}`)
     };
 
-    async function addTagToPiece(writerId, pieceId, tagId) {
+    async function addTagToGig(platformId, gigId, tagId) {
         // //remove piece from pices out on fe
         let addedTag = tagsOff.splice(tagsOff.map(t => t.id).indexOf(tagId), 1)[0];
 
         setTagsOff(tagsOff)
 
-        await PrintApi.addTagToPiece(writerId, pieceId, tagId);
+        await PrintApi.addTagToGig(platformId, gigId, tagId);
 
         setTagsOn([...tagsOn, addedTag]);
     };
 
-    async function removeTagFromPiece(writerId, pieceId, tagId) {
-        let removedTag = tagsOn.splice(tagsOn.map(p => p.id).indexOf(tagId), 1)[0];
+    async function removeTagFromGig(platformId, gigId, tagId) {
+        let removedTag = tagsOn.splice(tagsOn.map(t => t.id).indexOf(tagId), 1)[0];
 
         setTagsOn(tagsOn);
 
-        await PrintApi.removeTagFromPiece(writerId, pieceId, tagId);
+        await PrintApi.removeTagFromGig(platformId, gigId, tagId);
         setTagsOff([...tagsOff, removedTag]);
     };
 
-    async function deletePiece(writerId, pieceId) {
-        if(window.confirm("Are you sure you want to delete this piece?")) {
-            await PrintApi.deletePiece(writerId, pieceId);
-            history.push(`/writers/${currentUser.writerId}`);
+    async function deleteGig(platformId, gigId) {
+        if(window.confirm("Are you sure you want to delete this gig?")) {
+            await PrintApi.deleteGig(platformId, gigId);
+            history.push(`/platforms/${currentUser.platformId}`);
         } else {
             return;
         }
@@ -87,22 +95,56 @@ function EditPieceForm() {
                     value={formData.title}
                     type="text"
                     onChange={handleChange}
-                    placeholder={piece ? piece.title : "Title"}/>
+                    placeholder={gig ? gig.title : "Title"}/>
+
                 <textarea 
-                    name="text"
-                    value={formData.text}
+                    name="description"
+                    value={formData.description}
                     type="text"
                     onChange={handleChange}
-                    placeholder={piece ? piece.title : "Text"}/>
-                <button>Sumbit</button>
+                    placeholder={gig ? gig.title : "Text"}/>
+
+                <input
+                    name="compensation"
+                    value={formData.compensation}
+                    type="number"
+                    onChange={handleChange}
+                    placeholder="Compensation"
+                />
+
+            <label htmlFor="isRemote">Is Remote</label>
+                <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange}>
+                    <option value="">--</option>
+                    <option value={true}>True</option>
+                    <option value={false}>False</option>
+                </select>     
+            
+            <label htmlFor="isActive">Is Active</label>
+                <select name="isActive" id="isActive" value={formData.isActive} onChange={handleChange}>
+                    <option value="">--</option>
+                    <option value={true}>True</option>
+                    <option value={false}>False</option>
+                </select> 
+
+            <label htmlFor="wordCount">Word Count</label>  
+                <input
+                    name="wordCount"
+                    value={formData.wordCount}
+                    type="number"
+                    onChange={handleChange}
+                    placeholder="wordCount"
+                />
+
+<button>Sumbit</button>
+
             </form>
 
 
             <h4>Tags</h4>
             <ul>
-                {tagsOn ? tagsOn.map(p => 
+                {tagsOn ? tagsOn.map(t => 
                 <li>
-                    {p.title} <button onClick={()=>removeTagFromPiece(currentUser.writerId, piece.id, p.id)}>X</button>
+                    {t.title} <button onClick={()=>removeTagFromGig(currentUser.platformId, gigId, t.id)}>X</button>
                 </li>
                 ) : ""}
             </ul>
@@ -111,16 +153,16 @@ function EditPieceForm() {
             <ul>
                 {tagsOff ? tagsOff.map(t => 
                 <li>
-                    {t.title} <button onClick={()=>addTagToPiece(currentUser.writerId, pieceId, t.id)}>O</button>
+                    {t.title} <button onClick={()=>addTagToGig(currentUser.platformId, gigId, t.id)}>O</button>
                 </li>) 
                 : ""}
             </ul>
 
 
-            <button className="button btn-info" onClick={() => history.push(`/writers/${currentUser.writerId}`)}>Confirm</button>
-            <button className="button btn-danger" onClick={() => deletePiece(currentUser.writerId, pieceId)}>DELETE</button>
+            <button className="button btn-info" onClick={() => history.push(`/platforms/${currentUser.platformId}`)}>Confirm</button>
+            <button className="button btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>DELETE</button>
         </div>
     )
 };
 
-export default EditPieceForm;
+export default EditGigForm;

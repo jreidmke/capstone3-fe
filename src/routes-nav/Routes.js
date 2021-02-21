@@ -23,6 +23,7 @@ import PlatformDetails from "../platforms/PlatformDetails";
 
 import GigList from "../gigs/GigList";
 import GigDetails from "../gigs/GigDetails";
+import EditGigForm from "../gigs/EditGigForm";
 
 function Routes({ login, register}) {
     return(
@@ -85,6 +86,10 @@ function Routes({ login, register}) {
 
             <PrivateRoute path="/platforms">
                 <PlatformList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/gigs/:gigId/edit">
+                <EditGigForm/>
             </PrivateRoute>
 
             <PrivateRoute path="/gigs/:gigId">
