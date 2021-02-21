@@ -22,6 +22,7 @@ import PlatformList from "../platforms/PlatformList";
 import PlatformDetails from "../platforms/PlatformDetails";
 
 import GigList from "../gigs/GigList";
+import GigDetails from "../gigs/GigDetails";
 
 function Routes({ login, register}) {
     return(
@@ -84,6 +85,10 @@ function Routes({ login, register}) {
 
             <PrivateRoute path="/platforms">
                 <PlatformList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/gigs/:gigId">
+                <GigDetails/>
             </PrivateRoute>
 
             <PrivateRoute path="/gigs">

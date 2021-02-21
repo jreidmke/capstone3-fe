@@ -156,11 +156,15 @@ class PrintApi {
         if(queryParams[prop] == "") {
           delete queryParams[prop];
         };
-      };
-      
+      };      
       let res = await this.request(`gigs`, queryParams);
       return res.gigs;
-    }
+    };
+
+    static async getGigById(gigId) {
+      let res = await this.request(`gigs/${gigId}`);
+      return res.gig;
+    };
 };
 
 export default PrintApi;
