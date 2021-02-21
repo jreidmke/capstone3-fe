@@ -15,7 +15,7 @@ import WriterList from "../writers/WriterList";
 import WriterPieces from "../writers/WriterPieces";
 
 import PrivateRoute from './PrivateRoute';
-import PieceEditForm from "../pieces/PieceEditForm";
+import EditPieceForm from "../pieces/EditPieceForm";
 import PieceList from "../pieces/PieceList";
 
 import PlatformList from "../platforms/PlatformList";
@@ -68,7 +68,7 @@ function Routes({ login, register}) {
             </PrivateRoute>
             
             <PrivateRoute path="/pieces/:pieceId/edit">
-                <PieceEditForm/>
+                <EditPieceForm/>
             </PrivateRoute>
             
             <PrivateRoute path="/pieces/:pieceId">

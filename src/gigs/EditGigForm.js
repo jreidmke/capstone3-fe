@@ -4,7 +4,7 @@ import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
 
-function PieceEditForm() {
+function EditPieceForm() {
     //what we need: User ID, PortfolioId, list of all user pieces
     const { currentUser } = useContext(UserContext);
     const {pieceId} = useParams();
@@ -123,4 +123,4 @@ function PieceEditForm() {
     )
 };
 
-export default PieceEditForm;
+export default EditPieceForm;
