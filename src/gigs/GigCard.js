@@ -5,7 +5,7 @@ function GigCard({gig}) {
         <div className="card">
             <div className="card-text">
                 <Link to={`/gigs/${gig.id}`}>{gig.title}</Link>
-                <p>{gig.description.substring(0, 100)}...</p>
+                <p>{gig.description.substring(0, 500)}...</p>
             </div>
         </div>
     )

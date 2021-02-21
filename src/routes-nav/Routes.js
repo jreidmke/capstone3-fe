@@ -21,6 +21,8 @@ import PieceList from "../pieces/PieceList";
 import PlatformList from "../platforms/PlatformList";
 import PlatformDetails from "../platforms/PlatformDetails";
 
+import GigList from "../gigs/GigList";
+
 function Routes({ login, register}) {
     return(
         <Switch>
@@ -82,6 +84,10 @@ function Routes({ login, register}) {
 
             <PrivateRoute path="/platforms">
                 <PlatformList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/gigs">
+                <GigList/>
             </PrivateRoute>
             
         </Switch>

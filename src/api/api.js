@@ -149,6 +149,18 @@ class PrintApi {
       let res = await this.request(`platforms/${platformId}`);
       return res.platform;
     };
+
+    //GIG STUFFS
+    static async getAllGigs(queryParams) {
+      for(let prop in queryParams) {
+        if(queryParams[prop] == "") {
+          delete queryParams[prop];
+        };
+      };
+      
+      let res = await this.request(`gigs`, queryParams);
+      return res.gigs;
+    }
 };
 
 export default PrintApi;
