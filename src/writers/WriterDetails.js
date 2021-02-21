@@ -24,7 +24,11 @@ function WriterDetails() {
             <h1>Writer Details</h1>
             {writer ? <h1>{writer.firstName} {writer.lastName} {writer.bio}</h1> : <h1>Loading</h1>}
             <h2>Portfolios</h2> {currentUser.writerId==writerId ? <button><Link to={`/writers/${writerId}/portfolios/new`}>Add New Portfolio</Link></button> : ""}
-            {writer ? writer.portfolios.map(p => <PortfolioCard portfolio={p} key={p.id}/>) : "Pizza"}
+            {writer ? writer.portfolios.map(p => <PortfolioCard portfolio={p} key={p.id}/>) : ""}
+
+            <h2>Pieces {currentUser.writerId==writerId ? <button><Link to={`/writers/${writerId}/pieces/new`}>Add New Piece</Link></button> : ""}</h2>
+
+            <h2><Link to={`/writers/${writerId}/pieces`}>Click here to see writer pieces</Link></h2>
             {currentUser.writerId == writerId ? <h1>This belongs to the writer</h1> : "THIS DOES NOT BELONG TO WRITER"}
         </div>
     )

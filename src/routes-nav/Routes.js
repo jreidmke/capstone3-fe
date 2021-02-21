@@ -8,7 +8,7 @@ import PortfolioEditForm from "../portfolios/PortfolioEditForm";
 import NewPortfolioForm from "../portfolios/NewPortfolioForm";
 import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
-
+import WriterPieces from "../writers/WriterPieces";
 
 
 import PrivateRoute from './PrivateRoute';
@@ -30,6 +30,14 @@ function Routes({ login, register}) {
 
             <PrivateRoute exact path="/writers">
                 <WriterList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/writers/:writerId/pieces">
+                <WriterPieces/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/writers/:writerId/pieces/new">
+                <NewPieceForm/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/portfolios/new">

@@ -115,7 +115,3 @@ function PortfolioEditForm() {
 };
 
 export default PortfolioEditForm;
-
-{/* <button onClick={()=>PrintApi.removePieceFromPortfolio(currentUser.writerId, portfolio.id, p.id)}>X</button>
-
-<button onClick={()=>PrintApi.addPieceToPortfolio(currentUser.writerId, portfolio.id, p.id)}>O</button> */}

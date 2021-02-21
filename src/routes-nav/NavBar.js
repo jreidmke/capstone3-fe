@@ -30,6 +30,11 @@ function NavBar({logout}) {
                     </NavLink>
                 </li>
                 <li className="nav-item">
+                    <NavLink to={`/writers/${currentUser.writerId}`}>
+                        | Profile |
+                    </NavLink>
+                </li>
+                <li className="nav-item">
                     <NavLink to="/" onClick={logout}>
                         | Logout 
                     </NavLink>
