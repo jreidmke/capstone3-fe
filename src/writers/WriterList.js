@@ -27,7 +27,6 @@ function WriterList() {
 
     function handleChange(e) {
         const {name, value} = e.target;
-        console.log(name, value);
         setFormData({...formData, [name]: value});
     };
 
@@ -57,7 +56,7 @@ function WriterList() {
                         return <option value={s} key={s}>{s}</option>
                     })}
                 </select>
-                <button>JFDSK:L</button>
+                <button>Submit</button>
             </form>
             {!writers.length ? "Loading..." : writers.map(w => <WriterCard key={w.id} writer={w}/>)}
         </div>

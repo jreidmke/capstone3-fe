@@ -22,7 +22,6 @@ function NewPortfolioForm() {
     async function submit(e) {
         e.preventDefault();
         const newPortfolio = await PrintApi.createPortfolio(writerId, formData);
-        console.log(newPortfolio);
         history.push(`/portfolios/${newPortfolio.id}/edit`);
     };
 

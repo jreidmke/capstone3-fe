@@ -69,16 +69,6 @@ class PrintApi {
       return res.updatedPortfolio;
     };
 
-    static async addPieceToPortfolio(writerId, portfolioId, pieceId) {
-      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'post');
-      return res;
-    };
-
-    static async removePieceFromPortfolio(writerId, portfolioId, pieceId) {
-      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'delete');
-      return res;
-    };
-
     static async deletePortfolio(writerId, portfolioId) {
       let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}`, {}, "delete");
       return res.deleted;
@@ -88,6 +78,16 @@ class PrintApi {
       let res = await this.request(`writers/${writerId}/portfolios/new`, data, "post");
       return res.newPortfolio;
     }
+
+    static async addPieceToPortfolio(writerId, portfolioId, pieceId) {
+      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'post');
+      return res;
+    };
+
+    static async removePieceFromPortfolio(writerId, portfolioId, pieceId) {
+      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'delete');
+      return res;
+    };
 
     //PIECE STUFFS
 
@@ -99,7 +99,39 @@ class PrintApi {
     static async getPiecesByWriterId(writerId) {
       let res = await this.request(`writers/${writerId}/pieces`);
       return res.pieces;
+    };
+
+    static async createPiece(writerId, data) {
+      let res = await this.request(`writers/${writerId}/pieces/new`, data, "post");
+      return res.newPiece;
+    };
+
+    static async updatePiece(writerId, pieceId, updates) {
+      let res = await this.request(`writers/${writerId}/pieces/${pieceId}`, updates, "patch");
+      return res.updatedPiece;
+    };
+
+    static async deletePiece(writerId, pieceId) {
+      let res = await this.request(`writers/${writerId}/pieces/${pieceId}`, {}, "delete");
+      return res.deletedPiece;
     }
+
+    //TAGS STUFFS
+
+    static async getAllTags() {
+      let res = await this.request(`tags`);
+      return res.tags;
+    };
+
+    static async addTagToPiece(writerId, pieceId, tagId) {
+      let res = await this.request(`writers/${writerId}/pieces/${pieceId}/tags/${tagId}`, {}, "post");
+      return res.newTag;
+    };
+
+    static async removeTagFromPiece(writerId, pieceId, tagId) {
+      let res = await this.request(`writers/${writerId}/pieces/${pieceId}/tags/${tagId}`, {}, "delete");
+      return res.removedTag;
+    };
 };
 
 export default PrintApi;

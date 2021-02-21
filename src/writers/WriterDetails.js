@@ -17,7 +17,6 @@ function WriterDetails() {
         getWriter();
     }, []);
 
-    console.log(currentUser)
 
     return(
         <div>

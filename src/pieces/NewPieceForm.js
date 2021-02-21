@@ -3,7 +3,7 @@ import PrintApi from '../api/api';
 import { useHistory, useParams } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 
-function NewPortfolioForm() {
+function NewPieceForm() {
     const { writerId } = useParams();
     const { currentUser } = useContext(UserContext);
     const history = useHistory();
@@ -11,7 +11,8 @@ function NewPortfolioForm() {
     if(writerId != currentUser.writerId) history.push("/login");
 
     const [formData, setFormdata] = useState({
-        title: ""
+        title: "",
+        text: ""
     });
 
     function handleChange(e) {
@@ -21,25 +22,32 @@ function NewPortfolioForm() {
 
     async function submit(e) {
         e.preventDefault();
-        const newPortfolio = await PrintApi.createPortfolio(writerId, formData);
-        console.log(newPortfolio);
-        history.push(`/portfolios/${newPortfolio.id}/edit`);
+        const newPiece = await PrintApi.createPiece(currentUser.writerId, formData);
+        history.push(`/pieces/${newPiece.id}/edit`);
     };
 
     return(
         <div>
-            <p>Simply title your portfolio right now. You'll add pieces to it after you create the title!</p>
+            <p>Simply write up your piece right now. You'll add tags to it after you create the piece!</p>
             <form onSubmit={submit}>
                 <input 
                     type="text"
                     name="title"
                     onChange={handleChange}
                     value={formData.title}
-                    placeholder="Portfolio Title"/>
+                    placeholder="Piece Title"/>
+                <textarea 
+                    type="text"
+                    name="text"
+                    onChange={handleChange}
+                    value={formData.text}
+                    placeholder="Piece Text"
+                    rows="4" 
+                    cols="50"/>
                 <button>Submit</button>
             </form>
         </div>
     )
 };
 
-export default NewPortfolioForm;
+export default NewPieceForm;

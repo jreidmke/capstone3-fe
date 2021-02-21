@@ -71,7 +71,6 @@ function PortfolioEditForm() {
     async function deletePortfolio(writerId, portfolioId) {
         if(window.confirm("Are you sure you want to delete this portfolio?")) {
             await PrintApi.deletePortfolio(writerId, portfolioId);
-            console.log("JFIPODS")
             history.push(`/writers/${currentUser.writerId}`);
         } else {
             return;
