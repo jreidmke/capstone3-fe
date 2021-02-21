@@ -5,8 +5,12 @@ import Homepage from '../homepage/Homepage';
 import PieceDetails from "../pieces/PieceDetails";
 import PortfolioDetails from "../portfolios/PortfolioDetails";
 import PortfolioEditForm from "../portfolios/PortfolioEditForm";
+import NewPortfolioForm from "../portfolios/NewPortfolioForm";
 import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
+
+
+
 import PrivateRoute from './PrivateRoute';
 
 function Routes({ login, register}) {
@@ -28,20 +32,22 @@ function Routes({ login, register}) {
                 <WriterList/>
             </PrivateRoute>
 
+            <PrivateRoute path="/writers/:writerId/portfolios/new">
+                <NewPortfolioForm/>
+            </PrivateRoute>
+
             <PrivateRoute path="/writers/:writerId">
                 <WriterDetails/>
             </PrivateRoute>
-            
+
             <PrivateRoute path="/portfolios/:portfolioId/edit">
                 <PortfolioEditForm/>
             </PrivateRoute>
-
+            
             <PrivateRoute path="/portfolios/:portfolioId">
                 <PortfolioDetails/>
             </PrivateRoute>
-
             
-
             <PrivateRoute path="/pieces/:pieceId">
                 <PieceDetails/>
             </PrivateRoute>

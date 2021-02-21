@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
 import UserContext from '../auth/UserContext';
 
@@ -23,7 +23,7 @@ function WriterDetails() {
         <div>
             <h1>Writer Details</h1>
             {writer ? <h1>{writer.firstName} {writer.lastName} {writer.bio}</h1> : <h1>Loading</h1>}
-            <h2>Portfolios</h2>
+            <h2>Portfolios</h2> {currentUser.writerId==writerId ? <button><Link to={`/writers/${writerId}/portfolios/new`}>Add New Portfolio</Link></button> : ""}
             {writer ? writer.portfolios.map(p => <PortfolioCard portfolio={p} key={p.id}/>) : "Pizza"}
             {currentUser.writerId == writerId ? <h1>This belongs to the writer</h1> : "THIS DOES NOT BELONG TO WRITER"}
         </div>

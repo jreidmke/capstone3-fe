@@ -108,7 +108,7 @@ function PortfolioEditForm() {
                 </li>) 
                 : ""}
             </ul>
-            
+            <button className="button btn-info" onClick={() => history.push(`/writers/${currentUser.writerId}`)}>Confirm</button>
             <button className="button btn-danger" onClick={() => deletePortfolio(currentUser.writerId, portfolioId)}>DELETE</button>
         </div>
     )

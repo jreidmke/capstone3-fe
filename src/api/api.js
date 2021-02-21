@@ -84,8 +84,9 @@ class PrintApi {
       return res.deleted;
     };
 
-    static async createPortfolio(writerId, portfolioId) {
-      
+    static async createPortfolio(writerId, data) {
+      let res = await this.request(`writers/${writerId}/portfolios/new`, data, "post");
+      return res.newPortfolio;
     }
 
     //PIECE STUFFS
