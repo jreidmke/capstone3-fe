@@ -77,7 +77,18 @@ class PrintApi {
     static async removePieceFromPortfolio(writerId, portfolioId, pieceId) {
       let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}/pieces/${pieceId}`, {}, 'delete');
       return res;
+    };
+
+    static async deletePortfolio(writerId, portfolioId) {
+      let res = await this.request(`writers/${writerId}/portfolios/${portfolioId}`, {}, "delete");
+      return res.deleted;
+    };
+
+    static async createPortfolio(writerId, portfolioId) {
+      
     }
+
+    //PIECE STUFFS
 
     static async getPieceById(pieceId) {
       let res = await this.request(`pieces/${pieceId}`);
