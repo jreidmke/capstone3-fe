@@ -91,6 +91,11 @@ class PrintApi {
 
     //PIECE STUFFS
 
+    static async getAllPieces(queryParams) {
+      let res = await this.request(`pieces`, queryParams);
+      return res.pieces;
+    };
+
     static async getPieceById(pieceId) {
       let res = await this.request(`pieces/${pieceId}`);
       return res.piece;
@@ -132,6 +137,13 @@ class PrintApi {
       let res = await this.request(`writers/${writerId}/pieces/${pieceId}/tags/${tagId}`, {}, "delete");
       return res.removedTag;
     };
+
+
+    //PLATFORM STUFFS
+    static async getAllPlatforms(queryParams) {
+      let res = await this.request(`platforms`, queryParams);
+      return res.platforms;
+    }
 };
 
 export default PrintApi;

@@ -17,6 +17,8 @@ import WriterPieces from "../writers/WriterPieces";
 
 import PrivateRoute from './PrivateRoute';
 import PieceEditForm from "../pieces/PieceEditForm";
+import PieceList from "../pieces/PieceList";
+import PlatformList from "../platforms/PlatformList";
 
 function Routes({ login, register}) {
     return(
@@ -41,10 +43,6 @@ function Routes({ login, register}) {
                 <NewPieceForm/>
             </PrivateRoute>
 
-            <PrivateRoute path="/pieces/:pieceId/edit">
-                <PieceEditForm/>
-            </PrivateRoute>
-
             <PrivateRoute path="/writers/:writerId/pieces">
                 <WriterPieces/>
             </PrivateRoute>
@@ -64,7 +62,7 @@ function Routes({ login, register}) {
             <PrivateRoute path="/portfolios/:portfolioId">
                 <PortfolioDetails/>
             </PrivateRoute>
-
+            
             <PrivateRoute path="/pieces/:pieceId/edit">
                 <PieceEditForm/>
             </PrivateRoute>
@@ -72,6 +70,15 @@ function Routes({ login, register}) {
             <PrivateRoute path="/pieces/:pieceId">
                 <PieceDetails/>
             </PrivateRoute>
+
+            <PrivateRoute path="/pieces">
+                <PieceList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/platforms">
+                <PlatformList/>
+            </PrivateRoute>
+            
 
         </Switch>
     )

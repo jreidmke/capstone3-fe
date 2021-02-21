@@ -4,7 +4,6 @@ import UserContext from '../auth/UserContext';
 
 function PieceCard({piece}) {
     const { currentUser } = useContext(UserContext);
-
     return(
         <div className="card">
             <div className="card-text">
