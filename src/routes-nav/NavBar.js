@@ -30,7 +30,7 @@ function NavBar({logout}) {
                     </NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink to={`/writers/${currentUser.writerId}`}>
+                    <NavLink to={currentUser.writerId !== null ? `/writers/${currentUser.writerId}` : `/platforms/${currentUser.platformId}`}>
                         | Profile |
                     </NavLink>
                 </li>

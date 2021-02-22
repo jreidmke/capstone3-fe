@@ -27,6 +27,14 @@ function EditGigForm() {
             const gigRes = await PrintApi.getGigById(gigId);
             setGig(gigRes);
             setTagsOn(gigRes.tags);
+            setFormData({
+                title: gigRes.title,
+                description: gigRes.description,
+                compensation: gigRes.compensation,
+                isRemote: gigRes.isRemote,
+                wordCount: gigRes.wordCount,
+                isActive: gigRes.isActive
+            });
 
             if(gigRes.platformId !== currentUser.platformId) history.push("/login");
 
@@ -46,6 +54,7 @@ function EditGigForm() {
 
     async function submit(e) {
         e.preventDefault();
+        console.log(formData);
         let result = await PrintApi.updateGig(currentUser.platformId, gigId, formData);
         setFormData({
             title: result.title,

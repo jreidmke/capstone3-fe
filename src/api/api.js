@@ -176,6 +176,12 @@ class PrintApi {
       return res.updatedGig;
     };
 
+    static async deleteGig(platformId, gigId) {
+      let res = await this.request(`platforms/${platformId}/gigs/${gigId}`, {}, "delete");
+      console.log(res);
+      return res;
+    }
+
     static async addTagToGig(platformId, gigId, tagId) {
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}/tags/${tagId}`, {}, "post");
       return res.newTag;
