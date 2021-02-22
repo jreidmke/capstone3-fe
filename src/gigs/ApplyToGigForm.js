@@ -2,6 +2,7 @@ import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
 import { useParams, Link, useHistory } from "react-router-dom";
 import UserContext from '../auth/UserContext';
+import PrivateRoute from '../routes-nav/PrivateRoute';
 
 function ApplyToGigForm() {
     const { currentUser } = useContext(UserContext);
@@ -14,11 +15,21 @@ function ApplyToGigForm() {
     });
     const [gig, setGig] = useState();
     const [portfolios, setPortfolios] = useState();
+    const [applied, setApplied] = useState(false);
+
+    //come back and let people update what profile they selected
 
     useEffect(() => {
         async function getGig() {
             const gigRes = await PrintApi.getGigById(gigId);
             setGig(gigRes);
+
+            const appRes = (await PrintApi.getApplicationsByWriterId(currentUser.writerId)).map(a => a.gigId);
+            if(appRes.indexOf(parseInt(gigId)) !== -1) {
+                history.push(`/writers/${currentUser.writerId}`);
+            } 
+
+
             const portfolioRes = await PrintApi.getWriterById(currentUser.writerId);
             setPortfolios(portfolioRes.portfolios);
         };

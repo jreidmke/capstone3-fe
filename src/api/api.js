@@ -58,6 +58,11 @@ class PrintApi {
       return res.writer;
     };
 
+    static async getApplicationsByWriterId(writerId) {
+      let res = await this.request(`writers/${writerId}/applications`);
+      return res.apps;
+    }
+
     ////PORTFOLIO METHODS
     static async getPortfolioById(portfolioId) {
       let res = await this.request(`portfolios/${portfolioId}`);
@@ -151,11 +156,6 @@ class PrintApi {
     };
 
     //GIG STUFFS
-    static async applyToGig(writerId, gigId, data) {
-      let res = await this.request(`gigs/${gigId}/apply/writers/${writerId}`, data, "post");
-      console.log(res);
-      return res;
-    }
   
     static async getAllGigs(queryParams) {
       for(let prop in queryParams) {
@@ -201,6 +201,13 @@ class PrintApi {
     static async removeTagFromGig(platformId, gigId, tagId) {
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}/tags/${tagId}`, {}, "delete");
       return res.removedTag;
+    };
+
+    //APPLICATION STUFFS
+
+    static async applyToGig(writerId, gigId, data) {
+      let res = await this.request(`gigs/${gigId}/apply/writers/${writerId}`, data, "post");
+      return res;
     };
 
 };
