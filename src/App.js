@@ -15,6 +15,11 @@ function App() {
   const [token, setToken] = useLocalStorage('token');
   const [infoLoaded, setInfoLoaded] = useState(false);
 
+  const [writerPlatformFollows, setWriterPlatformFollows] = useState();
+  const [writerTagFollows, setWriterTagFollows] = useState();
+  const [platformTagFollows, setPlatformTagFollows] = useState();
+  const [platformWriterFollows, setPlatformWriterFollows] = useState();
+
   useEffect(() => {
     async function getCurrentUser() {
       if(token) {
@@ -23,6 +28,20 @@ function App() {
           const { userId } = jwt.decode(token);
           let currUser = await PrintApi.getCurrentUser(userId);
           setCurrentUser(currUser);
+
+          if(currUser.writerId !== null) {
+            const wPFRes = await PrintApi.getWriterPlatformFollows(currUser.writerId);
+            setWriterPlatformFollows(wPFRes);
+            const wTFRes = await PrintApi.getWriterTagFollows(currUser.writerId);
+            setWriterTagFollows(wTFRes);
+          } else {
+            const pTFRes = await PrintApi.getPlatformTagFollows(currUser.platformId);
+            setPlatformTagFollows(pTFRes);
+            const pWFRes = await PrintApi.getPlatformWriterFollows(currUser.platformId);
+            console.log(pWFRes);
+            setPlatformWriterFollows(pWFRes);
+          }
+
         } catch (error) {
           setCurrentUser(null);
         }
@@ -56,7 +75,9 @@ function App() {
   function logout() {
     setCurrentUser(null);
     setToken(null);
-  }
+  };
+
+ 
 
   if(!infoLoaded) return <h1>Loading...</h1>
 
@@ -64,7 +85,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider
-          value={{currentUser, setCurrentUser}}>
+          value={{currentUser,
+                  setCurrentUser,
+                  platformWriterFollows,
+                  setPlatformWriterFollows}}>
             <NavBar logout={logout}/>
             <Routes login={login} register={register}/>
           </UserContext.Provider>
@@ -74,3 +98,10 @@ function App() {
 }
 
 export default App;
+
+// writerPlatformFollows,
+//                   setWriterPlatformFollows,
+//                   writerTagFollows,
+//                   setWriterTagFollows,
+//                   platformTagFollows,
+//                   setPlatformTagFollows,

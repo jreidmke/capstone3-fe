@@ -23,6 +23,11 @@ function EditPieceForm() {
         async function getItems() {
             const pieceRes = await PrintApi.getPieceById(pieceId);
             setPiece(pieceRes);
+            setFormData({
+                title: pieceRes.title,
+                text: pieceRes.text
+            });
+
             setTagsOn(pieceRes.tags);
 
             if(pieceRes.writerId !== currentUser.writerId) history.push("/login");

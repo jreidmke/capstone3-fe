@@ -22,6 +22,11 @@ function PortfolioEditForm() {
         async function getItems() {
             const portfolioRes = await PrintApi.getPortfolioById(portfolioId);
             setPortfolio(portfolioRes);
+
+            setFormData({
+                title: portfolioRes.title
+            });
+
             setPiecesIn(portfolioRes.pieces);
 
             if(portfolioRes.writerId !== currentUser.writerId) history.push("/login");

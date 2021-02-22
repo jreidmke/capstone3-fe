@@ -61,7 +61,49 @@ class PrintApi {
     static async getApplicationsByWriterId(writerId) {
       let res = await this.request(`writers/${writerId}/applications`);
       return res.apps;
+    };
+
+    static async getWriterPlatformFollows(writerId) {
+      let res = await this.request(`writers/${writerId}/followed_platforms`);
+      return res.platforms;
+    };
+
+    static async getWriterTagFollows(writerId) {
+      let res = await this.request(`writers/${writerId}/followed_tags`);
+      return res.tags;
     }
+
+    //PLATFORM STUFFS
+    static async getAllPlatforms(queryParams) {
+      let res = await this.request(`platforms`, queryParams);
+      return res.platforms;
+    };
+
+    static async getPlatformById(platformId) {
+      let res = await this.request(`platforms/${platformId}`);
+      return res.platform;
+    };
+
+    static async getPlatformTagFollows(platformId) {
+      let res = await this.request(`platforms/${platformId}/followed_tags`);
+      return res.tags;
+    };
+
+    static async getPlatformWriterFollows(platformId) {
+      let res = await this.request(`platforms/${platformId}/followed_writers`);
+      return res.writers;
+    };
+
+    static async platformFollowWriter(platformId, writerId) {
+      let res = await this.request(`platforms/${platformId}/followed_writers/${writerId}`, {}, "post");
+      return res.followed;
+    };
+
+    static async platformUnfollowWriter(platformId, writerId) {
+      let res = await this.request(`platforms/${platformId}/followed_writers/${writerId}`, {}, "delete");
+      return res.unfollowed;
+    };
+
 
     ////PORTFOLIO METHODS
     static async getPortfolioById(portfolioId) {
@@ -141,18 +183,6 @@ class PrintApi {
     static async removeTagFromPiece(writerId, pieceId, tagId) {
       let res = await this.request(`writers/${writerId}/pieces/${pieceId}/tags/${tagId}`, {}, "delete");
       return res.removedTag;
-    };
-
-
-    //PLATFORM STUFFS
-    static async getAllPlatforms(queryParams) {
-      let res = await this.request(`platforms`, queryParams);
-      return res.platforms;
-    };
-
-    static async getPlatformById(platformId) {
-      let res = await this.request(`platforms/${platformId}`);
-      return res.platform;
     };
 
     //GIG STUFFS
