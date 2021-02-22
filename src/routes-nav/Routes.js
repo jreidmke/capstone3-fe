@@ -24,6 +24,8 @@ import PlatformDetails from "../platforms/PlatformDetails";
 import GigList from "../gigs/GigList";
 import GigDetails from "../gigs/GigDetails";
 import EditGigForm from "../gigs/EditGigForm";
+import NewGigForm from "../gigs/NewGigForm";
+import ApplyToGigForm from "../gigs/ApplyToGigForm";
 
 function Routes({ login, register}) {
     return(
@@ -79,6 +81,10 @@ function Routes({ login, register}) {
             <PrivateRoute path="/pieces">
                 <PieceList/>
             </PrivateRoute>
+            
+            <PrivateRoute exact path="/platforms/:platformId/gigs/new">
+                <NewGigForm/>
+            </PrivateRoute>
 
             <PrivateRoute path="/platforms/:platformId">
                 <PlatformDetails/>
@@ -90,6 +96,10 @@ function Routes({ login, register}) {
 
             <PrivateRoute path="/gigs/:gigId/edit">
                 <EditGigForm/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/gigs/:gigId/apply">
+                <ApplyToGigForm/>
             </PrivateRoute>
 
             <PrivateRoute path="/gigs/:gigId">

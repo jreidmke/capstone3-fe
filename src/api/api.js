@@ -151,6 +151,12 @@ class PrintApi {
     };
 
     //GIG STUFFS
+    static async applyToGig(writerId, gigId, data) {
+      let res = await this.request(`gigs/${gigId}/apply/writers/${writerId}`, data, "post");
+      console.log(res);
+      return res;
+    }
+  
     static async getAllGigs(queryParams) {
       for(let prop in queryParams) {
         if(queryParams[prop] == "") {
@@ -166,6 +172,12 @@ class PrintApi {
       return res.gig;
     };
 
+    static async createGig(platformId, data) {
+      let res = await this.request(`platforms/${platformId}/gigs/new`, data, "post");
+      console.log(res);
+      return res.newGig;
+    };
+
     static async updateGig(platformId, gigId, updates) {
       for(let prop in updates) {
         if(updates[prop] == "") {
@@ -178,7 +190,6 @@ class PrintApi {
 
     static async deleteGig(platformId, gigId) {
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}`, {}, "delete");
-      console.log(res);
       return res;
     }
 

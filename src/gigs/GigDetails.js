@@ -37,7 +37,6 @@ function GigDetails() {
             {gig && currentUser.platformId == gig.platformId ? <button className="button btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete</button> : ""}
             {!currentUser.platformId ? <Link to={`/gigs/${gigId}/apply`}>Apply Today</Link> : ""}
         </div>
-    )
-};
+    )};
 
 export default GigDetails
