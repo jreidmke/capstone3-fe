@@ -23,7 +23,7 @@ function WriterDetails() {
                 setApplications(appRes);
             };
             if(currentUser.writerId === null) {
-                setFollowed(platformWriterFollows.map(f => f.writerId).indexOf(parseInt(writerId)) !== -1 && currentUser.platformId !== null);
+                setFollowed(platformWriterFollows.map(f => f.writerId).indexOf(parseInt(writerId)) !== -1);
             }
         };
         getWriter();

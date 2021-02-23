@@ -2,21 +2,21 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from '../auth/LoginForm';
 import UserRegisterForm from "../auth/UserRegisterForm";
 import Homepage from '../homepage/Homepage';
+import PrivateRoute from './PrivateRoute';
 
 import PieceDetails from "../pieces/PieceDetails";
 import NewPieceForm from "../pieces/NewPieceForm";
+import EditPieceForm from "../pieces/EditPieceForm";
+import PieceList from "../pieces/PieceList";
 
 import PortfolioDetails from "../portfolios/PortfolioDetails";
-import PortfolioEditForm from "../portfolios/PortfolioEditForm";
+import EditPortfolioForm from "../portfolios/EditPortfolioForm";
 import NewPortfolioForm from "../portfolios/NewPortfolioForm";
 
 import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
 import WriterPieces from "../writers/WriterPieces";
-
-import PrivateRoute from './PrivateRoute';
-import EditPieceForm from "../pieces/EditPieceForm";
-import PieceList from "../pieces/PieceList";
+import EditWriterProfile from "../writers/EditWriterProfile";
 
 import PlatformList from "../platforms/PlatformList";
 import PlatformDetails from "../platforms/PlatformDetails";
@@ -59,12 +59,16 @@ function Routes({ login, register}) {
                 <NewPortfolioForm/>
             </PrivateRoute>
 
+            <PrivateRoute path="/writers/:writerId/edit">
+                <EditWriterProfile/>
+            </PrivateRoute>
+
             <PrivateRoute path="/writers/:writerId">
                 <WriterDetails/>
             </PrivateRoute>
 
             <PrivateRoute path="/portfolios/:portfolioId/edit">
-                <PortfolioEditForm/>
+                <EditPortfolioForm/>
             </PrivateRoute>
             
             <PrivateRoute path="/portfolios/:portfolioId">

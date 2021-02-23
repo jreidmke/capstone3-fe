@@ -58,6 +58,21 @@ class PrintApi {
       return res.writer;
     };
 
+    static async updateWriterProfile(writerId, data) {
+      for(let prop in data.writerData) {
+        if(data.writerData[prop] === "" || data.writerData[prop] === null) {
+          delete data.writerData[prop]
+        };
+      };
+      for(let prop in data.userData) {
+        if(data.userData[prop] === "" || data.userData[prop] === null) {
+          delete data.userData[prop]
+        };
+      };
+      let res = await this.request(`writers/${writerId}`, data, "patch");
+      return res.updatedWriter;
+    };
+
     static async getApplicationsByWriterId(writerId) {
       let res = await this.request(`writers/${writerId}/applications`);
       return res.apps;
@@ -68,10 +83,30 @@ class PrintApi {
       return res.platforms;
     };
 
+    static async writerFollowPlatform(writerId, platformId) {
+      let res = await this.request(`writers/${writerId}/followed_platforms/${platformId}`, {}, "post");
+      return res.followed;
+    };
+
+    static async writerUnfollowPlatform(writerId, platformId) {
+      let res = await this.request(`writers/${writerId}/followed_platforms/${platformId}`, {}, "delete");
+      return res.followed;
+    }; 
+
     static async getWriterTagFollows(writerId) {
       let res = await this.request(`writers/${writerId}/followed_tags`);
       return res.tags;
-    }
+    };
+
+    static async writerFollowTag(writerId, tagId) {
+      let res = await this.request(`writers/${writerId}/followed_tags/${tagId}`, {}, "post");
+      return res.followed;
+    };
+
+    static async writerUnfollowTag(writerId, tagId) {
+      let res = await this.request(`writers/${writerId}/followed_tags/${tagId}`, {}, "delete");
+      return res.followed;
+    };
 
     //PLATFORM STUFFS
     static async getAllPlatforms(queryParams) {

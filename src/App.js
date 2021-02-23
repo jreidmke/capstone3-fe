@@ -38,7 +38,6 @@ function App() {
             const pTFRes = await PrintApi.getPlatformTagFollows(currUser.platformId);
             setPlatformTagFollows(pTFRes);
             const pWFRes = await PrintApi.getPlatformWriterFollows(currUser.platformId);
-            console.log(pWFRes);
             setPlatformWriterFollows(pWFRes);
           }
 
@@ -85,10 +84,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider
-          value={{currentUser,
-                  setCurrentUser,
-                  platformWriterFollows,
-                  setPlatformWriterFollows}}>
+          value={{currentUser, setCurrentUser,
+                  writerPlatformFollows, setWriterPlatformFollows,
+                  platformWriterFollows, setPlatformWriterFollows,
+                  writerTagFollows, setWriterTagFollows}}>
             <NavBar logout={logout}/>
             <Routes login={login} register={register}/>
           </UserContext.Provider>

@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext } from 'react';
-import { useParams, Redirect, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
 
-function PortfolioEditForm() {
+function EditPortfolioForm() {
     //what we need: User ID, PortfolioId, list of all user pieces
     const { currentUser } = useContext(UserContext);
     const {portfolioId} = useParams();
+    
     const [portfolio, setPortfolio] = useState();
     const [piecesIn, setPiecesIn] = useState();
     const [piecesOut, setPiecesOut] = useState();
@@ -118,4 +119,4 @@ function PortfolioEditForm() {
     )
 };
 
-export default PortfolioEditForm;
+export default EditPortfolioForm;
