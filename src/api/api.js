@@ -132,6 +132,19 @@ class PrintApi {
       return res.platform;
     };
 
+    //PLATFORM FEED
+    static async getPiecesForFeedFromTags(platformId, tagIds) {
+      let res = await this.request(`platforms/${platformId}/feed/tags?tag_ids=${tagIds}`);
+      return res.gigs;
+    }
+
+    static async getPiecesForFeedFromWriters(platformId, platformIds) {
+      let res = await this.request(`platforms/${platformId}/feed/writers?writer_ids=${platformIds}`);
+      return res.gigs;
+    }
+
+    //PLATFORM FOLLOWS
+
     static async getPlatformTagFollows(platformId) {
       let res = await this.request(`platforms/${platformId}/followed_tags`);
       return res.tags;

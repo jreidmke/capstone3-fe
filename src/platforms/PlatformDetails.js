@@ -3,6 +3,7 @@ import PrintApi from '../api/api';
 import { useParams, Link } from "react-router-dom";
 import UserContext from '../auth/UserContext';
 import GigCard from '../gigs/GigCard';
+import PlatformFeed from "./PlatformFeed";
 
 function PlatformDetails() {
     const { currentUser, writerPlatformFollows, setWriterPlatformFollows } = useContext(UserContext);
@@ -61,6 +62,10 @@ function PlatformDetails() {
             <h2>GIGS</h2> {gigs && currentUser.platformId == platformId ? <p><Link to={`/platforms/${currentUser.platformId}/gigs/new`}>Create New Gig</Link></p> : ""}
             
             {gigs ? gigs.map(g => <GigCard key={g.id} gig={g}/>) : ""}
+
+            <h1>FEED</h1>
+
+            <PlatformFeed platformId={platformId}/>
 
             {currentUser.platformId == platformId ? "AUTH" : "NO AUTH"}
         </div>
