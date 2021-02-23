@@ -124,6 +124,16 @@ class PrintApi {
       return res.tags;
     };
 
+    static async platformFollowTag(platformId, tagId) {
+      let res = await this.request(`platforms/${platformId}/followed_tags/${tagId}`, {}, "post");
+      return res.followed;
+    };
+
+    static async platformUnfollowTag(platformId, tagId) {
+      let res = await this.request(`platforms/${platformId}/followed_tags/${tagId}`, {}, "delete");
+      return res.followed;
+    };
+
     static async getPlatformWriterFollows(platformId) {
       let res = await this.request(`platforms/${platformId}/followed_writers`);
       return res.writers;

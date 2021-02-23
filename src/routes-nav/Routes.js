@@ -20,6 +20,7 @@ import EditWriterProfile from "../writers/EditWriterProfile";
 
 import PlatformList from "../platforms/PlatformList";
 import PlatformDetails from "../platforms/PlatformDetails";
+import EditPlatformProfile from "../platforms/EditPlatformDetails";
 
 import GigList from "../gigs/GigList";
 import GigDetails from "../gigs/GigDetails";
@@ -93,6 +94,10 @@ function Routes({ login, register}) {
             
             <PrivateRoute exact path="/platforms/:platformId/gigs/new">
                 <NewGigForm/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/platforms/:platformId/edit">
+                <EditPlatformProfile/>
             </PrivateRoute>
 
             <PrivateRoute path="/platforms/:platformId">

@@ -76,8 +76,6 @@ function App() {
     setToken(null);
   };
 
- 
-
   if(!infoLoaded) return <h1>Loading...</h1>
 
   return (
@@ -87,7 +85,8 @@ function App() {
           value={{currentUser, setCurrentUser,
                   writerPlatformFollows, setWriterPlatformFollows,
                   platformWriterFollows, setPlatformWriterFollows,
-                  writerTagFollows, setWriterTagFollows}}>
+                  writerTagFollows, setWriterTagFollows,
+                  platformTagFollows, setPlatformTagFollows}}>
             <NavBar logout={logout}/>
             <Routes login={login} register={register}/>
           </UserContext.Provider>
@@ -97,10 +96,3 @@ function App() {
 }
 
 export default App;
-
-// writerPlatformFollows,
-//                   setWriterPlatformFollows,
-//                   writerTagFollows,
-//                   setWriterTagFollows,
-//                   platformTagFollows,
-//                   setPlatformTagFollows,
