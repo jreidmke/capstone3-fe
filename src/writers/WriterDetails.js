@@ -8,8 +8,9 @@ function WriterDetails() {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
     const { writerId } = useParams();
     const [writer, setWriter] = useState();
+    
     const [applications, setApplications] = useState();
-    console.log(platformWriterFollows);
+
     //BOOLEAN used to see if writer followed
     const [followed, setFollowed] = useState(platformWriterFollows.map(f => f.writerId).indexOf(parseInt(writerId)) !== -1 && currentUser.platformId !== null);
     
@@ -20,7 +21,7 @@ function WriterDetails() {
             if(writerId == currentUser.writerId) {
                 const appRes = await PrintApi.getApplicationsByWriterId(writerId);
                 setApplications(appRes);
-            }
+            };
         };
         getWriter();
     }, [writerId]);
@@ -32,11 +33,9 @@ function WriterDetails() {
     };
 
     async function unfollow(platformId) {
-        console.log(platformWriterFollows);
         const unfollwedRes = await PrintApi.platformUnfollowWriter(platformId, writerId);
         setFollowed(false);
         platformWriterFollows.splice(platformWriterFollows.map(f => f.writerId).indexOf(writerId), 1);
-        console.log(platformWriterFollows);
     }
 
 

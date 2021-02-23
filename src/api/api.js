@@ -235,11 +235,25 @@ class PrintApi {
 
     //APPLICATION STUFFS
 
+    static async getApplicationById(platformId, applicationId) {
+      let res = await this.request(`platforms/${platformId}/applications/${applicationId}`);
+      return res.app; 
+    };
+
     static async applyToGig(writerId, gigId, data) {
       let res = await this.request(`gigs/${gigId}/apply/writers/${writerId}`, data, "post");
       return res;
     };
 
+    static async getApplicationsByGigId(platformId, gigId) {
+      let res = await this.request(`platforms/${platformId}/gigs/${gigId}/applications`);
+      return res.apps;
+    };
+
+    static async updateApplicationStatus(platformId, applicationId, data) {
+      let res = await this.request(`platforms/${platformId}/applications/${applicationId}`, data, "patch");
+      return res.app;
+    }
 };
 
 export default PrintApi;

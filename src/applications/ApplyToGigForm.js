@@ -1,8 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import UserContext from '../auth/UserContext';
-import PrivateRoute from '../routes-nav/PrivateRoute';
 
 function ApplyToGigForm() {
     const { currentUser } = useContext(UserContext);
