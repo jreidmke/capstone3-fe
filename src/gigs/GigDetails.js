@@ -41,10 +41,10 @@ function GigDetails() {
             {gig ? <h5>{gig.compensation}//{gig.wordCount}//{gig.isRemote.toString()}</h5> : ""}
 
 
-            {tags ? tags.map(t => <li>{t.title}</li>) : ""}
+            {tags ? tags.map(t => <li key={t.id}>{t.title}</li>) : ""}
 
             <h1>Applications</h1>
-            {applications ? applications.map(a => <ApplicationCard app={a}/>) : ""}
+            {applications ? applications.map(a => <ApplicationCard app={a} key={a.id}/>) : ""}
 
 
             {applications ? <Link to={`/gigs/${gigId}/edit`}>Edit Gig</Link> : ""}

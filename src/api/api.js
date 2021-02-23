@@ -253,7 +253,12 @@ class PrintApi {
     static async updateApplicationStatus(platformId, applicationId, data) {
       let res = await this.request(`platforms/${platformId}/applications/${applicationId}`, data, "patch");
       return res.app;
-    }
+    };
+
+    static async withdrawApplication(writerId, gigId) {
+      let res = await this.request(`gigs/${gigId}/apply/writers/${writerId}`, {}, "delete");
+      return res;
+    };
 };
 
 export default PrintApi;

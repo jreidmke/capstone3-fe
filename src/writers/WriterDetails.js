@@ -12,7 +12,7 @@ function WriterDetails() {
     const [applications, setApplications] = useState();
 
     //BOOLEAN used to see if writer followed
-    const [followed, setFollowed] = useState(platformWriterFollows.map(f => f.writerId).indexOf(parseInt(writerId)) !== -1 && currentUser.platformId !== null);
+    const [followed, setFollowed] = useState();
     
     useEffect(() => {
         async function getWriter() {
@@ -22,6 +22,9 @@ function WriterDetails() {
                 const appRes = await PrintApi.getApplicationsByWriterId(writerId);
                 setApplications(appRes);
             };
+            if(currentUser.writerId === null) {
+                setFollowed(platformWriterFollows.map(f => f.writerId).indexOf(parseInt(writerId)) !== -1 && currentUser.platformId !== null);
+            }
         };
         getWriter();
     }, [writerId]);
@@ -33,19 +36,35 @@ function WriterDetails() {
     };
 
     async function unfollow(platformId) {
-        const unfollwedRes = await PrintApi.platformUnfollowWriter(platformId, writerId);
+        await PrintApi.platformUnfollowWriter(platformId, writerId);
         setFollowed(false);
         platformWriterFollows.splice(platformWriterFollows.map(f => f.writerId).indexOf(writerId), 1);
-    }
+    };
 
+    async function withdrawApplication(writerId, gigId) {
+        if(window.confirm("Are you sure you want to withdraw this application?")) {
+            await PrintApi.withdrawApplication(writerId, gigId);
+            applications.splice(applications.map(a => a.gigId).indexOf(gigId), 1);
+            setApplications([...applications]);
+        } else {
+            return;
+        }
+    };
 
     return(
         <div>
             <h1>Writer Details</h1>
 
-            {followed ? <button onClick={() => unfollow(currentUser.platformId)}>Unfollow</button> : 
+            {currentUser.writerId===null ? 
+                
+                <div>
+                    {followed ? <button onClick={() => unfollow(currentUser.platformId)}>Unfollow</button> : 
+                            
+                            <button onClick={() => follow(currentUser.platformId)}>Follow</button>}
+                </div>
+
+             : ""}
             
-            <button onClick={() => follow(currentUser.platformId)}>Follow</button>}
 
             {writer ? <h1>{writer.firstName} {writer.lastName} {writer.bio}</h1> : <h1>Loading</h1>}
 
@@ -61,7 +80,16 @@ function WriterDetails() {
 
             <h5>Applications</h5>
 
-            {applications && currentUser.writerId == writerId ? applications.map(a => <li>{a.gigId} {a.portfolioId}</li>) : ""}
+            {applications ? applications.map(a => 
+            <li key={a.id}>
+                <Link to={`/gigs/${a.gigId}`}>
+                    {a.gigId}
+                </Link>
+                 <Link to={`/portfolios/${a.portfolioId}`}>
+                     {a.portfolioId}
+                </Link>
+                <button onClick={() => withdrawApplication(a.writerId, a.gigId)}>X</button>
+            </li>) : ""}
 
             {currentUser.writerId == writerId ? <h1>This belongs to the writer</h1> : "THIS DOES NOT BELONG TO WRITER"}
         </div>

@@ -14,11 +14,12 @@ function ApplicationDetails() {
     useEffect(() => {
         async function getApplication() {
             const appRes = await PrintApi.getApplicationById(platformId, appId);
+            if(appRes.platformId != platformId) history.push(`/platforms/${platformId}`);
             setApplication(appRes);
             setFormData({
                 status: appRes.status
             })
-            if(appRes.platformId != platformId) history.push(`/platforms/${platformId}`);
+            console.log(appRes.platformId);
         };
         getApplication();
     }, []);
