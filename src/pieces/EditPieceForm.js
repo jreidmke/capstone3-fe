@@ -122,7 +122,7 @@ function EditPieceForm() {
             </ul>
 
 
-            <button className="button btn-info" onClick={() => history.push(`/writers/${currentUser.writerId}`)}>Confirm</button>
+            <button className="button btn-info" onClick={() => history.push(`/pieces/${piece.id}`)}>Confirm</button>
             <button className="button btn-danger" onClick={() => deletePiece(currentUser.writerId, pieceId)}>DELETE</button>
         </div>
     )

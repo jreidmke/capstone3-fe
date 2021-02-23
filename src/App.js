@@ -34,6 +34,9 @@ function App() {
             setWriterPlatformFollows(wPFRes);
             const wTFRes = await PrintApi.getWriterTagFollows(currUser.writerId);
             setWriterTagFollows(wTFRes);
+
+            console.log(wPFRes);
+            console.log(wTFRes);
           } else {
             const pTFRes = await PrintApi.getPlatformTagFollows(currUser.platformId);
             setPlatformTagFollows(pTFRes);

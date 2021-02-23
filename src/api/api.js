@@ -78,6 +78,19 @@ class PrintApi {
       return res.apps;
     };
 
+    //WRITER FEEDS
+    static async getGigsForFeedFromTags(writerId, tagIds) {
+      let res = await this.request(`writers/${writerId}/feed/tags?tag_ids=${tagIds}`);
+      return res.gigs;
+    }
+
+    static async getGigsForFeedFromPlatforms(writerId, platformIds) {
+      let res = await this.request(`writers/${writerId}/feed/platforms?platform_ids=${platformIds}`);
+      return res.gigs;
+    }
+
+    //WRITER FOLLOWS
+
     static async getWriterPlatformFollows(writerId) {
       let res = await this.request(`writers/${writerId}/followed_platforms`);
       return res.platforms;

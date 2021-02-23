@@ -3,6 +3,7 @@ import PrintApi from '../api/api';
 import { useParams, Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
 import UserContext from '../auth/UserContext';
+import WriterFeed from "./WriterFeed";
 
 function WriterDetails() {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
@@ -55,6 +56,8 @@ function WriterDetails() {
         <div>
             <h1>Writer Details</h1>
 
+            {currentUser.writerId == writerId ? <Link to={`/writers/${writerId}/edit`}>Edit Profile</Link>: ""}
+
             {currentUser.writerId===null ? 
                 
                 <div>
@@ -90,6 +93,9 @@ function WriterDetails() {
                 </Link>
                 <button onClick={() => withdrawApplication(a.writerId, a.gigId)}>X</button>
             </li>) : ""}
+
+                <h1>FEED</h1>
+                {currentUser.writerId == writerId ? <WriterFeed writerId={writerId}/> : ""}
 
             {currentUser.writerId == writerId ? <h1>This belongs to the writer</h1> : "THIS DOES NOT BELONG TO WRITER"}
         </div>
