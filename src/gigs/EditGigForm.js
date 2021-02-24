@@ -54,7 +54,6 @@ function EditGigForm() {
 
     async function submit(e) {
         e.preventDefault();
-        console.log(formData);
         let result = await PrintApi.updateGig(currentUser.platformId, gigId, formData);
         setFormData({
             title: result.title,

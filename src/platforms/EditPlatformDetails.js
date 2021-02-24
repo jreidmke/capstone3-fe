@@ -162,8 +162,6 @@ function EditPlatformProfile() {
                     onChange={handleChange}
                     placeholder="City"
                 />
-            {console.log(followedTags)}
-{console.log(notFollowedTags)}
                 <label>State</label>
                 <input
                     name="state"

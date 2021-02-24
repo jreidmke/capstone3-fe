@@ -275,7 +275,6 @@ class PrintApi {
 
     static async createGig(platformId, data) {
       let res = await this.request(`platforms/${platformId}/gigs/new`, data, "post");
-      console.log(res);
       return res.newGig;
     };
 

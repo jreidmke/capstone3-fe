@@ -19,7 +19,6 @@ function ApplicationDetails() {
             setFormData({
                 status: appRes.status
             })
-            console.log(appRes.platformId);
         };
         getApplication();
     }, []);
