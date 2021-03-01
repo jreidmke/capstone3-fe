@@ -37,6 +37,7 @@ function PlatformRegisterForm({ register }) {
     async function submit(e) {
         e.preventDefault();
         let result = await register(formData);
+        console.log(result);
         if(result.success) {
             history.push("/");
         } else {

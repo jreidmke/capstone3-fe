@@ -59,6 +59,8 @@ function PlatformDetails() {
 
             {platform ? <h1>{platform.displayName} {platform.description}</h1> : <h1>Loading</h1>}
 
+            {currentUser.platformId === +platformId ? <Link to={`/platforms/${currentUser.platformId}/edit`}>Edit Profile</Link> : ""}
+
             <h2>GIGS</h2> {gigs && currentUser.platformId == platformId ? <p><Link to={`/platforms/${currentUser.platformId}/gigs/new`}>Create New Gig</Link></p> : ""}
             
             {gigs ? gigs.map(g => <GigCard key={g.id} gig={g}/>) : ""}

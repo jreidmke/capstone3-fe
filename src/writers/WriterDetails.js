@@ -119,14 +119,3 @@ function WriterDetails() {
 };
 
 export default WriterDetails
-
-// {applications ? applications.map(a => 
-//     <li key={a.id}>
-//         <Link to={`/gigs/${a.gigId}`}>
-//             {a.gigId}
-//         </Link>
-//          <Link to={`/portfolios/${a.portfolioId}`}>
-//              {a.portfolioId}
-//         </Link>
-//         <button onClick={() => withdrawApplication(a.writerId, a.gigId)}>X</button>
-//     </li>) : ""}
