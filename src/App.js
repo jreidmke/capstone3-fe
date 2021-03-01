@@ -89,7 +89,7 @@ function App() {
                   writerTagFollows, setWriterTagFollows,
                   platformTagFollows, setPlatformTagFollows}}>
             <NavBar logout={logout}/>
-            <Routes login={login} register={register}/>
+            <Routes login={login} register={register} logout={logout}/>
           </UserContext.Provider>
       </BrowserRouter>
     </div>

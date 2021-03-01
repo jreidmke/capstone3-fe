@@ -6,7 +6,7 @@ import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromFollowedArray from '../helpers/removeFromFollowedArray';
 
-function EditWriterProfile() {
+function EditWriterProfile({ logout }) {
     const { currentUser, writerTagFollows, setWriterTagFollows } = useContext(UserContext);
     const { writerId } = useParams();
     const history = useHistory();
@@ -129,6 +129,16 @@ function EditWriterProfile() {
         setNotFollowedTags([...notFollowedTags, removedTag]);
     };
 
+    async function deleteProfile(writerId) {
+        if(window.confirm("Are you sure you want to delete this profile?")) {
+            await PrintApi.deleteWriterAccount(writerId);
+            logout();
+            history.push(`/`);
+        } else {
+            return;
+        }
+    }
+
     return(
         <div>
             <h1>Update Writer Form</h1>
@@ -248,10 +258,14 @@ function EditWriterProfile() {
 
             <div>
                 <h1>Followed Tags</h1>
-                {followedTags ? followedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => unfollowTag(currentUser.writerId, t.id)}>X</button></li>) : ""}
+                {followedTags ? followedTags.map(t => <li key={t.id * Math.random()}>{t.title} <button onClick={() => unfollowTag(currentUser.writerId, t.id)}>X</button></li>) : ""}
 
                 <h1>Not Followed Tags</h1>
-                {notFollowedTags ? notFollowedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => followTag(currentUser.writerId, t.id)}>O</button></li>) : ""}
+                {notFollowedTags ? notFollowedTags.map(t => <li key={t.id * Math.random()}>{t.title} <button onClick={() => followTag(currentUser.writerId, t.id)}>O</button></li>) : ""}
+            </div>
+
+            <div>
+                <button onClick={() => deleteProfile(writerId)} className="button btn-danger">Delete Profile</button>
             </div>
 
         </div>

@@ -72,6 +72,10 @@ class PrintApi {
       let res = await this.request(`writers/${writerId}`, data, "patch");
       return res.updatedWriter;
     };
+    
+    static async deleteWriterAccount(writerId) {
+      await this.request(`writers/${writerId}`, {}, "delete");
+    }
 
     static async getApplicationsByWriterId(writerId) {
       let res = await this.request(`writers/${writerId}/applications`);

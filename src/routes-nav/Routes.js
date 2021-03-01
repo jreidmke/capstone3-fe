@@ -29,7 +29,7 @@ import NewGigForm from "../gigs/NewGigForm";
 import ApplyToGigForm from "../applications/ApplyToGigForm";
 import ApplicationDetails from "../applications/ApplicationDetails";
 
-function Routes({ login, register}) {
+function Routes({ login, register, logout }) {
     return(
         <Switch>
             <Route exact path="/">
@@ -61,7 +61,7 @@ function Routes({ login, register}) {
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/edit">
-                <EditWriterProfile/>
+                <EditWriterProfile logout={logout}/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId">
