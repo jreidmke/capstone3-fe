@@ -9,9 +9,15 @@ function WriterFeed({writerId}) {
 
     useEffect(() => {
         async function getGigs() {
-            const tagRes = await PrintApi.getGigsForFeedFromTags(writerId, writerTagFollows.map(f => f.tagId));
-            const platformRes = await PrintApi.getGigsForFeedFromPlatforms(writerId, writerPlatformFollows.map(f => f.platformId));
-            setGigs([platformRes, tagRes].flat());
+            let tagRes;
+            let platformRes;
+            if(writerTagFollows.length) {
+                tagRes = await PrintApi.getGigsForFeedFromTags(writerId, writerTagFollows.map(f => f.tagId));
+            };
+            if(writerPlatformFollows.length) {
+                const platformRes = await PrintApi.getGigsForFeedFromPlatforms(writerId, writerPlatformFollows.map(f => f.platformId));
+            }
+            setGigs([tagRes, platformRes].flat().filter(x => x !== undefined));
         };
         getGigs();
     }, []);
