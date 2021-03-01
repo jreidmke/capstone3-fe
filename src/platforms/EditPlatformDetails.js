@@ -116,13 +116,14 @@ function EditPlatformProfile() {
     };
 
     async function unfollowTag(platformId, tagId) {
-        let removedTag = followedTags.splice(followedTags.map(p => p.id).indexOf(tagId), 1)[0];
+        let removedTag = followedTags.splice(followedTags.map(f => f.tagId).indexOf(tagId), 1)[0];
 
         setFollowedTags([...followedTags]);
 
         await PrintApi.platformUnfollowTag(platformId, tagId);
         setNotFollowedTags([...notFollowedTags, removedTag]);
     };
+
 
     return(
         <div>
@@ -212,14 +213,14 @@ function EditPlatformProfile() {
     <br/>
                 <label>Display Name</label>
                 <input 
-                    name="firstName"
+                    name="displayName"
                     value={formData.displayName}
                     onChange={handleChange}
                     placeholder="First Name"
                 />
                 <label>Description</label>
                 <input
-                    name="lastName"
+                    name="description"
                     value={formData.description}
                     onChange={handleChange}
                     placeholder="Last Name"
@@ -230,7 +231,7 @@ function EditPlatformProfile() {
 
             <div>
                 <h1>Followed Tags</h1>
-                {followedTags ? followedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => unfollowTag(currentUser.platformId, t.id)}>X</button></li>) : ""}
+                {followedTags ? followedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => unfollowTag(currentUser.platformId, t.tagId)}>X</button></li>) : ""}
 
                 <h1>Not Followed Tags</h1>
                 {notFollowedTags ? notFollowedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => followTag(currentUser.platformId, t.id)}>O</button></li>) : ""}
