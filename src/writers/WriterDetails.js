@@ -108,10 +108,11 @@ function WriterDetails() {
 
 
                 <h1>FEED</h1>
+
                 {currentUser.writerId == writerId ? <WriterFeed writerId={writerId}/> : ""}
 
             <h1>FOLLOWS</h1>
-            <WriterFollows/>
+            {currentUser.writerId === +writerId ? <WriterFollows/> : ""}
 
             {currentUser.writerId == writerId ? <h1>This belongs to the writer</h1> : "THIS DOES NOT BELONG TO WRITER"}
         </div>

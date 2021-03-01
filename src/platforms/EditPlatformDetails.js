@@ -6,7 +6,7 @@ import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromFollowedArray from '../helpers/removeFromFollowedArray';
 
-function EditPlatformProfile() {
+function EditPlatformProfile( {logout} ) {
     const { currentUser, platformTagFollows, setPlatformTagFollows } = useContext(UserContext);
     const { platformId } = useParams();
     const history = useHistory();
@@ -122,6 +122,16 @@ function EditPlatformProfile() {
         setNotFollowedTags([...notFollowedTags, removedTag]);
     };
 
+    async function deleteProfile(platformId) {
+        if(window.confirm("Are you sure you want to delete this profile?")) {
+            await PrintApi.deletePlatformAccount(platformId);
+            logout();
+            history.push(`/`);
+        } else {
+            return;
+        }
+    }
+
 
     return(
         <div>
@@ -233,6 +243,10 @@ function EditPlatformProfile() {
 
                 <h1>Not Followed Tags</h1>
                 {notFollowedTags ? notFollowedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => followTag(currentUser.platformId, t.id)}>O</button></li>) : ""}
+            </div>
+
+            <div>
+                <button className="button btn-danger" onClick={() => deleteProfile(currentUser.platformId)}>Delete Account</button>
             </div>
 
         </div>

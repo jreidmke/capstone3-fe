@@ -152,6 +152,10 @@ class PrintApi {
       return res.updatedPlatform;
     };
 
+    static async deletePlatformAccount(platformId) {
+      await this.request(`platforms/${platformId}`, {}, "delete");
+    }
+
     //PLATFORM FEED
     static async getPiecesForFeedFromTags(platformId, tagIds) {
       let res = await this.request(`platforms/${platformId}/feed/tags?tag_ids=${tagIds}`);

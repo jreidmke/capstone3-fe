@@ -97,7 +97,7 @@ function Routes({ login, register, logout }) {
             </PrivateRoute>
 
             <PrivateRoute path="/platforms/:platformId/edit">
-                <EditPlatformProfile/>
+                <EditPlatformProfile logout={logout}/>
             </PrivateRoute>
 
             <PrivateRoute path="/platforms/:platformId">

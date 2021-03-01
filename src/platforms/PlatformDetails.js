@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import UserContext from '../auth/UserContext';
 import GigCard from '../gigs/GigCard';
 import PlatformFeed from "./PlatformFeed";
+import PlatformFollows from './PlatformFollows';
 
 function PlatformDetails() {
     const { currentUser, writerPlatformFollows, setWriterPlatformFollows } = useContext(UserContext);
@@ -70,6 +71,9 @@ function PlatformDetails() {
             {currentUser.platformId === platformId ? <PlatformFeed platformId={platformId}/> : ""}
 
             {currentUser.platformId == platformId ? "AUTH" : "NO AUTH"}
+
+            {currentUser.platformId === +platformId ? <PlatformFollows/> : ""}
+
         </div>
     )
 };

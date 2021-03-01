@@ -1,13 +1,10 @@
 import { useContext } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 
 function WriterFollows() {
-    const { currentUser, writerTagFollows, writerPlatformFollows } = useContext(UserContext);
-    const { writerId } = useParams();
-    const history = useHistory();
+    const { writerTagFollows, writerPlatformFollows } = useContext(UserContext);
 
-    if(currentUser.writerId !== +writerId) return history.push(`/login`);
     return(
         <div>
             <h1>Followed Tags</h1>
