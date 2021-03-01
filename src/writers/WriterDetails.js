@@ -83,7 +83,6 @@ function WriterDetails() {
             <h2><Link to={`/writers/${writerId}/pieces`}>Click here to see writer pieces</Link></h2>
 
             <h5>Applications</h5>
-            {console.log(applications)}
                 <table>
                     <thead>
                         <tr>
