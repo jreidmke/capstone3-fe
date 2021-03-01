@@ -26,7 +26,7 @@ function LoginForm({ login }) {
         e.preventDefault();
         let result = await login(formData);
         if(result.success) {
-            history.push("/");
+            history.push("/home");
         } else {
             setFormErrors(result.error);
         };

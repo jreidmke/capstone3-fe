@@ -1,8 +1,10 @@
 import { Switch, Route, Redirect } from "react-router-dom";
 import LoginForm from '../auth/LoginForm';
 import UserRegisterForm from "../auth/UserRegisterForm";
-import Homepage from '../homepage/Homepage';
 import PrivateRoute from './PrivateRoute';
+
+import Homepage from '../homepage/Homepage';
+import LandingPage from '../homepage/LandingPage';
 
 import PieceDetails from "../pieces/PieceDetails";
 import NewPieceForm from "../pieces/NewPieceForm";
@@ -32,7 +34,12 @@ import ApplicationDetails from "../applications/ApplicationDetails";
 function Routes({ login, register, logout }) {
     return(
         <Switch>
+
             <Route exact path="/">
+                <LandingPage/>
+            </Route>
+
+            <Route exact path="/home">
                 <Homepage/>
             </Route>
 
