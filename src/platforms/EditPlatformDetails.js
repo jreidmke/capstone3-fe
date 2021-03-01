@@ -97,10 +97,8 @@ function EditPlatformProfile() {
             twitterUsername: result.twitterUsername,
             facebookUsername: result.facebookUsername,
             youtubeUsername: result.youtubeUsername,
-            firstName: result.writerData.firstName,
-            lastName: result.writerData.lastName,
-            age: result.writerData.age,
-            bio: result.writerData.bio
+            displayName: result.displayName,
+            description: result.description
         });
     };
 

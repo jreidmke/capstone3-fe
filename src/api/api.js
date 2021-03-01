@@ -136,6 +136,22 @@ class PrintApi {
       return res.platform;
     };
 
+    static async updatePlatformProfile(platformId, data) {
+      for(let prop in data.platformData) {
+        if(data.platformData[prop] === "" || data.platformData[prop] === null) {
+          delete data.platformData[prop];
+        };
+      };
+      for(let prop in data.userData) {
+        if(data.userData[prop] === "" || data.userData[prop] === null) {
+          delete data.userData[prop];
+        };
+      };
+      let res = await this.request(`platforms/${platformId}`, data, "patch");
+      console.log(res);
+      return res.updatedPlatform;
+    };
+
     //PLATFORM FEED
     static async getPiecesForFeedFromTags(platformId, tagIds) {
       let res = await this.request(`platforms/${platformId}/feed/tags?tag_ids=${tagIds}`);
