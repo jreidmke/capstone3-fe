@@ -29,9 +29,10 @@ function WriterHomepage({writer}) {
                     {platform ? 
                     <div className="card mr-5" style={{width: 30+'em'}} id="weekCard">
                         <h3 className="my-2">Platform of the Week</h3>
+                        <hr/>
+                        <h3 className='card-title'><Link to={`/platforms/${platform.id}`}>{platform.displayName}</Link>-{platform.city}, {platform.state}</h3>
                         <img className="card-img-top" src={platform.imageUrl} alt="Platform of the week img"/>
                         <div className='card-body'>
-                            <h3 className='card-title'><Link to={`/platforms/${platform.id}`}>{platform.displayName}</Link>-{platform.city}, {platform.state}</h3>
                             <h2>
                                 <a className='mr-5' href={`https://www.twitter.com/${platform.twitterUsername}`}><FaTwitter/></a>
                                 <a className='mx-5' href={`https://www.facebook.com/${platform.facebookUsername}`}><FaFacebook/></a>
@@ -77,7 +78,7 @@ function WriterHomepage({writer}) {
 
                             <p><b>Tagged:</b> {gig.tags.map(g =>`  ${g.title} | `)}</p>
 
-                            <button className="button btn-success"><Link to={`/gigs/${gig.id}/apply`}>Apply Now!</Link></button>
+                            <button className="btn btn-success"><Link to={`/gigs/${gig.id}/apply`}>Apply Now!</Link></button>
 
                             <hr/>
                             <h4><Link to="/gigs">More Gigs</Link></h4>
