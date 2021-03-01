@@ -45,6 +45,8 @@ function WriterHomepage({writer}) {
                     <ul className="list-group list-group-flush">
                         {platform.gigs.map(g => <li key={g.id} className="list-group-item"><Link to={`/gigs/${g.id}`}>{g.title}</Link></li>)}
                     </ul>
+                    <hr/>
+                    <h4><Link to="/platforms">More Platforms</Link></h4>
                 </div>
             </div>
              : ""}
@@ -75,6 +77,10 @@ function WriterHomepage({writer}) {
                     </table>
 
                     <p><b>Tagged:</b> {gig.tags.map(g =>`  ${g.title} | `)}</p>
+
+                    <hr/>
+                    <h4><Link to="/gigs">More Gigs</Link></h4>
+
                 </div>
             </div>
             : ""}
