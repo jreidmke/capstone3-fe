@@ -122,7 +122,7 @@ class PrintApi {
 
     static async writerUnfollowTag(writerId, tagId) {
       let res = await this.request(`writers/${writerId}/followed_tags/${tagId}`, {}, "delete");
-      return res.followed;
+      return res.unfollowed;
     };
 
     //PLATFORM STUFFS

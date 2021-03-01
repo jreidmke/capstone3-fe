@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
 import UserContext from '../auth/UserContext';
 import WriterFeed from "./WriterFeed";
+import WriterFollows from './WriterFollows';
 
 function WriterDetails() {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
@@ -82,20 +83,35 @@ function WriterDetails() {
             <h2><Link to={`/writers/${writerId}/pieces`}>Click here to see writer pieces</Link></h2>
 
             <h5>Applications</h5>
+            {console.log(applications)}
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Gig Id</td>
+                            <td>Gig Title</td>
+                            <td>Submitted Portfolio</td>
+                            <td>Withdraw Applciation</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {applications ? applications.map(a => 
+                        <tr key={a.id}>
+                            <td>{a.gigId}</td>
+                            <td><Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link></td>
+                            <td><Link to={`/portfolios/${a.portfolioId}`}>{a.portfolioTitle}</Link></td>
+                            <td><button onClick={() => withdrawApplication(a.writerId, a.gigId)}>X</button></td>
+                        </tr>
+                    ) : ""}
+                    </tbody>
+                </table>
 
-            {applications ? applications.map(a => 
-            <li key={a.id}>
-                <Link to={`/gigs/${a.gigId}`}>
-                    {a.gigId}
-                </Link>
-                 <Link to={`/portfolios/${a.portfolioId}`}>
-                     {a.portfolioId}
-                </Link>
-                <button onClick={() => withdrawApplication(a.writerId, a.gigId)}>X</button>
-            </li>) : ""}
+
 
                 <h1>FEED</h1>
                 {currentUser.writerId == writerId ? <WriterFeed writerId={writerId}/> : ""}
+
+            <h1>FOLLOWS</h1>
+            <WriterFollows/>
 
             {currentUser.writerId == writerId ? <h1>This belongs to the writer</h1> : "THIS DOES NOT BELONG TO WRITER"}
         </div>
@@ -103,3 +119,14 @@ function WriterDetails() {
 };
 
 export default WriterDetails
+
+// {applications ? applications.map(a => 
+//     <li key={a.id}>
+//         <Link to={`/gigs/${a.gigId}`}>
+//             {a.gigId}
+//         </Link>
+//          <Link to={`/portfolios/${a.portfolioId}`}>
+//              {a.portfolioId}
+//         </Link>
+//         <button onClick={() => withdrawApplication(a.writerId, a.gigId)}>X</button>
+//     </li>) : ""}

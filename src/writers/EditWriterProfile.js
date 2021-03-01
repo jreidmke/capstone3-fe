@@ -1,5 +1,3 @@
-//THIS IS WHERE YOU CAN PUT THE ADD/REMOVE FOLLOWED TAGS TOO
-
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
@@ -54,7 +52,6 @@ function EditWriterProfile({ logout }) {
                 youtubeUsername: writerRes.youtubeUsername
             });
             let tagRes = await PrintApi.getAllTags();
-            
             setNotFollowedTags(removeFromFollowedArray(tagRes, followedTags));
         };
         getWriter();
@@ -110,7 +107,7 @@ function EditWriterProfile({ logout }) {
     };
 
     async function followTag(writerId, tagId) {
-        // //remove piece from pices out on fe
+        console.log(notFollowedTags)
         let addedTag = notFollowedTags.splice(notFollowedTags.map(t => t.id).indexOf(tagId), 1)[0];
 
         setNotFollowedTags([...notFollowedTags]);
@@ -121,11 +118,12 @@ function EditWriterProfile({ logout }) {
     };
 
     async function unfollowTag(writerId, tagId) {
-        let removedTag = followedTags.splice(followedTags.map(p => p.id).indexOf(tagId), 1)[0];
+        let removedTag = followedTags.splice(followedTags.map(f => f.tagId).indexOf(tagId), 1)[0];
 
         setFollowedTags([...followedTags]);
 
         await PrintApi.writerUnfollowTag(writerId, tagId);
+
         setNotFollowedTags([...notFollowedTags, removedTag]);
     };
 
@@ -258,7 +256,7 @@ function EditWriterProfile({ logout }) {
 
             <div>
                 <h1>Followed Tags</h1>
-                {followedTags ? followedTags.map(t => <li key={t.id * Math.random()}>{t.title} <button onClick={() => unfollowTag(currentUser.writerId, t.id)}>X</button></li>) : ""}
+                {followedTags ? followedTags.map(t => <li key={t.id * Math.random()}>{t.title} <button onClick={() => unfollowTag(currentUser.writerId, t.tagId)}>X</button></li>) : ""}
 
                 <h1>Not Followed Tags</h1>
                 {notFollowedTags ? notFollowedTags.map(t => <li key={t.id * Math.random()}>{t.title} <button onClick={() => followTag(currentUser.writerId, t.id)}>O</button></li>) : ""}
