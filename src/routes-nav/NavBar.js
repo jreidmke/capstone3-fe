@@ -61,7 +61,7 @@ function NavBar({logout}) {
 
     return(
         <nav className="Navigation navbar navbar-expand-md">
-            <Link className="navbar-brand" to="/">
+            <Link className="navbar-brand" to="/home">
                 Print
             </Link>
             <button onClick={()=>console.log(currentUser)}>Print User</button>

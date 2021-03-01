@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import UserContext from "../auth/UserContext";
-import useTitle from "../hooks/useTitle";
+import WriterHomepage from "./WriterHomepage";
 
 function Homepage() {
     const { currentUser } = useContext(UserContext);
@@ -11,7 +11,7 @@ function Homepage() {
 
     return(
         <div>
-            <h1>Homepage</h1>
+            {currentUser.writerId ? <WriterHomepage writer={currentUser}/> : ""}
         </div>
     )
 };

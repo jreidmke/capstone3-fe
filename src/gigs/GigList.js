@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react';
 import GigCard from './GigCard';
 import PrintApi from '../api/api';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
  
 function GigList() {
+    const {tagTitle} = useParams();
     const [gigs, setGigs] = useState([]);
     const [tags, setTags] = useState([]);
 
@@ -38,6 +39,7 @@ function GigList() {
 
     return(
         <div>
+
             <form onSubmit={submit}>
                 <label>Min Compensation</label>
                 <input
@@ -73,7 +75,7 @@ function GigList() {
                 <label htmlFor="tagTitle">Tagged</label>
                 <select name="tagTitle" id="tagTitle" value={formData.tagTitle} onChange={handleChange}>
                     <option value="">--</option>
-                    {tags.length ? tags.map(t => <option value={t.title}>{t.title}</option>) : ""}
+                    {tags.length ? tags.map(t => <option key={t.id} value={t.title}>{t.title}</option>) : ""}
                 </select>
 
                 <button>Submit</button>
