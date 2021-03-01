@@ -20,7 +20,7 @@ function PlatformDetails() {
             setPlatform(platformRes);
             setGigs(platformRes.gigs);
             if(currentUser.platformId === null) {
-                setFollowed(writerPlatformFollows.map(f => f.platform_id).indexOf(parseInt(platformId)) !== -1);
+                setFollowed(writerPlatformFollows.map(f => f.platformId).indexOf(parseInt(platformId)) !== -1);
             }
         };
         getPlatform();
@@ -65,7 +65,7 @@ function PlatformDetails() {
 
             <h1>FEED</h1>
 
-            <PlatformFeed platformId={platformId}/>
+            {currentUser.platformId === platformId ? <PlatformFeed platformId={platformId}/> : ""}
 
             {currentUser.platformId == platformId ? "AUTH" : "NO AUTH"}
         </div>
