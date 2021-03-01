@@ -20,7 +20,7 @@ function WriterDetails() {
         async function getWriter() {
             const writerRes = await PrintApi.getWriterById(writerId);
             setWriter(writerRes);
-            if(writerId == currentUser.writerId) {
+            if(+writerId === currentUser.writerId) {
                 const appRes = await PrintApi.getApplicationsByWriterId(writerId);
                 setApplications(appRes);
             };

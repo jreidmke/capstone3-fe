@@ -9,12 +9,12 @@ function WriterFollows() {
         <div>
             <h1>Followed Tags</h1>
             <ul>
-                {writerTagFollows.map(t => <li>{t.title}</li>)}
+                {writerTagFollows.map(t => <li key={t.id}>{t.title}</li>)}
             </ul>
 
             <h1>Followed Platforms</h1>
             <ul>
-                {writerPlatformFollows.map(p => <Link to={`/platforms/${p.platformId}`}><li>{p.displayName}</li></Link>)}
+                {writerPlatformFollows.map(p => <li key={p.id}><Link to={`/platforms/${p.platformId}`}></Link>{p.displayName}</li>)}
             </ul>
         </div>
     ) 

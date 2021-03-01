@@ -15,7 +15,7 @@ import PortfolioDetails from "../portfolios/PortfolioDetails";
 import EditPortfolioForm from "../portfolios/EditPortfolioForm";
 import NewPortfolioForm from "../portfolios/NewPortfolioForm";
 
-import WriterDetails from "../writers/WriterDetails";
+import WriterDetails2 from "../writers/WriterDetails2";
 import WriterList from "../writers/WriterList";
 import WriterPieces from "../writers/WriterPieces";
 import EditWriterProfile from "../writers/EditWriterProfile";
@@ -72,7 +72,7 @@ function Routes({ login, register, logout }) {
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId">
-                <WriterDetails/>
+                <WriterDetails2/>
             </PrivateRoute>
 
             <PrivateRoute path="/portfolios/:portfolioId/edit">
