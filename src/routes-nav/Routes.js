@@ -63,7 +63,7 @@ function Routes({ login, register, logout }) {
                 <WriterPieces/>
             </PrivateRoute>
 
-            <PrivateRoute path="/writers/:writerId/portfolios/new">
+            <PrivateRoute path="/portfolios/new">
                 <NewPortfolioForm/>
             </PrivateRoute>
 

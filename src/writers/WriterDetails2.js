@@ -6,6 +6,7 @@ import UserContext from '../auth/UserContext';
 import WriterFeed from "./WriterFeed";
 import WriterFollows from './WriterFollows';
 import "./WriterDetails.css";
+import { FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
 
 function WriterDetails2() {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
@@ -20,7 +21,8 @@ function WriterDetails2() {
         async function getWriter() {
             const writerRes = await PrintApi.getWriterById(writerId);
             setWriter(writerRes);
-            if(+writerId === currentUser.writerId) {
+            console.log(writerRes)
+            if(writerRes.id === currentUser.writerId) {
                 const appRes = await PrintApi.getApplicationsByWriterId(writerId);
                 setApplications(appRes);
             };
@@ -53,6 +55,7 @@ function WriterDetails2() {
         }
     };
 
+
     return(
         <div>
             {console.log(writer)}
@@ -62,17 +65,25 @@ function WriterDetails2() {
 
                         <div className="col mr-2">
                             <div className="row">
-                                <div className="col" id="pictureBox">
-                                    <p>Picture Box</p>
+                                <div className="col">
+                                    <img src={writer.imageUrl} alt="Writer Profile Image" id="pictureBox"/>
                                 </div>
                                 <div className="col" id="contactInfo">
-                                    <p>Contact Info</p>
+                                    <h3>{writer.firstName} {writer.lastName}</h3>
+                                    <h5>{writer.city}, {writer.state}</h5>
+                                    <h3>
+                                        <a href={`https://www.facebook.com/${writer.facebookUsername}`} className='mx-2'><FaFacebook color="blue"/></a>
+                                        <a href={`https://www.twitter.com/${writer.twitterUsername}`} className='mx-2'><FaTwitter color="lightblue"/></a>
+                                        <a href={`https://www.youtube.com/${writer.youtubeUsername}`} className='mx-2'><FaYoutube color="red"/></a>
+                                    </h3>
+                                    <p>Add headline functionality like status in FB.</p>
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col" id="portfolio">
-                                    <p>Portfolios</p>
+                                    <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
+                                    {writer.portfolios.map(p => <PortfolioCard portfolio={p}/>)}
                                 </div>
                             </div>
 

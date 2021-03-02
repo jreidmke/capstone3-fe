@@ -2,17 +2,14 @@
 
 #pictureBox {
     background-color: red;
-    height: 20rem;
+    height: 15rem;
+    width: 15rem;
     border-radius: 50%;
 }
 
 #contactInfo {
-    background-color: pink;
-    height: 20rem;
-}
-
-#portfolio {
-    background-color: purple;
+    padding-top: 2rem;
+    height: 15rem;
 }
 
 #pieces {
