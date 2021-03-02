@@ -88,7 +88,7 @@ function PlatformDetailsAuth() {
                         
                         <div className="row mt-5">
                             <div className="col" id="portfolio">
-                                <h5>Gigs || <Link to={`/portfolios/new`}>Create New</Link></h5>
+                                <h5>Gigs || <Link to={`/gigs/new`}>Create New</Link></h5>
                                 {gigs.map(g => <GigCard key={g.id} gig={g}/>)}
                             </div>
                         </div>

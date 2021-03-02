@@ -99,7 +99,7 @@ function Routes({ login, register, logout }) {
                 <ApplicationDetails/>
             </PrivateRoute>
             
-            <PrivateRoute exact path="/platforms/:platformId/gigs/new">
+            <PrivateRoute exact path="/gigs/new">
                 <NewGigForm/>
             </PrivateRoute>
 
