@@ -57,23 +57,69 @@ function WriterDetails2() {
         <div>
             {console.log(writer)}
             {writer ?
-            <div className="container">
+                <div className="container mt-5">
+                    <div className="row">
 
-                <div className="row mt-4">
-                    <div className="col">
-                        <div className="row"><img src={writer.imageUrl} id="writerImg" className="rounded" alt="Writer Profile Image"/></div>
-                        <div className="row">
-                            <h1 className="text-center">{writer.firstName} {writer.lastName}</h1>
-                            <h3>{writer.city}, {writer.state}</h3>
+                        <div className="col mr-2">
+                            <div className="row">
+                                <div className="col" id="pictureBox">
+                                    <p>Picture Box</p>
+                                </div>
+                                <div className="col" id="contactInfo">
+                                    <p>Contact Info</p>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col" id="portfolio">
+                                    <p>Portfolios</p>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col" id="pieces">
+                                    <p>Pieces</p>
+                                </div>
+                            </div>
+
+                            <div className="row">
+                                <div className="col" id="applications">
+                                    <p>Applications</p>
+                                </div>
+                            </div>
                         </div>
-                        
+
+                            <div className="col ml-2" id="feed">
+                                <p>Feed</p>
+                            </div>
+
                     </div>
                 </div>
-                
-            </div>
             : ""}
         </div>
     )
 };
 
 export default WriterDetails2
+{/* <div className="container">
+
+<div className="row mt-4">
+    <div className="col-3" id="pictureBox">
+        <p>Picture Box</p>
+    </div>
+    <div className="col-3" id="contactInfo">
+        <p>Contact Info</p>
+    </div>
+    
+    <div className="col" id="feed">
+        <p>Feed</p>
+    </div>
+</div>
+
+<div className="row">
+        <div className="col-6" id="portfolio">
+            <p>Portfolio</p>
+        </div>
+    </div>
+
+</div> */}

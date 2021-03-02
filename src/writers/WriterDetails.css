@@ -1,4 +1,29 @@
-#writerImg {
-    height: 15em;
-    width: 15em;
-};
+
+
+#pictureBox {
+    background-color: red;
+    height: 20rem;
+    border-radius: 50%;
+}
+
+#contactInfo {
+    background-color: pink;
+    height: 20rem;
+}
+
+#portfolio {
+    background-color: purple;
+}
+
+#pieces {
+    background-color: green;
+}
+
+#applications {
+    background-color: brown;
+}
+
+#feed {
+    background-color: blue;
+    height: 100rem;
+}
