@@ -1,0 +1,10 @@
+#platformImg {
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+}
+
+#gigCard {
+    outline: lightgray 1px solid;
+    padding: 1rem;
+}

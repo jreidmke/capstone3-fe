@@ -21,7 +21,6 @@ function WriterDetails2() {
         async function getWriter() {
             const writerRes = await PrintApi.getWriterById(writerId);
             setWriter(writerRes);
-            console.log(writerRes)
             if(writerRes.id === currentUser.writerId) {
                 const appRes = await PrintApi.getApplicationsByWriterId(writerId);
                 setApplications(appRes);
@@ -58,7 +57,6 @@ function WriterDetails2() {
 
     return(
         <div>
-            {console.log(writer)}
             {writer && applications ?
                 <div className="container mt-5">
                     <div className="row">
@@ -69,6 +67,7 @@ function WriterDetails2() {
                                     <img src={writer.imageUrl} alt="Writer Profile Image" id="pictureBox"/>
                                 </div>
                                 <div className="col" id="contactInfo">
+                                    <p><Link to={`/writers/${writerId}/edit`}>Edit Profile</Link></p>
                                     <h3>{writer.firstName} {writer.lastName}</h3>
                                     <h5>{writer.city}, {writer.state}</h5>
                                     <h3>
@@ -95,7 +94,7 @@ function WriterDetails2() {
                                         </thead>
                                         <tbody>
                                             {applications.map(a => 
-                                            <tr>
+                                            <tr key={a.id}>
                                                 <td>{a.gigTitle}</td>
                                                 <td>{a.platformName}</td>
                                                 <td>{a.portfolioTitle}</td>
@@ -119,7 +118,7 @@ function WriterDetails2() {
                                 <div className="row mt-5">
                                     <div className="col" id="portfolio">
                                         <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
-                                        {writer.portfolios.map(p => <PortfolioCard portfolio={p}/>)}
+                                        {writer.portfolios.map(p => <PortfolioCard key={p.id} portfolio={p}/>)}
                                     </div>
                                 </div>
 
