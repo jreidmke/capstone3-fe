@@ -8,7 +8,7 @@ function GigCard({gig}) {
         <div className="card">
             <div className="card-text">
                 <Link to={`/gigs/${gig.id}`}>{gig.title}</Link>{currentUser.platformId == gig.platformId ? <Link to={`/gigs/${gig.id}/edit`}>Edit Gig</Link> : ""}
-                <p>{gig.description.substring(0, 500)}...</p>
+                <p>{gig.description.substring(0, 100)}...</p>
             </div>
         </div>
     )

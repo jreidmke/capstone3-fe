@@ -81,20 +81,6 @@ function WriterDetails2() {
                             </div>
 
                             <div className="row">
-                                <div className="col" id="portfolio">
-                                    <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
-                                    {writer.portfolios.map(p => <PortfolioCard portfolio={p}/>)}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col" id="pieces">
-                                    <h5>Pieces</h5>
-                                    <p><Link to={`/writers/${currentUser.writerId}/pieces`}>View Your Pieces</Link></p>
-                                    <p><Link to={`/pieces/new`}>Create A New Piece</Link></p>
-                                </div>
-                            </div>
-                            <div className="row">
                                 <div className="col" id="applications">
                                     <h5>Applications</h5>
                                     <table className="table">
@@ -122,8 +108,29 @@ function WriterDetails2() {
                             </div>
                         </div>
 
-                            <div className="col ml-2" id="feed">
-                                <p>Feed</p>
+                            <div className="col ml-2">
+                                <div className="row">
+                                    <div className="col overflow-auto" id="feed">
+                                        <h5>Gig Feed</h5>
+                                        <WriterFeed writerId={writerId}/>
+                                    </div>
+                                </div>
+
+                                <div className="row mt-5">
+                                    <div className="col" id="portfolio">
+                                        <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
+                                        {writer.portfolios.map(p => <PortfolioCard portfolio={p}/>)}
+                                    </div>
+                                </div>
+
+                                <div className="row mt-5">
+                                    <div className="col" id="pieces">
+                                        <h5>Pieces</h5>
+                                        <p><Link to={`/writers/${currentUser.writerId}/pieces`}>View Your Pieces</Link></p>
+                                        <p><Link to={`/pieces/new`}>Create A New Piece</Link></p>
+                                    </div>
+                                </div>
+
                             </div>
 
                     </div>
@@ -134,3 +141,6 @@ function WriterDetails2() {
 };
 
 export default WriterDetails2
+
+
+
