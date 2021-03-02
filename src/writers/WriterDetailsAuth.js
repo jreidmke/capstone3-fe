@@ -8,13 +8,10 @@ import WriterFollows from './WriterFollows';
 import "./WriterDetails.css";
 import { FaTwitter, FaFacebook, FaYoutube, FaTimes } from 'react-icons/fa';
 
-function WriterDetailsAuth() {
-    const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
-    const { writerId } = useParams();
+function WriterDetailsAuth({writerId}) {
+    const { currentUser } = useContext(UserContext);
     const [writer, setWriter] = useState();
     const [applications, setApplications] = useState();
-
-    //BOOLEAN used to see if writer followed
     
     useEffect(() => {
         async function getWriter() {

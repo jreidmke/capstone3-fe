@@ -15,8 +15,7 @@ import PortfolioDetails from "../portfolios/PortfolioDetails";
 import EditPortfolioForm from "../portfolios/EditPortfolioForm";
 import NewPortfolioForm from "../portfolios/NewPortfolioForm";
 
-import WriterDetailsAuth from "../writers/WriterDetailsAuth";
-import WriterDetailsNoAuth from "../writers/WriterDetailsNoAuth";
+import WriterDetails from "../writers/WriterDetails";
 import WriterList from "../writers/WriterList";
 import WriterPieces from "../writers/WriterPieces";
 import EditWriterProfile from "../writers/EditWriterProfile";
@@ -72,12 +71,8 @@ function Routes({ login, register, logout }) {
                 <EditWriterProfile logout={logout}/>
             </PrivateRoute>
 
-            <PrivateRoute path="/writers/:writerId/noAuth">
-                <WriterDetailsNoAuth/>
-            </PrivateRoute>
-
             <PrivateRoute path="/writers/:writerId">
-                <WriterDetailsAuth/>
+                <WriterDetails/>
             </PrivateRoute>
 
             <PrivateRoute path="/portfolios/:portfolioId/edit">

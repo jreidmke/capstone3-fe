@@ -7,9 +7,8 @@ import WriterFollows from './WriterFollows';
 import { FaTwitter, FaFacebook, FaYoutube, FaPenFancy } from 'react-icons/fa';
 import PieceCard from '../pieces/PieceCard';
 
-function WriterDetailsNoAuth() {
+function WriterDetailsNoAuth({writerId}) {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
-    const { writerId } = useParams();
     const [writer, setWriter] = useState();
     const [pieces, setPieces] = useState();
     
