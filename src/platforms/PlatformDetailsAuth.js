@@ -49,7 +49,7 @@ function PlatformDetailsAuth() {
                                 <p>Add headline functionality like status in FB.</p>
                             </div>
                         </div>
-{console.log(gigs)}
+
                         <div className="row">
                             <div className="col" id="applications">
                                 <h5>Applications</h5>

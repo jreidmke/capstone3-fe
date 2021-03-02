@@ -1,17 +1,18 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
-import {FaCheck, FaTimes, FaTwitter} from 'react-icons/fa';
+import {FaCheck, FaTimes} from 'react-icons/fa';
 import "./GigCard.css";
 
 function GigCard({gig}) {
+    const { currentUser } = useContext(UserContext);
 
     return(
        <div className="container m-2" id="gigCard">
             <div className="row">
 
                <div className="col-3">
-                   {gig.imageUrl ? <Link to={`/platforms/${gig.platformId}`}><img src={gig.imageUrl} alt="Platform Image" id="platformImg"/></Link> : <div className="mt-5"><Link to={`/gigs/${gig.id}/edit`}>Edit Gig</Link></div>}
+                   {currentUser.platformId === gig.platformId ? <div className="mt-5"><Link to={`/gigs/${gig.id}/edit`}>Edit Gig</Link></div> : <Link to={`/platforms/${gig.platformId}`}><img src={gig.imageUrl} alt="Platform Image" id="platformImg"/></Link>}
                </div>
 
                <div className="col">
