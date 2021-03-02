@@ -1,0 +1,8 @@
+#tagList {
+    list-style: none;
+}
+
+#pieces {
+    outline: lightgray 1px solid;
+    margin: 3rem;
+}
