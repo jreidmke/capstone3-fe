@@ -5,14 +5,13 @@ import {FaCheck, FaTimes, FaTwitter} from 'react-icons/fa';
 import "./GigCard.css";
 
 function GigCard({gig}) {
-    console.log(gig);
-    const { currentUser } = useContext(UserContext);
+
     return(
        <div className="container m-2" id="gigCard">
             <div className="row">
 
                <div className="col-3">
-                   <Link to={`/platforms/${gig.platformId}`}><img src={gig.imageUrl} alt="Platform Image" id="platformImg"/></Link>
+                   {gig.imageUrl ? <Link to={`/platforms/${gig.platformId}`}><img src={gig.imageUrl} alt="Platform Image" id="platformImg"/></Link> : <Link to={`/gigs/${gig.id}/edit`}>Edit Gig</Link>}
                </div>
 
                <div className="col">

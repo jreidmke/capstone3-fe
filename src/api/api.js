@@ -334,6 +334,11 @@ class PrintApi {
       return res.app; 
     };
 
+    static async getApplictionByPlatformId(platformId) {
+      let res = await this.request(`platforms/${platformId}/applications`);
+      return res.apps;
+    }
+
     static async applyToGig(writerId, gigId, data) {
       let res = await this.request(`gigs/${gigId}/apply/writers/${writerId}`, data, "post");
       return res;
