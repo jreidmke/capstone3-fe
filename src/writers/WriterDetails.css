@@ -1,7 +1,6 @@
 
 
 #pictureBox {
-    background-color: red;
     height: 15rem;
     width: 15rem;
     border-radius: 50%;
@@ -10,14 +9,6 @@
 #contactInfo {
     padding-top: 2rem;
     height: 15rem;
-}
-
-#pieces {
-    background-color: green;
-}
-
-#applications {
-    background-color: brown;
 }
 
 #feed {

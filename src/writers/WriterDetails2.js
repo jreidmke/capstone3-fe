@@ -6,7 +6,7 @@ import UserContext from '../auth/UserContext';
 import WriterFeed from "./WriterFeed";
 import WriterFollows from './WriterFollows';
 import "./WriterDetails.css";
-import { FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaTimes } from 'react-icons/fa';
 
 function WriterDetails2() {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
@@ -59,7 +59,7 @@ function WriterDetails2() {
     return(
         <div>
             {console.log(writer)}
-            {writer ?
+            {writer && applications ?
                 <div className="container mt-5">
                     <div className="row">
 
@@ -89,13 +89,35 @@ function WriterDetails2() {
 
                             <div className="row">
                                 <div className="col" id="pieces">
-                                    <p>Pieces</p>
+                                    <h5>Pieces</h5>
+                                    <p><Link to={`/writers/${currentUser.writerId}/pieces`}>View Your Pieces</Link></p>
+                                    <p><Link to={`/pieces/new`}>Create A New Piece</Link></p>
                                 </div>
                             </div>
-
                             <div className="row">
                                 <div className="col" id="applications">
-                                    <p>Applications</p>
+                                    <h5>Applications</h5>
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <td>Gig Title</td>
+                                                <td>Platform</td>
+                                                <td>Portfolio Submitted</td>
+                                                <td>Status</td>
+                                                <td>Withdraw</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {applications.map(a => 
+                                            <tr>
+                                                <td>{a.gigTitle}</td>
+                                                <td>{a.platformName}</td>
+                                                <td>{a.portfolioTitle}</td>
+                                                <td>{a.status}</td>
+                                                <td><FaTimes color="red" onClick={()=>withdrawApplication(a.writerId, a.gigId)}/></td>
+                                            </tr>)}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -112,25 +134,3 @@ function WriterDetails2() {
 };
 
 export default WriterDetails2
-{/* <div className="container">
-
-<div className="row mt-4">
-    <div className="col-3" id="pictureBox">
-        <p>Picture Box</p>
-    </div>
-    <div className="col-3" id="contactInfo">
-        <p>Contact Info</p>
-    </div>
-    
-    <div className="col" id="feed">
-        <p>Feed</p>
-    </div>
-</div>
-
-<div className="row">
-        <div className="col-6" id="portfolio">
-            <p>Portfolio</p>
-        </div>
-    </div>
-
-</div> */}

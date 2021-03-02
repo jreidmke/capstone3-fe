@@ -1,14 +1,11 @@
 import { useContext, useState } from 'react';
 import PrintApi from '../api/api';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 
 function NewPieceForm() {
-    const { writerId } = useParams();
     const { currentUser } = useContext(UserContext);
     const history = useHistory();
-
-    if(writerId != currentUser.writerId) history.push("/login");
 
     const [formData, setFormdata] = useState({
         title: "",

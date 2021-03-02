@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react';
+import { useState, useEffect } from 'react';
 import PrintApi from '../api/api';
 import { useParams } from "react-router-dom";
 import PieceCard from '../pieces/PieceCard';
