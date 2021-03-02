@@ -3,13 +3,11 @@ import PrintApi from '../api/api';
 import { useParams, Link, useHistory } from "react-router-dom";
 import UserContext from '../auth/UserContext';
 import {FaCheck, FaTimes} from 'react-icons/fa';
-import ApplicationCard from '../applications/ApplicationCard';
 
 function GigDetails() {
     const { currentUser } = useContext(UserContext);
     const { gigId } = useParams();
     const [gig, setGig] = useState();
-    const [tags, setTags] = useState();
     const [applications, setApplications] = useState();
     const history = useHistory();
 
@@ -17,7 +15,6 @@ function GigDetails() {
         async function getGig() {
             const gigRes = await PrintApi.getGigById(gigId);
             setGig(gigRes);
-            setTags(gigRes.tags);
             if(currentUser.platformId === gigRes.platformId) {
                 const appRes = await PrintApi.getApplicationsByGigId(gigRes.platformId, gigId);
                 setApplications(appRes);
@@ -54,6 +51,7 @@ function GigDetails() {
                         <p>Compensation: {gig.compensation}</p>
                         <p>Word Count: {gig.wordCount}</p>
                         <p>Remote: {gig.isRemote ? <FaCheck color="green"/> : <FaTimes color="red"/>}</p>
+                        <p>Posted On: {gig.createdAt.slice(0, 10)}</p>
                         <p><b>Tags:</b></p> 
                         {gig.tags.map(t => <p key={t.id}>-{t.title}</p>)}
                     </div>
