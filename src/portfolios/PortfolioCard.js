@@ -9,11 +9,11 @@ function PortfolioCard({portfolio}) {
         <div className="card">
             <div className="card-text">
                 <Link to={`/portfolios/${portfolio.id}`}>
-                    {portfolio.title} |
+                    {portfolio.title} 
                 </Link>
                 {currentUser.writerId === portfolio.writerId ? 
                 <Link to={`/portfolios/${portfolio.id}/edit`}>
-                    | Edit Portfolio
+                    || Edit Portfolio
                 </Link>
                 : ""}
             </div>

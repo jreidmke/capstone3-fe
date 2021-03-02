@@ -8,41 +8,23 @@ import WriterFollows from './WriterFollows';
 import "./WriterDetails.css";
 import { FaTwitter, FaFacebook, FaYoutube, FaTimes } from 'react-icons/fa';
 
-function WriterDetails2() {
+function WriterDetailsAuth() {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
     const { writerId } = useParams();
     const [writer, setWriter] = useState();
     const [applications, setApplications] = useState();
 
     //BOOLEAN used to see if writer followed
-    const [followed, setFollowed] = useState();
     
     useEffect(() => {
         async function getWriter() {
             const writerRes = await PrintApi.getWriterById(writerId);
             setWriter(writerRes);
-            if(writerRes.id === currentUser.writerId) {
-                const appRes = await PrintApi.getApplicationsByWriterId(writerId);
-                setApplications(appRes);
-            };
-            if(currentUser.writerId === null) {
-                setFollowed(platformWriterFollows.map(f => f.writerId).indexOf(parseInt(writerId)) !== -1);
-            }
+            const appRes = await PrintApi.getApplicationsByWriterId(writerId);
+            setApplications(appRes);
         };
         getWriter();
     }, [writerId]);
-    
-    async function follow(platformId) {
-        const followRes = await PrintApi.platformFollowWriter(platformId, writerId);
-        setFollowed(true);
-        setPlatformWriterFollows([...platformWriterFollows, followRes]);
-    };
-
-    async function unfollow(platformId) {
-        await PrintApi.platformUnfollowWriter(platformId, writerId);
-        setFollowed(false);
-        platformWriterFollows.splice(platformWriterFollows.map(f => f.writerId).indexOf(writerId), 1);
-    };
 
     async function withdrawApplication(writerId, gigId) {
         if(window.confirm("Are you sure you want to withdraw this application?")) {
@@ -53,7 +35,6 @@ function WriterDetails2() {
             return;
         }
     };
-
 
     return(
         <div>
@@ -107,33 +88,28 @@ function WriterDetails2() {
                             </div>
                         </div>
 
-                            <div className="col ml-2">
-                                <div className="row">
-                                    <div className="col overflow-auto" id="feed">
-                                        <h5>Gig Feed</h5>
-                                        <WriterFeed writerId={writerId}/>
-                                    </div>
+                        <div className="col ml-2">
+                            <div className="row">
+                                <div className="col overflow-auto" id="feed">
+                                    <h5>Gig Feed</h5>
+                                    <WriterFeed writerId={writerId}/>
                                 </div>
-
-                                
-
-                                <div className="row mt-5">
-                                    <div className="col" id="portfolio">
-                                        <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
-                                        {writer.portfolios.map(p => <PortfolioCard key={p.id} portfolio={p}/>)}
-                                    </div>
-                                </div>
-
-                                <div className="row mt-5">
-                                    <div className="col" id="pieces">
-                                        <h5>Pieces</h5>
-                                        <p><Link to={`/writers/${currentUser.writerId}/pieces`}>View Your Pieces</Link></p>
-                                        <p><Link to={`/pieces/new`}>Create A New Piece</Link></p>
-                                    </div>
-                                </div>
-
                             </div>
-
+                            
+                            <div className="row mt-5">
+                                <div className="col" id="portfolio">
+                                    <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
+                                    {writer.portfolios.map(p => <PortfolioCard key={p.id} portfolio={p}/>)}
+                                </div>
+                            </div>
+                            <div className="row mt-5">
+                                <div className="col" id="pieces">
+                                    <h5>Pieces</h5>
+                                    <p><Link to={`/writers/${currentUser.writerId}/pieces`}>View Your Pieces</Link></p>
+                                    <p><Link to={`/pieces/new`}>Create A New Piece</Link></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             : ""}
@@ -141,7 +117,19 @@ function WriterDetails2() {
     )
 };
 
-export default WriterDetails2
+export default WriterDetailsAuth
 
 
 
+    
+// async function follow(platformId) {
+//     const followRes = await PrintApi.platformFollowWriter(platformId, writerId);
+//     setFollowed(true);
+//     setPlatformWriterFollows([...platformWriterFollows, followRes]);
+// };
+
+// async function unfollow(platformId) {
+//     await PrintApi.platformUnfollowWriter(platformId, writerId);
+//     setFollowed(false);
+//     platformWriterFollows.splice(platformWriterFollows.map(f => f.writerId).indexOf(writerId), 1);
+// };

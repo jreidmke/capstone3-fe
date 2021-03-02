@@ -1,5 +1,3 @@
-
-
 #pictureBox {
     height: 15rem;
     width: 15rem;
@@ -15,4 +13,14 @@
     height: 23rem;
     outline: lightgray 1px solid;
     padding: 1rem;
+}
+
+#bio {
+    height: 20rem;
+    outline: lightgray 1px solid;
+    padding-top: 2rem;
+}
+
+#pieces {
+    height: 20rem;
 }
