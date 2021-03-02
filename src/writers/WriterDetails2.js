@@ -115,6 +115,8 @@ function WriterDetails2() {
                                     </div>
                                 </div>
 
+                                
+
                                 <div className="row mt-5">
                                     <div className="col" id="portfolio">
                                         <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>

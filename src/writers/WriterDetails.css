@@ -12,5 +12,7 @@
 }
 
 #feed {
-    height: 20rem;
+    height: 23rem;
+    outline: lightgray 1px solid;
+    padding: 1rem;
 }
