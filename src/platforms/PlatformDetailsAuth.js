@@ -1,31 +1,55 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserContext from '../auth/UserContext';
 import GigCard from '../gigs/GigCard';
 import PlatformFeed from "./PlatformFeed";
-import PlatformFollows from './PlatformFollows';
 import { FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 function PlatformDetailsAuth({platformId}) {
-    const { currentUser, writerPlatformFollows, setWriterPlatformFollows } = useContext(UserContext);
     const [platform, setPlatform] = useState();
     const [gigs, setGigs] = useState();
     const [applications, setApplications] = useState();
-    console.log(platformId)
+    const [formData, setFormData] = useState({
+        status: ""
+    });
 
     useEffect(() => {
         async function getPlatform() {
             const platformRes = await PrintApi.getPlatformById(platformId);
-            const appRes = await PrintApi.getApplictionByPlatformId(platformId);
+            let appRes = await PrintApi.getApplictionByPlatformId(platformId);
             setPlatform(platformRes);
-            console.log(platformRes.gigs);
             setGigs(platformRes.gigs);
             setApplications(appRes);
         };
         getPlatform();
     }, []);
 
+    const colors = {
+        "Pending": "yellow",
+        "Rejected": "red",
+        "Accepted": "green"
+    };
+
+    const statusOrder = {
+        "Pending": 3,
+        "Accepted": 2,
+        "Rejected": 1
+    };
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setFormData({...formData, [name]: value});
+    };
+
+    async function submit(applicationId) {
+        const res = await PrintApi.updateApplicationStatus(platform.id, applicationId, formData);
+        const updatedAppIdx = applications.map(a => a.id).indexOf(applicationId);
+        const updatedApp = applications.splice(applications.map(a => a.id).indexOf(applicationId), 1)[0];
+        updatedApp.status = res.status;
+        applications.splice(updatedAppIdx, 0, updatedApp);
+        setApplications([...applications]);
+    }
 
     return(
         <div>
@@ -61,6 +85,7 @@ function PlatformDetailsAuth({platformId}) {
                                             <td>Portfolio Submitted</td>
                                             <td>Status</td>
                                             <td>Update Status</td>
+                                            <td></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,8 +94,17 @@ function PlatformDetailsAuth({platformId}) {
                                             <td><Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link></td>
                                             <td><Link to={`/writers/${a.writerId}`}>{a.firstName} {a.lastName}</Link></td>
                                             <td><Link to={`/portfolios/${a.portfolioId}`}>{a.portfolioTitle}</Link></td>
-                                            <td>{a.status}</td>
-                                            <td><Link to={`/platforms/${platformId}/applications/${a.id}`}>Update Status</Link></td>
+                                            <td style={{backgroundColor: colors[a.status]}}>{a.status}</td>
+                                            <td>
+                                                <select name="status" id="status-select" defaultValue={a.status} onChange={handleChange}>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Accepted">Accepted</option>
+                                                    <option value="Rejected">Rejected</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button className="btn btn-success" onClick={() => submit(a.id)}>Update</button>
+                                            </td>
                                         </tr>)}
                                     </tbody>
                                 </table>

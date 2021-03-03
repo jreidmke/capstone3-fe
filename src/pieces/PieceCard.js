@@ -5,7 +5,6 @@ import "./PieceCard.css";
 
 function PieceCard({piece}) {
     const { currentUser } = useContext(UserContext);
-    console.log(piece)
     return(
         <div className="card" id="pieceCard">
             <div className="card-text">
