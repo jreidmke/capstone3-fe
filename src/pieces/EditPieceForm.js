@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
+import "./EditPieceForm.css";
+import { FaPlus, FaTimes } from 'react-icons/fa';
 
 function EditPieceForm() {
     //what we need: User ID, PortfolioId, list of all user pieces
@@ -85,47 +87,94 @@ function EditPieceForm() {
     };
     
     return(
-        <div>
-            <form onSubmit={submit}>
-                <input
-                    name="title"
-                    value={formData.title}
-                    type="text"
-                    onChange={handleChange}
-                    placeholder={piece ? piece.title : "Title"}/>
-                <textarea 
-                    name="text"
-                    value={formData.text}
-                    type="text"
-                    onChange={handleChange}
-                    placeholder={piece ? piece.title : "Text"}/>
-                <button>Sumbit</button>
-            </form>
+        <div className="container">
+            {piece ? 
+            <div className="container">
 
+                <div className="row">
+                    <div className="col"><h1>Edit Piece: {piece.title} <FaTimes color="red" onClick={()=> deletePiece(piece.writerId, piece.id)}/></h1></div>
+                </div>
 
-            <h4>Tags</h4>
-            <ul>
-                {tagsOn ? tagsOn.map(p => 
-                <li>
-                    {p.title} <button onClick={()=>removeTagFromPiece(currentUser.writerId, piece.id, p.id)}>X</button>
-                </li>
-                ) : ""}
-            </ul>
+                <div className="row">
+                    <div className="col">
+                        <div className="row">
+                            <div className="col-2">
+                                <label className="mr-2">Piece Title: </label>
+                            </div>
+                            <div className="col">
+                                <label className="mr-2">Piece Text: </label>
 
-            <h4>Not Tagged</h4>
-            <ul>
-                {tagsOff ? tagsOff.map(t => 
-                <li>
-                    {t.title} <button onClick={()=>addTagToPiece(currentUser.writerId, pieceId, t.id)}>O</button>
-                </li>) 
-                : ""}
-            </ul>
+                            </div>
+                        </div>
 
+                        <form onSubmit={submit}>
+                            <div className="row">
+                                <div className="col-2">
+                                    <input
+                                        name="title"
+                                        value={formData.title}
+                                        type="text"
+                                        onChange={handleChange}
+                                        placeholder={piece ? piece.title : "Title"}/>
+                                </div>
 
-            <button className="button btn-info" onClick={() => history.push(`/pieces/${piece.id}`)}>Confirm</button>
-            <button className="button btn-danger" onClick={() => deletePiece(currentUser.writerId, pieceId)}>DELETE</button>
+                                <div className="col">
+                                    <textarea 
+                                        name="text"
+                                        value={formData.text}
+                                        type="text"
+                                        onChange={handleChange}
+                                        placeholder={piece ? piece.title : "Text"}
+                                        rows="10"
+                                        cols="80"/>
+                                </div>
+                            </div>
+                            
+                            <button className="btn btn-info">Commit Changes</button>
+                        </form>
+                    </div>
+                </div>
+            
+                <div className="row mt-3">
+                    <div className="col">
+                        <h6>Select Tags to Add to Your Piece</h6>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col">
+                        <h4>Tags</h4>
+                            <ul>
+                                {tagsOn ? tagsOn.map(p => 
+                                <li>
+                                    {p.title} <FaTimes onClick={()=>removeTagFromPiece(currentUser.writerId, piece.id, p.id)} color="red"/>
+                                </li>
+                                ) : ""}
+                            </ul>
+                    </div>
+                    <div className="col">
+                        <h4>Not Tagged</h4>
+                            <ul>
+                                {tagsOff ? tagsOff.map(t => 
+                                <li>
+                                    {t.title} <FaPlus onClick={()=>addTagToPiece(currentUser.writerId, pieceId, t.id)} color="green"/>
+                                </li>) 
+                                : ""}
+                            </ul>
+                    </div>
+
+                </div>
+
+                    
+
+                
+            </div>
+
+            : ""}
         </div>
     )
 };
 
 export default EditPieceForm;
+
+{/* <button className="button btn-info" onClick={() => history.push(`/pieces/${piece.id}`)}>Confirm</button> */}
