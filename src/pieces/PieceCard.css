@@ -1,3 +1,6 @@
 #pieceCard {
     padding: 1rem;
+    outline: 1px lightgrey dashed;
+    margin: 1rem;
+    float: right;
 }
