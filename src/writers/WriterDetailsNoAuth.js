@@ -9,8 +9,6 @@ function WriterDetailsNoAuth({writerId}) {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
     const [writer, setWriter] = useState();
     const [pieces, setPieces] = useState();
-    
-    //BOOLEAN used to see if writer followed
     const [followed, setFollowed] = useState();
     
     useEffect(() => {
@@ -45,9 +43,9 @@ function WriterDetailsNoAuth({writerId}) {
                     {currentUser.writerId===null ? 
                 
                 <div>
-                    {followed ? <button onClick={() => unfollow(currentUser.platformId)}>Unfollow</button> : 
+                    {followed ? <button className="btn btn-danger" onClick={() => unfollow(currentUser.platformId)}>Unfollow</button> : 
                             
-                            <button onClick={() => follow(currentUser.platformId)}>Follow</button>}
+                            <button className="btn btn-success" onClick={() => follow(currentUser.platformId)}>Follow</button>}
                 </div>
             
                  : ""}
@@ -80,7 +78,7 @@ function WriterDetailsNoAuth({writerId}) {
                             </div>
                         </div>
 
-                        <div className="col ml-2">
+                        <div className="col mt-5 ml-2">
                             <div className="row">
                                 <div className="col" id="bio">
                                     <h4>About the Author</h4>

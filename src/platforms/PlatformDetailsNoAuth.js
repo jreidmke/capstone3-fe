@@ -44,11 +44,11 @@ function PlatformDetailsNoAuth({platformId}) {
            
                 <div>
                     {followed ? 
-                    <button onClick={() => unfollow(currentUser.writerId, platformId)}>
+                    <button className="btn btn-danger" onClick={() => unfollow(currentUser.writerId, platformId)}>
                         Unfollow
                     </button> : 
                     
-                    <button  onClick={() => follow(currentUser.writerId, platformId)}> 
+                    <button className="btn btn-success" onClick={() => follow(currentUser.writerId, platformId)}> 
                         Follow
                     </button>}
                 </div>
@@ -88,9 +88,9 @@ function PlatformDetailsNoAuth({platformId}) {
                     </div>
 
                     <div className="col ml-2">
-                        <div className="row mt-5">
+                        <div className="row mt-4">
                             <div className="col" id="portfolio">
-                                <h5>Gigs</h5>
+                                <h3>Gigs</h3>
                                 {gigs.map(g => <GigCard key={g.id} gig={g}/>)}
                             </div>
                         </div>

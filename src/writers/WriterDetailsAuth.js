@@ -1,24 +1,24 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
-import UserContext from '../auth/UserContext';
 import WriterFeed from "./WriterFeed";
-import WriterFollows from './WriterFollows';
 import "./WriterDetails.css";
-import { FaTwitter, FaFacebook, FaYoutube, FaTimes } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus } from 'react-icons/fa';
 
 function WriterDetailsAuth({writerId}) {
-    const { currentUser } = useContext(UserContext);
     const [writer, setWriter] = useState();
     const [applications, setApplications] = useState();
+    const [pieces, setPieces] = useState();
     
     useEffect(() => {
         async function getWriter() {
             const writerRes = await PrintApi.getWriterById(writerId);
-            setWriter(writerRes);
             const appRes = await PrintApi.getApplicationsByWriterId(writerId);
+            const pieceRes = await PrintApi.getPiecesByWriterId(writerId);
+            setWriter(writerRes);
             setApplications(appRes);
+            setPieces(pieceRes);
         };
         getWriter();
     }, [writerId]);
@@ -35,7 +35,7 @@ function WriterDetailsAuth({writerId}) {
 
     return(
         <div>
-            {writer && applications ?
+            {writer && applications && pieces ?
                 <div className="container mt-5">
                     <div className="row">
 
@@ -45,8 +45,7 @@ function WriterDetailsAuth({writerId}) {
                                     <img src={writer.imageUrl} alt="Writer Profile Image" id="pictureBox"/>
                                 </div>
                                 <div className="col" id="contactInfo">
-                                    <p><Link to={`/writers/${writerId}/edit`}>Edit Profile</Link></p>
-                                    <h3>{writer.firstName} {writer.lastName}</h3>
+                                    <h3>{writer.firstName} {writer.lastName}<Link className="ml-2" to={`/writers/${writerId}/edit`}><FaEdit/></Link></h3>
                                     <h5>{writer.city}, {writer.state}</h5>
                                     <h3>
                                         <a href={`https://www.facebook.com/${writer.facebookUsername}`} className='mx-2'><FaFacebook color="blue"/></a>
@@ -95,15 +94,26 @@ function WriterDetailsAuth({writerId}) {
                             
                             <div className="row mt-5">
                                 <div className="col" id="portfolio">
-                                    <h5>Portfolios || <Link to={`/portfolios/new`}>Create New</Link></h5>
+                                    <h5>Portfolios<Link to={`/portfolios/new`} className="float-right"><FaPlus/></Link></h5>
                                     {writer.portfolios.map(p => <PortfolioCard key={p.id} portfolio={p}/>)}
                                 </div>
                             </div>
-                            <div className="row mt-5">
-                                <div className="col" id="pieces">
-                                    <h5>Pieces</h5>
-                                    <p><Link to={`/writers/${currentUser.writerId}/pieces`}>View Your Pieces</Link></p>
-                                    <p><Link to={`/pieces/new`}>Create A New Piece</Link></p>
+                            <div className="row mt-4">
+                                <div className="col">
+                                    <h5>Pieces <Link to={`/pieces/new`} className="float-right mr-5"><FaPlus/></Link></h5>
+                                    <div className="overflow-auto" id="pieces">
+                                        {pieces.map(p => 
+                                        <div className="card">
+                                            <div className="card-body">
+                                                <Link to={`/pieces/${p.id}`}>
+                                                    {p.title}
+                                                </Link>
+                                                <Link to={`/pieces/${p.id}/edit`} className="ml-3">
+                                                    <FaEdit/>
+                                                </Link>
+                                            </div>
+                                        </div>)}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,18 +125,3 @@ function WriterDetailsAuth({writerId}) {
 };
 
 export default WriterDetailsAuth
-
-
-
-    
-// async function follow(platformId) {
-//     const followRes = await PrintApi.platformFollowWriter(platformId, writerId);
-//     setFollowed(true);
-//     setPlatformWriterFollows([...platformWriterFollows, followRes]);
-// };
-
-// async function unfollow(platformId) {
-//     await PrintApi.platformUnfollowWriter(platformId, writerId);
-//     setFollowed(false);
-//     platformWriterFollows.splice(platformWriterFollows.map(f => f.writerId).indexOf(writerId), 1);
-// };

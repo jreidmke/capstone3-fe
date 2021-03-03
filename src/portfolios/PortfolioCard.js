@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import UserContext from '../auth/UserContext';
+import { FaEdit } from 'react-icons/fa';
 
 function PortfolioCard({portfolio}) {
     const { currentUser } = useContext(UserContext);
@@ -9,11 +10,11 @@ function PortfolioCard({portfolio}) {
         <div className="card">
             <div className="card-text">
                 <Link to={`/portfolios/${portfolio.id}`}>
-                    {portfolio.title} |
+                    {portfolio.title}
                 </Link>
                 {currentUser.writerId === portfolio.writerId ? 
-                <Link to={`/portfolios/${portfolio.id}/edit`}>
-                    | Edit
+                <Link to={`/portfolios/${portfolio.id}/edit`} className="ml-3">
+                   <FaEdit/>
                 </Link>
                 : ""}
             </div>

@@ -22,5 +22,7 @@
 }
 
 #pieces {
-    height: 20rem;
+    height: 10rem;
+    width: 30rem;
+    margin-top: 0;
 }
