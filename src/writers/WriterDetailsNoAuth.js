@@ -86,7 +86,7 @@ function WriterDetailsNoAuth({writerId}) {
                                     <FaPenFancy size="2em"/>
                                 </div>
                             </div>
-{console.log(pieces)}
+
                             <div className="row mt-5">
                                 <div className="col overflow-auto" id="pieces">
                                     <h5>Pieces</h5>

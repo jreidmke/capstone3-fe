@@ -6,7 +6,6 @@ import "./GigCard.css";
 
 function GigCard({gig}) {
     const { currentUser } = useContext(UserContext);
-console.log(gig)
     return(
         <div className="container my-5" id="gigCard">
             <div className="row">
@@ -16,7 +15,7 @@ console.log(gig)
                     <p>Platform: <Link to={`/platforms/${gig.platformId}`}>{gig.displayName}</Link></p>
                 </div>
                 <div className="col">
-                    <p>Gig Description: {gig.description}</p>
+                    <p>Gig Description: {gig.description.slice(0, 400)}... {currentUser.writerId ? <Link to={`/gigs/${gig.id}`}>Click to read more and apply!</Link> : ""}</p>
                 </div>
             </div>
             <div className="row">

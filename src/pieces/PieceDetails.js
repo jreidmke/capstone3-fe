@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
+import { FaPenFancy, FaTimes, FaEdit } from 'react-icons/fa';
+import "./PieceDetails.css";
 
 function PieceDetails() {
     const { currentUser } = useContext(UserContext);
@@ -27,15 +29,29 @@ function PieceDetails() {
     };
 
     return(
-        <div>
-            {piece ? <h1>{piece.title} {piece.text}</h1> : "Loading"}
-
-            {piece ? piece.tags.map(t => <p>{t.title}</p>) : "Tags"}
-
-            {piece && currentUser.writerId == piece.writerId ? <Link to={`/pieces/${piece.id}/edit`}>EDIT</Link> : ""}
-
-            {piece && currentUser.writerId == piece.writerId ? <button className="button btn-danger" onClick={() => deletePiece(currentUser.writerId, pieceId)}>DELETE</button> : ""}
-
+        <div className="container">
+            {piece ? 
+            <div className="row mt-3">
+                <div className="col-3">
+                    <img src={piece.imageUrl} id="writerImage"/>
+                    <h2>By: <Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></h2>
+                    <h6>Submitted: {piece.createdAt.slice(0, 10)}</h6>
+                    <ul>
+                        Tagged With:
+                        {piece.tags.map(t => <li>{t.title}</li>)}
+                    </ul>
+                </div>
+                <div className="col mt-5">
+                    <h1>{piece.title} {currentUser.writerId===piece.writerId ? 
+                    <span>
+                        <Link to={`/pieces/${piece.id}/edit`} className="ml-1"><FaEdit/></Link>
+                        <FaTimes onClick={() => deletePiece(piece.writerId, piece.pieceId)} color='red' className="ml-3" id="deleteBtn"/>
+                    </span>
+                    : ""}</h1>
+                    <p className="mt-3">{piece.text}</p>
+                </div>
+            </div> 
+            : ""}
         </div>
     )
 };
