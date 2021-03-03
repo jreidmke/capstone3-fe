@@ -11,7 +11,7 @@ function PlatformHomepage({platform}) {
 
     useEffect(() => {
         async function getItemsOfTheWeek() {
-            const writerRes = await PrintApi.getWriterById(2);
+            const writerRes = await PrintApi.getWriterById(3);
             const pieceRes = await PrintApi.getPieceById(2);
             setWriter(writerRes);
             setPiece(pieceRes);
@@ -41,7 +41,7 @@ function PlatformHomepage({platform}) {
 
                             <h5 className='card-title'>Current Portfolios</h5>
                             <ul className="list-group list-group-flush">
-                                {writer.portfolios.map(g => <li key={g.id} className="list-group-item"><Link to={`/gigs/${g.id}`}>{g.title}</Link></li>)}
+                                {writer.portfolios.map(p => <li key={p.id} className="list-group-item"><Link to={`/portfolios/${p.id}`}>{p.title}</Link></li>)}
                             </ul>
                             <hr/>
                             <h4><Link to="/writers">More Writers</Link></h4>

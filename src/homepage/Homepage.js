@@ -10,11 +10,15 @@ function Homepage() {
     const { currentUser } = useContext(UserContext);
     const history = useHistory();
 
-    if(!currentUser) history.push("/");
+    if(!currentUser) return(
+        <div>
+            {history.push("/")}
+        </div>
+    )
 
     return(
         <div>
-            {currentUser.writerId ? <WriterHomepage writer={currentUser}/> : <PlatformHomepage platform={currentUser}/>}
+            {currentUser && currentUser.writerId ? <WriterHomepage writer={currentUser}/> : <PlatformHomepage platform={currentUser}/>}
         </div>
     )
 };

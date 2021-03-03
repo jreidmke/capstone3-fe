@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import useTitle from '../hooks/useTitle';
-
-/** Login form.
- *
- * Shows form and manages update to state on changes.
- * On submission:
- * - calls login function prop
- * - redirects to /companies route
- *
- * Routes -> LoginForm -> Alert
- * Routed as /login
- */
+import Alert from "../common/Alert";
 
 function LoginForm({ login }) {
     useTitle("Login Form");
@@ -68,6 +58,11 @@ function LoginForm({ login }) {
                     required
                 />
     <br/>
+
+            {formErrors.length ?
+                <Alert type="danger" messages={formErrors}/>
+                : ""}
+
             <button>Submit</button>
             </form>
         </div>

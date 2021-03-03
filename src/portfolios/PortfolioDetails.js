@@ -27,7 +27,7 @@ function PortfolioDetails() {
                    <div className="col">
                        <h1>{portfolio.title}</h1>
                        <h5>
-                           A Portfolio By: {portfolio.firstName} {portfolio.lastName}
+                           A Portfolio By: <Link to={`/writers/${portfolio.writerId}`}>{portfolio.firstName} {portfolio.lastName}</Link>
                         </h5>
                         {currentUser && portfolio && currentUser.writerId == portfolio.writerId ? <h5><Link to={`/portfolios/${portfolio.id}/edit`}>Edit or Add Pieces</Link></h5>: ""}
 
@@ -45,7 +45,7 @@ function PortfolioDetails() {
                     <div className="col">
                         {portfolio.pieces.map(p => 
                         <div key={p.id} className="overflow-auto" id="pieces">
-                            <h5><b>{p.title}</b></h5>
+                            <h5><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b></h5>
                             <p>Submitted At: {p.createdAt.slice(0, 10)}</p>
                             <p>{p.text}</p>
                         </div>)
