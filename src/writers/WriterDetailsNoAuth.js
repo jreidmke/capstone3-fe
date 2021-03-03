@@ -1,9 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams, Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
 import UserContext from '../auth/UserContext';
-import WriterFollows from './WriterFollows';
 import { FaTwitter, FaFacebook, FaYoutube, FaPenFancy } from 'react-icons/fa';
 import PieceCard from '../pieces/PieceCard';
 
@@ -44,7 +42,18 @@ function WriterDetailsNoAuth({writerId}) {
         <div>
             {writer ?
                 <div className="container mt-5">
+                    {currentUser.writerId===null ? 
+                
+                <div>
+                    {followed ? <button onClick={() => unfollow(currentUser.platformId)}>Unfollow</button> : 
+                            
+                            <button onClick={() => follow(currentUser.platformId)}>Follow</button>}
+                </div>
+            
+                 : ""}
                     <div className="row">
+
+                    
 
                         <div className="col mr-2">
                             <div className="row">
@@ -96,12 +105,4 @@ function WriterDetailsNoAuth({writerId}) {
 
 export default WriterDetailsNoAuth
 
-// {currentUser.writerId===null ? 
-                
-//     <div>
-//         {followed ? <button onClick={() => unfollow(currentUser.platformId)}>Unfollow</button> : 
-                
-//                 <button onClick={() => follow(currentUser.platformId)}>Follow</button>}
-//     </div>
 
-//      : ""}

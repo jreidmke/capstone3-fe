@@ -34,13 +34,13 @@ function GigDetails() {
 
     return(
         <div>
-
+{console.log(gig)}
             {gig ? 
             <div className="container">
                 <div className="row">
                     <div className="col">
                         <h1>{gig.title}</h1>
-                        <h4>Posted By {gig.displayName}</h4>
+                        <h4>Posted By <Link to={`/platforms/${gig.platformId}`}>{gig.displayName}</Link></h4>
                         {gig.platformId === currentUser.platformId ? <h4><Link to={`/gigs/${gigId}/edit`}>Edit Gig</Link></h4> : ""}
                     </div>
                 </div>

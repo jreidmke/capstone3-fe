@@ -19,7 +19,10 @@ function GigList() {
     useEffect(() => {
         async function getGigs() {
             const gigRes = await PrintApi.getAllGigs();
-            setGigs(gigRes);
+            console.log();
+            setGigs(gigRes.sort((a, b) => {
+                return +a.compensation/a.wordCount > +b.compensation/b.wordCount; 
+            }));
             const tagRes = await PrintApi.getAllTags();
             setTags(tagRes);
         };

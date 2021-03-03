@@ -21,7 +21,7 @@ import WriterPieces from "../writers/WriterPieces";
 import EditWriterProfile from "../writers/EditWriterProfile";
 
 import PlatformList from "../platforms/PlatformList";
-import PlatformDetailsNoAuth from "../platforms/PlatformDetailsNoAuth";
+import PlatformDetails from "../platforms/PlatformDetails";
 import EditPlatformProfile from "../platforms/EditPlatformDetails";
 
 import GigList from "../gigs/GigList";
@@ -108,7 +108,7 @@ function Routes({ login, register, logout }) {
             </PrivateRoute>
 
             <PrivateRoute path="/platforms/:platformId">
-                <PlatformDetailsNoAuth/>
+                <PlatformDetails/>
             </PrivateRoute>
 
             <PrivateRoute path="/platforms">

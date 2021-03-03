@@ -6,15 +6,16 @@ import { FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
 
 function PlatformHomepage({platform}) {
     const [writer, setWriter] = useState();
-    const [piece, setPiece] = useState();
+    const [pieces, setPieces] = useState();
 
 
     useEffect(() => {
         async function getItemsOfTheWeek() {
             const writerRes = await PrintApi.getWriterById(3);
-            const pieceRes = await PrintApi.getPieceById(2);
+            const pieceRes1 = await PrintApi.getPieceById(2);
+            const pieceRes2 = await PrintApi.getPieceById(4);
             setWriter(writerRes);
-            setPiece(pieceRes);
+            setPieces([pieceRes1, pieceRes2]);
         };
         getItemsOfTheWeek();
     }, []);
@@ -22,7 +23,7 @@ function PlatformHomepage({platform}) {
     return(
         <div>
             <br/>
-            <h1>Welcome back Platform {platform.displayName}!</h1>
+            <h1>Welcome back {platform.displayName}!</h1>
 
             <div className='container'>
                 <div className="row">
@@ -49,15 +50,21 @@ function PlatformHomepage({platform}) {
                     </div>
                     : ""}
 
-                    {piece ?
+                    {pieces ?
                         <div className='card ml-5' style={{width: 30+'em'}} id="weekCard">
-                            <h3>Piece of the Week</h3>
+                            <h3>Pieces of the Week</h3>
                             <div className='card-body'>
-                                <h3 className="card-title"><Link to={`/pieces/${piece.id}`}>{piece.title}</Link></h3>
-                                <h4 className="card-title">Writer: <Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></h4>
-                                <p className='card-text'>{piece.text}</p>
+                                <h3 className="card-title"><Link to={`/pieces/${pieces[0].id}`}>{pieces[0].title}</Link></h3>
+                                <h4 className="card-title">Writer: <Link to={`/writers/${pieces[0].writerId}`}>{pieces[0].firstName} {pieces[0].lastName}</Link></h4>
+                                <p className='card-text'>{pieces[0].text}</p>
                                 
-                                <p><b>Tagged:</b> {piece.tags.map(g =>`  ${g.title} | `)}</p>
+                                <p><b>Tagged:</b> {pieces[0].tags.map(g =>`  ${g.title} | `)}</p>
+
+                                <h3 className="card-title"><Link to={`/pieces/${pieces[1].id}`}>{pieces[1].title}</Link></h3>
+                                <h4 className="card-title">Writer: <Link to={`/writers/${pieces[1].writerId}`}>{pieces[1].firstName} {pieces[1].lastName}</Link></h4>
+                                <p className='card-text'>{pieces[1].text.slice(0, 300)}</p>
+                                
+                                <p><b>Tagged:</b> {pieces[1].tags.map(g =>`  ${g.title} | `)}</p>
 
                                 <hr/>
                                 <h4><Link to="/pieces">More Pieces</Link></h4>

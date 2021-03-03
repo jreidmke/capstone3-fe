@@ -7,10 +7,8 @@ import PlatformFeed from "./PlatformFeed";
 import PlatformFollows from './PlatformFollows';
 import { FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 
-function PlatformDetailsNoAuth() {
+function PlatformDetailsNoAuth({platformId}) {
     const { currentUser, writerPlatformFollows, setWriterPlatformFollows } = useContext(UserContext);
-    const { platformId } = useParams();
-
     const [platform, setPlatform] = useState();
     const [gigs, setGigs] = useState();
 

@@ -7,12 +7,12 @@ import PlatformFeed from "./PlatformFeed";
 import PlatformFollows from './PlatformFollows';
 import { FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 
-function PlatformDetailsAuth() {
+function PlatformDetailsAuth({platformId}) {
     const { currentUser, writerPlatformFollows, setWriterPlatformFollows } = useContext(UserContext);
-    const { platformId } = useParams();
     const [platform, setPlatform] = useState();
     const [gigs, setGigs] = useState();
     const [applications, setApplications] = useState();
+    console.log(platformId)
 
     useEffect(() => {
         async function getPlatform() {
@@ -39,7 +39,7 @@ function PlatformDetailsAuth() {
                             </div>
                             <div className="col" id="contactInfo">
                                 <p><Link to={`/platforms/${platformId}/edit`}>Edit Profile</Link></p>
-                                <h3>{platform.firstName} {platform.lastName}</h3>
+                                <h3>{platform.displayName}</h3>
                                 <h5>{platform.city}, {platform.state}</h5>
                                 <h3>
                                     <a href={`https://www.facebook.com/${platform.facebookUsername}`} className='mx-2'><FaFacebook color="blue"/></a>
@@ -66,9 +66,9 @@ function PlatformDetailsAuth() {
                                     <tbody>
                                         {applications.map(a => 
                                         <tr key={a.id}>
-                                            <td>{a.gigTitle}</td>
-                                            <td>{a.firstName} {a.lastName}</td>
-                                            <td>{a.portfolioTitle}</td>
+                                            <td><Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link></td>
+                                            <td><Link to={`/writers/${a.writerId}`}>{a.firstName} {a.lastName}</Link></td>
+                                            <td><Link to={`/portfolios/${a.portfolioId}`}>{a.portfolioTitle}</Link></td>
                                             <td>{a.status}</td>
                                             <td><Link to={`/platforms/${platformId}/applications/${a.id}`}>Update Status</Link></td>
                                         </tr>)}

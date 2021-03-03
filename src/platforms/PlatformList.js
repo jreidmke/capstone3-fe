@@ -48,14 +48,8 @@ function PlatformList() {
                     })}
                 </select>
 
-                <label htmlFor="state">Filter By State:</label>
 
-                <select name="state" id="states" value={formData.state} onChange={handleChange}>
-                    <option value={null}></option>
-                    {!states.length ? <option></option> : states.map(s => {
-                        return <option value={s} key={s}>{s}</option>
-                    })}
-                </select>
+                
                 <button>Submit</button>
             </form>
             {!platforms.length ? "Loading..." : platforms.map(p => <PlatformCard key={p.id} platform={p}/>)}
@@ -64,4 +58,12 @@ function PlatformList() {
 };
 
 export default PlatformList;
+
+{/* <select name="state" id="states" value={formData.state} onChange={handleChange}>
+                    <option value={null}></option>
+                    {!states.length ? <option></option> : states.map(s => {
+                        return <option value={s} key={s}>{s}</option>
+                    })}
+                </select> */}
+                // <label htmlFor="state">Filter By State:</label>
 
