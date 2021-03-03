@@ -1,7 +1,7 @@
 import { useContext  } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
-import {FaCheck, FaTimes} from 'react-icons/fa';
+import {FaCheck, FaTimes, FaEdit} from 'react-icons/fa';
 import "./GigCard.css";
 
 function GigCard({gig}) {
@@ -12,11 +12,13 @@ function GigCard({gig}) {
             <div className="row">
 
                <div className="col-3">
-                   {currentUser.platformId === gig.platformId ? <div className="mt-5"><Link to={`/gigs/${gig.id}/edit`}>Edit Gig</Link></div> : <Link to={`/platforms/${gig.platformId}`}><img src={gig.imageUrl} alt="Platform Image" id="platformImg"/></Link>}
+                   {<Link to={`/platforms/${gig.platformId}`}>
+                        <img src={gig.imageUrl} alt="Platform Image" id="platformImg"/>
+                    </Link>}
                </div>
 
                <div className="col">
-                    <p><Link to={`/gigs/${gig.id}`}>{gig.title}</Link></p>
+                    <p><Link to={`/gigs/${gig.id}`}>{gig.title}</Link>{currentUser.platformId===gig.platformId ? <Link to={`/gigs/${gig.id}/edit`} className="ml-3"><FaEdit/></Link> : ""}</p>
                     <p>{gig.description.slice(0,100)}...<Link to={`/gigs/${gig.id}`}>Click to read more and apply!</Link></p>
                </div>
            </div>

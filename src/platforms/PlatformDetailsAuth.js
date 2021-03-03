@@ -1,10 +1,9 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
-import UserContext from '../auth/UserContext';
 import GigCard from '../gigs/GigCard';
 import PlatformFeed from "./PlatformFeed";
-import { FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaYoutube, FaPlus } from 'react-icons/fa';
 
 function PlatformDetailsAuth({platformId}) {
     const [platform, setPlatform] = useState();
@@ -29,12 +28,6 @@ function PlatformDetailsAuth({platformId}) {
         "Pending": "yellow",
         "Rejected": "red",
         "Accepted": "green"
-    };
-
-    const statusOrder = {
-        "Pending": 3,
-        "Accepted": 2,
-        "Rejected": 1
     };
 
     function handleChange(e) {
@@ -62,8 +55,8 @@ function PlatformDetailsAuth({platformId}) {
                                 <img src={platform.imageUrl} alt="Platform Profile Image" id="pictureBox"/>
                             </div>
                             <div className="col" id="contactInfo">
-                                <p><Link to={`/platforms/${platformId}/edit`}>Edit Profile</Link></p>
                                 <h3>{platform.displayName}</h3>
+                                <h6><Link to={`/platforms/${platformId}/edit`}><span className="badge badge-info">Edit Profile</span></Link></h6>
                                 <h5>{platform.city}, {platform.state}</h5>
                                 <h3>
                                     <a href={`https://www.facebook.com/${platform.facebookUsername}`} className='mx-2'><FaFacebook color="blue"/></a>
@@ -74,7 +67,7 @@ function PlatformDetailsAuth({platformId}) {
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className="row mt-5">
                             <div className="col" id="applications">
                                 <h5>Applications</h5>
                                 <table className="table">
@@ -85,7 +78,6 @@ function PlatformDetailsAuth({platformId}) {
                                             <td>Portfolio Submitted</td>
                                             <td>Status</td>
                                             <td>Update Status</td>
-                                            <td></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,10 +93,9 @@ function PlatformDetailsAuth({platformId}) {
                                                     <option value="Accepted">Accepted</option>
                                                     <option value="Rejected">Rejected</option>
                                                 </select>
+                                                <button className="btn btn-success mt-1" onClick={() => submit(a.id)}>Update</button>
                                             </td>
-                                            <td>
-                                                <button className="btn btn-success" onClick={() => submit(a.id)}>Update</button>
-                                            </td>
+                                           
                                         </tr>)}
                                     </tbody>
                                 </table>
@@ -122,7 +113,7 @@ function PlatformDetailsAuth({platformId}) {
                         
                         <div className="row mt-5">
                             <div className="col" id="portfolio">
-                                <h5>Gigs || <Link to={`/gigs/new`}>Create New</Link></h5>
+                                <h5>Gigs<Link to={`/gigs/new`} className="float-right"><FaPlus/></Link></h5>
                                 {gigs.map(g => <GigCard key={g.id} gig={g}/>)}
                             </div>
                         </div>
