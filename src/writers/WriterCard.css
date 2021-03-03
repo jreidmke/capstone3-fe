@@ -1,0 +1,7 @@
+#writerCard {
+    outline: 1px lightgray dashed;
+}
+
+#writerCard:hover {
+    background-color: lightgray;
+}

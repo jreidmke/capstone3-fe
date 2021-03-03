@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react';
 import WriterCard from './WriterCard';
 import PrintApi from '../api/api';
 import { useHistory } from "react-router-dom";
+import "./WriterList.css";
 
 function WriterList() {
     const [writers, setWriters] = useState([]);
-    const [states, setStates] = useState([]);
     const [cities, setCities] = useState([]);
     const [formData, setFormData] = useState({
         city: "",
@@ -19,7 +19,6 @@ function WriterList() {
             setWriters(writerRes);
             let states = writerRes.map(w => w.state);
             let cities = writerRes.map(w => w.city);
-            setStates(Array.from(new Set(states)));
             setCities(Array.from(new Set(cities)));
         };
         getWriters();
@@ -39,17 +38,15 @@ function WriterList() {
     return(
         <div>
             <form onSubmit={submit}>
-                <label htmlFor="city">Filter By City:</label>
+                <label htmlFor="city" id="filter">Filter By City:</label>
 
-                <select name="city" id="cities" value={formData.city} onChange={handleChange}>
+                <select name="city" id="filter" value={formData.city} onChange={handleChange}>
                     <option value={null}></option>
                     {!cities.length ? <option></option> : cities.map(c => {
                         return <option value={c} key={c}>{c}</option>
                     })}
                 </select>
-
-                
-                <button>Submit</button>
+                <button className="btn btn-outline-secondary mb-1">Submit</button>
             </form>
             {!writers.length ? "Loading..." : writers.map(w => <WriterCard key={w.id} writer={w}/>)}
         </div>
@@ -57,13 +54,4 @@ function WriterList() {
 };
 
 export default WriterList;
-
-{/* <label htmlFor="state">Filter By State:</label>
-
-<select name="state" id="states" value={formData.state} onChange={handleChange}>
-    <option value={null}></option>
-    {!states.length ? <option></option> : states.map(s => {
-        return <option value={s} key={s}>{s}</option>
-    })}
-</select> */}
 
