@@ -44,40 +44,45 @@ function GigList() {
 
                 <div className="col-3" >
 
-                    <form onSubmit={submit}>
-                        <label>Min Compensation</label>
+                    <form onSubmit={submit} id="gigFilter">
+                        <label id="gigLabel">Min Compensation</label>
                         <input
                             type="number"
                             name="minCompensation"
                             value={formData.minCompensation}
                             onChange={handleChange}
+                            id="gigInput"
                         />
 
-                        <label>Max Word Count</label>
+                        <label id="gigLabel">Max Word Count</label>
                         <input
                             type="number"
                             name="maxWordCount"
                             value={formData.maxWordCount}
                             onChange={handleChange}
+                            id="gigInput"
+
                         />
 
-                        <label>Min Word Count</label>
+                        <label id="gigLabel">Min Word Count</label>
                         <input
                             type="number"
                             name="minWordCount"
                             value={formData.minWordCount}
                             onChange={handleChange}
+                            id="gigInput"
+
                         />
 
-                        <label htmlFor="isRemote">Is Remote</label>
-                        <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange}>
+                        <label id="gigLabel" htmlFor="isRemote">Is Remote</label>
+                        <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange} id="gigInput">
                             <option value="">--</option>
                             <option value={true}>True</option>
                             <option value={false}>False</option>
                         </select>
 
-                        <label htmlFor="tagTitle">Tagged</label>
-                        <select name="tagTitle" id="tagTitle" value={formData.tagTitle} onChange={handleChange}>
+                        <label id="gigLabel" htmlFor="tagTitle">Tagged</label>
+                        <select name="tagTitle" id="tagTitle" value={formData.tagTitle} onChange={handleChange} id="gigInput">
                             <option value="">--</option>
                             {tags.length ? tags.map(t => <option key={t.id} value={t.title}>{t.title}</option>) : ""}
                         </select>

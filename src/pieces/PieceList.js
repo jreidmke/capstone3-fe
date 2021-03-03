@@ -45,7 +45,7 @@ function PieceList() {
                     })}
                 </select>
 
-                <label htmlFor="text">Filter By State:</label>
+                <label htmlFor="text">Search By Text:</label>
                 <input
                     type='text'
                     name='text'

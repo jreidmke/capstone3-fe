@@ -1,15 +1,15 @@
-form {
+#gigFilter {
     position: fixed;
     top: 1;
     left: 1;
     width: 15rem;
 }
 
-input {
+#gigInput {
     margin: 1rem;
     display: block;
 }
 
-label {
+#gigLabel {
     display: block;
 }
