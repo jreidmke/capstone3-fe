@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import PlatformCard from './PlatformCard';
 import PrintApi from '../api/api';
 import { useHistory } from "react-router-dom";
-
+import "./PlatformList.css";
 function PlatformList() {
     const [platforms, setPlatforms] = useState([]);
     const [states, setStates] = useState([]);
@@ -39,18 +39,16 @@ function PlatformList() {
     return(
         <div>
             <form onSubmit={submit}>
-                <label htmlFor="city">Filter By City:</label>
+                <label htmlFor="city" id='filter'>Filter By City:</label>
 
-                <select name="city" id="cities" value={formData.city} onChange={handleChange}>
+                <select name="city" id="filter" value={formData.city} onChange={handleChange}>
                     <option value={null}></option>
                     {!cities.length ? <option></option> : cities.map(c => {
                         return <option value={c} key={c}>{c}</option>
                     })}
                 </select>
 
-
-                
-                <button>Submit</button>
+                <button className="btn btn-outline-secondary mb-1">Submit</button>
             </form>
             {!platforms.length ? "Loading..." : platforms.map(p => <PlatformCard key={p.id} platform={p}/>)}
         </div>
