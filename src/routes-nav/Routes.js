@@ -23,6 +23,7 @@ import EditWriterProfile from "../writers/EditWriterProfile";
 import PlatformList from "../platforms/PlatformList";
 import PlatformDetails from "../platforms/PlatformDetails";
 import EditPlatformProfile from "../platforms/EditPlatformDetails";
+import OfferForm from "../platforms/OfferForm";
 
 import GigList from "../gigs/GigList";
 import GigDetails from "../gigs/GigDetails";
@@ -65,6 +66,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/portfolios/new">
                 <NewPortfolioForm/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/writers/:writerId/make-offer">
+                <OfferForm/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/edit">

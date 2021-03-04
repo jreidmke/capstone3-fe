@@ -316,6 +316,11 @@ class PrintApi {
     static async deleteGig(platformId, gigId) {
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}`, {}, "delete");
       return res;
+    };
+
+    static async makeOffer(platformId, gigId, writerId, message) {
+      let res = await this.request(`platforms/${platformId}/gigs/${gigId}/writers/${writerId}`, message, "post");
+      return res.newOffer;
     }
 
     static async addTagToGig(platformId, gigId, tagId) {
