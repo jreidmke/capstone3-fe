@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import PieceCard from './PieceCard';
 import PrintApi from '../api/api';
 import { useHistory } from "react-router-dom";
+import "./PieceList.css";
 
 function PieceList() {
     const [pieces, setPieces] = useState([]);
@@ -34,27 +35,35 @@ function PieceList() {
     }
 
     return(
-        <div>
+        <div className="container">
+
             <form onSubmit={submit}>
-                <label htmlFor="tags">Filter By Tag:</label>
 
-                <select name="tagTitle" id="tags" value={formData.city} onChange={handleChange}>
-                    <option value={null}></option>
-                    {!tags.length ? <option></option> : tags.map(t => {
-                        return <option value={t.title} key={t.id}>{t.title}</option>
-                    })}
-                </select>
+                <div className="row">
+                    <div className="col-4">
+                        <label htmlFor="tags">Filter By Tag:</label>
+                        <select name="tagTitle" id="filter" value={formData.city} onChange={handleChange}>
+                            <option value={null}></option>
+                            {!tags.length ? <option></option> : tags.map(t => {
+                                return <option value={t.title} key={t.id}>{t.title}</option>
+                            })}
+                        </select>
+                    </div>
 
-                <label htmlFor="text">Search By Text:</label>
-                <input
-                    type='text'
-                    name='text'
-                    onChange={handleChange}
-                    placeholder="Text"/>
-                
-                <button>Submit</button>
+                    <div className="col-4">
+                        <label htmlFor="text">Search By Text:</label>
+                        <input
+                            type='text'
+                            name='text'
+                            onChange={handleChange}
+                            placeholder="Text"
+                            id="filter"/>
+                    </div>
+
+                    <button className="btn btn-outline-secondary" id="submitFilterBtn">Submit</button>
+                </div>
             </form>
-            {!pieces.length ? "Loading..." : pieces.map(p => <PieceCard key={p.id} piece={p}/>)}
+                    {!pieces.length ? "Loading..." : pieces.map(p => <PieceCard key={p.id} piece={p}/>)}
         </div>
     )
 };
