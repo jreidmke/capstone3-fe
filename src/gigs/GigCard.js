@@ -11,7 +11,12 @@ function GigCard({gig}) {
             <div className="row">
                 <div className="col-3">
                     <img src={gig.imageUrl} id="platformImg" alt="platform image"/>
-                    <h6><Link to={`/gigs/${gig.id}`}>{gig.title}</Link></h6>
+                    <h6>
+                        <Link to={`/gigs/${gig.id}`}>{gig.title}</Link>
+                        {currentUser.platformId===gig.platformId ? 
+                        <Link to={`/gigs/${gig.id}/edit`} className="ml-2"><FaEdit/></Link>
+                        : ""}
+                    </h6>
                     <p>Platform: <Link to={`/platforms/${gig.platformId}`}>{gig.displayName}</Link></p>
                 </div>
                 <div className="col">
