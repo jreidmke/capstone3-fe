@@ -40,7 +40,7 @@ function WriterRegisterForm({ register }) {
         e.preventDefault();
         let result = await register(formData);
         if(result.success) {
-            history.push("/");
+            history.push("/home");
         } else {
             console.log(result.error)
             setFormErrors(result.error);
@@ -168,7 +168,7 @@ function WriterRegisterForm({ register }) {
                         />
                     </div>
                     <div className="col-4">
-                        <label>Additional Address (Suite or Office Number)</label>
+                        <label>Additional Address (Ex: Appartment Number)</label>
                         <input
                             name="address2"
                             value={formData.address2}

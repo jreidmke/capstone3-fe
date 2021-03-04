@@ -43,6 +43,7 @@ class PrintApi {
     /** Signup for site. */
 
     static async register(data) {
+      if(data.imageUrl==="") delete data.imageUrl;
       let res = await this.request(`auth/register`, data, "post");
       return res.token;
     };

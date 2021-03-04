@@ -10,9 +10,15 @@ function PlatformFeed({platformId}) {
 
     useEffect(() => {
         async function getGigs() {
-            const tagRes = await PrintApi.getPiecesForFeedFromTags(platformId, platformTagFollows.map(f => f.tagId));
-            const writerRes = await PrintApi.getPiecesForFeedFromWriters(platformId, platformWriterFollows.map(f => f.writerId));
-            const feed = shuffle([writerRes, tagRes].flat());
+            let tagRes;
+            let writerRes;
+            if(platformTagFollows.length) {
+                tagRes = await PrintApi.getPiecesForFeedFromTags(platformId, platformTagFollows.map(f => f.tagId));
+            }
+            if(platformTagFollows.length) {
+                writerRes = await PrintApi.getPiecesForFeedFromWriters(platformId, platformWriterFollows.map(f => f.writerId));
+            }
+            const feed = shuffle([writerRes, tagRes].flat().filter(x => x !== undefined));
             setPieces(feed);
         };
         getGigs();

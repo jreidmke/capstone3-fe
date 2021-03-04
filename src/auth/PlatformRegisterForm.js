@@ -39,7 +39,7 @@ function PlatformRegisterForm({ register }) {
         let result = await register(formData);
         console.log(result);
         if(result.success) {
-            history.push("/");
+            history.push("/home");
         } else {
             console.log(result.error)
             setFormErrors(result.error);
@@ -91,7 +91,7 @@ function PlatformRegisterForm({ register }) {
                         <label>Display Name (ex. The Atlantic, Metal Blade Records, etc.)</label>
                         <input 
                             name="displayName"
-                            value={formData.firstName}
+                            value={formData.displayName}
                             onChange={handleChange}
                             placeholder="Display Name"
                             className="form-control"
@@ -220,7 +220,7 @@ function PlatformRegisterForm({ register }) {
                         <label>Description</label>
                         <textarea
                             name="description"
-                            value={formData.lastName}
+                            value={formData.description}
                             onChange={handleChange}
                             placeholder="Description"
                             className="form-control"
