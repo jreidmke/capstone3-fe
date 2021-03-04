@@ -33,6 +33,12 @@ function WriterDetailsAuth({writerId}) {
         }
     };
 
+    const statusColors = {
+        "Pending": "yellow",
+        "Accepted": "green",
+        "Rejected": "red"
+    };
+
     return(
         <div>
             {writer && applications && pieces ?
@@ -72,10 +78,10 @@ function WriterDetailsAuth({writerId}) {
                                         <tbody>
                                             {applications.map(a => 
                                             <tr key={a.id}>
-                                                <td>{a.gigTitle}</td>
-                                                <td>{a.platformName}</td>
-                                                <td>{a.portfolioTitle}</td>
-                                                <td>{a.status}</td>
+                                                <td><Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link></td>
+                                                <td><Link to={`/platforms/${a.platformId}`}>{a.platformName}</Link></td>
+                                                <td><Link to={`/portfolios/${a.portfolioId}`}>{a.portfolioTitle}</Link></td>
+                                                <td style={{backgroundColor: statusColors[a.status]}}>{a.status}</td>
                                                 <td><FaTimes color="red" onClick={()=>withdrawApplication(a.writerId, a.gigId)}/></td>
                                             </tr>)}
                                         </tbody>
