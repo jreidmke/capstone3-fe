@@ -36,10 +36,11 @@ function PieceDetails() {
                     <img src={piece.imageUrl} id="writerImage"/>
                     <h2>By: <Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></h2>
                     <h6>Submitted: {piece.createdAt.slice(0, 10)}</h6>
-                    <ul>
-                        Tagged With:
+                    <ul className="mb-3">
+                    <div className="text-success" id="listLabel">Tagged With:</div>
                         {piece.tags.map(t => <li>{t.title}</li>)}
                     </ul>
+                    <small>*to add or remove tags, select the edit button at the top.</small>
                 </div>
                 <div className="col mt-5">
                     <h1>{piece.title} {currentUser.writerId===piece.writerId ? 

@@ -55,6 +55,7 @@ function EditPieceForm() {
             title: result.title,
             text: result.text
         });
+        history.push(`/pieces/${pieceId}`)
     };
 
     async function addTagToPiece(writerId, pieceId, tagId) {

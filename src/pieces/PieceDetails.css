@@ -7,3 +7,7 @@
 #deleteBtn {
     cursor: pointer;
 }
+
+#listLable {
+    margin: 0
+}
