@@ -19,6 +19,7 @@ function App() {
   const [writerTagFollows, setWriterTagFollows] = useState();
   const [platformTagFollows, setPlatformTagFollows] = useState();
   const [platformWriterFollows, setPlatformWriterFollows] = useState();
+  const [offers, setOffers] = useState();
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -26,19 +27,20 @@ function App() {
         try {
           PrintApi.token = token;
           const { userId } = jwt.decode(token);
-          let currUser = await PrintApi.getCurrentUser(userId);
-          setCurrentUser(currUser);
+          let currentUser = await PrintApi.getCurrentUser(userId);
+          setCurrentUser(currentUser);
 
-          if(currUser.writerId !== null) {
-            const wPFRes = await PrintApi.getWriterPlatformFollows(currUser.writerId);
+          if(currentUser.writerId !== null) {
+            const wPFRes = await PrintApi.getWriterPlatformFollows(currentUser.writerId);
             setWriterPlatformFollows(wPFRes);
-            const wTFRes = await PrintApi.getWriterTagFollows(currUser.writerId);
+            const wTFRes = await PrintApi.getWriterTagFollows(currentUser.writerId);
             setWriterTagFollows(wTFRes);
-
+            const offerRes = await PrintApi.getOffersByWriterId(currentUser.writerId);
+            setOffers(offerRes);
           } else {
-            const pTFRes = await PrintApi.getPlatformTagFollows(currUser.platformId);
+            const pTFRes = await PrintApi.getPlatformTagFollows(currentUser.platformId);
             setPlatformTagFollows(pTFRes);
-            const pWFRes = await PrintApi.getPlatformWriterFollows(currUser.platformId);
+            const pWFRes = await PrintApi.getPlatformWriterFollows(currentUser.platformId);
             setPlatformWriterFollows(pWFRes);
           }
 
@@ -87,7 +89,8 @@ function App() {
                   writerPlatformFollows, setWriterPlatformFollows,
                   platformWriterFollows, setPlatformWriterFollows,
                   writerTagFollows, setWriterTagFollows,
-                  platformTagFollows, setPlatformTagFollows}}>
+                  platformTagFollows, setPlatformTagFollows,
+                  offers, setOffers}}>
             <NavBar logout={logout}/>
             <Routes login={login} register={register} logout={logout}/>
           </UserContext.Provider>

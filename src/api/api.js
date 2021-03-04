@@ -83,6 +83,11 @@ class PrintApi {
       return res.apps;
     };
 
+    static async getOffersByWriterId(writerId) {
+      let res = await this.request(`writers/${writerId}/offers`);
+      return res.offers;
+    }
+
     //WRITER FEEDS
     static async getGigsForFeedFromTags(writerId, tagIds) {
       let res = await this.request(`writers/${writerId}/feed/tags?tag_ids=${tagIds}`);

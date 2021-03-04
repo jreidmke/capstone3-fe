@@ -4,7 +4,7 @@ import UserContext from "../auth/UserContext";
 import "./NavBar.css";
 
 function NavBar({logout}) {
-    const { currentUser } = useContext(UserContext);
+    const { currentUser, offers } = useContext(UserContext);
 
     function authNav() {
         return(
@@ -32,6 +32,13 @@ function NavBar({logout}) {
                 <li className="nav-item">
                     <NavLink to={currentUser.writerId !== null ? `/writers/${currentUser.writerId}` : `/platforms/${currentUser.platformId}`}>
                         | Profile |
+                    </NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink to={`/writers/${currentUser.writerId}/offers`}>
+                    <button type="button" class="btn btn-primary">
+                        Offers <span class="badge badge-light">{offers.length}</span>
+                    </button>
                     </NavLink>
                 </li>
                 <li className="nav-item">
