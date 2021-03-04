@@ -32,7 +32,7 @@ function OfferForm() {
 
     async function submit(e) {
         e.preventDefault();
-        await PrintApi.makeOffer(platform.id, formData.gig, writerId, formData.message);
+        await PrintApi.makeOffer(platform.id, formData.gig, writerId, formData);
         history.push(`/platforms/${platform.id}`);
     }
 

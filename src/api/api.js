@@ -319,6 +319,7 @@ class PrintApi {
     };
 
     static async makeOffer(platformId, gigId, writerId, message) {
+      console.log(message);
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}/writers/${writerId}`, message, "post");
       return res.newOffer;
     }
