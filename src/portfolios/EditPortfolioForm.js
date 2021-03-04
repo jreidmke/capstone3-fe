@@ -51,10 +51,8 @@ function EditPortfolioForm() {
 
     async function submit(e) {
         e.preventDefault();
-        let result = await PrintApi.updatePortfolio(portfolio.id, currentUser.writerId, formData);
-        setFormData({
-            title: result.title
-        });
+        await PrintApi.updatePortfolio(portfolio.id, currentUser.writerId, formData);
+        history.push(`/portfolios/${portfolioId}`)
     };
 
     async function addPieceToPortfolio(writerId, portfolioId, pieceId) {
@@ -115,7 +113,8 @@ function EditPortfolioForm() {
                     <ul>
                         {piecesIn ? piecesIn.map(p => 
                         <li>
-                            {p.title} <FaTimes onClick={()=>removePieceFromPortfolio(currentUser.writerId, portfolio.id, p.id)} color="red"/>
+                            <Link to={`/pieces/${p.id}`}>{p.title}</Link>
+                            <FaTimes onClick={()=>removePieceFromPortfolio(currentUser.writerId, portfolio.id, p.id)} color="red"/>
                         </li>
                         ) : ""}
                     </ul>
@@ -126,14 +125,15 @@ function EditPortfolioForm() {
                     <ul>
                         {piecesOut ? piecesOut.map(p => 
                         <li>
-                            {p.title} <FaPlus onClick={()=>addPieceToPortfolio(currentUser.writerId, portfolio.id, p.id)} color="green"/>
+                            <Link to={`/pieces/${p.id}`}>{p.title}</Link>
+                            <FaPlus onClick={()=>addPieceToPortfolio(currentUser.writerId, portfolio.id, p.id)} color="green"/>
                         </li>) 
                         : ""}
                     </ul>
                 </div>
             </div>
 
-            <button className="btn btn-info" onClick={() => history.push(`/writers/${currentUser.writerId}`)}>Save Changes</button>
+            <button className="btn btn-info" onClick={submit}>Save Changes</button>
             <br/><br/>
             <button className="btn btn-danger" onClick={() => deletePortfolio(currentUser.writerId, portfolioId)}>DELETE PORTFOLIO</button>
         </div>

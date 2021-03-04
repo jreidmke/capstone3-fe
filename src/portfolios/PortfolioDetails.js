@@ -4,6 +4,7 @@ import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import { Link } from 'react-router-dom';
 import "./PortfolioDetails.css";
+import {FaEdit} from 'react-icons/fa';
 
 function PortfolioDetails() {
     const { currentUser } = useContext(UserContext);
@@ -25,21 +26,25 @@ function PortfolioDetails() {
 
                <div className="row">
                    <div className="col">
-                       <h1>{portfolio.title}</h1>
-                       <h5>
+                       <h1>
+                           {portfolio.title}
+                           {currentUser.writerId===portfolio.writerId ?
+                            <Link to={`/pieces/${portfolioId}/edit`} className="ml-3"><FaEdit color="green"/></Link>
+                        :""}
+                        </h1>
+                       <h3>
                            A Portfolio By: <Link to={`/writers/${portfolio.writerId}`}>{portfolio.firstName} {portfolio.lastName}</Link>
-                        </h5>
-                        {currentUser && portfolio && currentUser.writerId == portfolio.writerId ? <h5><Link to={`/portfolios/${portfolio.id}/edit`}>Edit or Add Pieces</Link></h5>: ""}
-
+                        </h3>
                    </div>
                </div>
 
                 <div className="row">
                     <div className="col-4">
-                        <h5>Includes Pieces Tagged With:</h5>
+                        <h5 className="text-success">Includes Pieces Tagged With:</h5>
                         <ul id="tagList">
                             {portfolio.tags.map(t => <li key={t.id}>{t.title}</li>)}
                         </ul>
+                        <small>*to add or remove tags, select the edit button</small>
                     </div>
 
                     <div className="col">
@@ -47,7 +52,8 @@ function PortfolioDetails() {
                         <div key={p.id} className="overflow-auto" id="pieces">
                             <h5><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b></h5>
                             <p>Submitted At: {p.createdAt.slice(0, 10)}</p>
-                            <p>{p.text}</p>
+                            <p>{p.text.slice(0, 300)}...</p>
+                            <Link to={`/pieces/${p.id}`}>Click to read more.</Link>
                         </div>)
                         }
                     </div>
