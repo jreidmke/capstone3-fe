@@ -2,9 +2,10 @@ import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import GigCard from '../gigs/GigCard';
+import shuffle from "../helpers/arrayShuffle";
 
 function WriterFeed({writerId}) {
-    const { currentUser, writerPlatformFollows, writerTagFollows } = useContext(UserContext);
+    const { writerPlatformFollows, writerTagFollows } = useContext(UserContext);
     const [gigs, setGigs] = useState();
 
     useEffect(() => {
@@ -17,8 +18,8 @@ function WriterFeed({writerId}) {
             if(writerPlatformFollows.length) {
                 platformRes = await PrintApi.getGigsForFeedFromPlatforms(writerId, writerPlatformFollows.map(f => f.platformId));
             }
-            
-            setGigs([tagRes, platformRes].flat().filter(x => x !== undefined));
+            const feed = shuffle([tagRes, platformRes].flat().filter(x => x !== undefined));
+            setGigs(feed);
         };
         getGigs();
     }, []);
