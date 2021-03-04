@@ -34,6 +34,7 @@ function PortfolioDetails() {
                         </h1>
                        <h3>
                            A Portfolio By: <Link to={`/writers/${portfolio.writerId}`}>{portfolio.firstName} {portfolio.lastName}</Link>
+                           {currentUser.platformId ? <h4><span className="badge badge-success"><Link to={`/writers/${portfolio.writerId}/make-offer`}>Make an Offer to this Writer</Link></span></h4> : ""}
                         </h3>
                    </div>
                </div>
@@ -44,7 +45,7 @@ function PortfolioDetails() {
                         <ul id="tagList">
                             {portfolio.tags.map(t => <li key={t.id}>{t.title}</li>)}
                         </ul>
-                        <small>*to add or remove tags, select the edit button</small>
+                        {currentUser.writerId === portfolio.writerId ? <small>*to add or remove tags, select the edit button</small> : ""}
                     </div>
 
                     <div className="col">

@@ -4,6 +4,7 @@ import PortfolioCard from '../portfolios/PortfolioCard';
 import UserContext from '../auth/UserContext';
 import { FaTwitter, FaFacebook, FaYoutube, FaPenFancy } from 'react-icons/fa';
 import PieceCard from '../pieces/PieceCard';
+import { Link } from 'react-router-dom';
 
 function WriterDetailsNoAuth({writerId}) {
     const { currentUser, platformWriterFollows, setPlatformWriterFollows } = useContext(UserContext);
@@ -61,6 +62,7 @@ function WriterDetailsNoAuth({writerId}) {
                                 <div className="col" id="contactInfo">
                                     <h3>{writer.firstName} {writer.lastName}</h3>
                                     <h5>{writer.city}, {writer.state}</h5>
+                                    {currentUser.platformId ? <h4><span className="badge badge-success"><Link to={`/writers/${writerId}/make-offer`}>Make an Offer to this Writer</Link></span></h4> : ""}
                                     <h3>
                                         <a href={`https://www.facebook.com/${writer.facebookUsername}`} className='mx-2'><FaFacebook color="blue"/></a>
                                         <a href={`https://www.twitter.com/${writer.twitterUsername}`} className='mx-2'><FaTwitter color="lightblue"/></a>

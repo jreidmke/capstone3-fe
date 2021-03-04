@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory, Link, Redirect } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import PrintApi from "../api/api";
 import "./OfferForm.css"
@@ -37,7 +37,7 @@ function OfferForm() {
     }
 
     if(currentUser.writerId) {
-        return history.push("/login");
+        return <Redirect to={`/login`}/>
     };
 
     return(
