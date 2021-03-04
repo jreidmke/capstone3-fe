@@ -86,13 +86,12 @@ function WriterDetailsNoAuth({writerId}) {
                                     <FaPenFancy size="2em"/>
                                 </div>
                             </div>
-
-                            <div className="row mt-5">
-                                <div className="col overflow-auto" id="pieces">
-                                    <h5>Pieces</h5>
-                                    {pieces ? pieces.map(p => <PieceCard key={p.id} piece={p}/>) : ""}
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                    <div className="row mt-5">
+                        <div className="col overflow-auto" id="piecesNoAuth">
+                            <h5>Pieces</h5>
+                            {pieces ? pieces.map(p => <PieceCard key={p.id} piece={p}/>) : ""}
                         </div>
                     </div>
                 </div>

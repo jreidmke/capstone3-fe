@@ -17,6 +17,7 @@ function WriterFeed({writerId}) {
             if(writerPlatformFollows.length) {
                 platformRes = await PrintApi.getGigsForFeedFromPlatforms(writerId, writerPlatformFollows.map(f => f.platformId));
             }
+            
             setGigs([tagRes, platformRes].flat().filter(x => x !== undefined));
         };
         getGigs();
