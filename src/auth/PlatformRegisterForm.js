@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./UserRegisterForm.css";
+import Alert from "../common/Alert";
 
 /** Login form.
  *
@@ -41,7 +42,6 @@ function PlatformRegisterForm({ register }) {
         if(result.success) {
             history.push("/home");
         } else {
-            console.log(result.error)
             setFormErrors(result.error);
         };
     };
@@ -229,7 +229,9 @@ function PlatformRegisterForm({ register }) {
                         />
                     </div>
                 </div>
-
+                {formErrors.length ?
+                <Alert type="danger" messages={formErrors}/>
+                : ""}
                 <button className="btn btn-info mt-5">Create Profile!</button>
             </form>
         </div>

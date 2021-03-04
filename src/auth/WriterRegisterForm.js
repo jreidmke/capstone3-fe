@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import useTitle from '../hooks/useTitle';
-
+import Alert from '../common/Alert';
 /** Login form.
  *
  * Shows form and manages update to state on changes.
@@ -42,7 +41,6 @@ function WriterRegisterForm({ register }) {
         if(result.success) {
             history.push("/home");
         } else {
-            console.log(result.error)
             setFormErrors(result.error);
         };
     };
@@ -251,7 +249,9 @@ function WriterRegisterForm({ register }) {
                         />
                     </div>
                 </div>
-
+                {formErrors.length ?
+                <Alert type="danger" messages={formErrors}/>
+                : ""}
                 <button className="btn btn-info mt-5">Create Profile!</button>
             </form>
         </div>

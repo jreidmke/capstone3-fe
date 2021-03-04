@@ -60,8 +60,8 @@ function LoginForm({ login }) {
     <br/>
 
             {formErrors.length ?
-                <Alert type="danger" messages={formErrors}/>
-                : ""}
+            <Alert type="danger" messages={formErrors}/>
+            : ""}
 
             <button>Submit</button>
             </form>
