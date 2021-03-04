@@ -63,16 +63,23 @@ function WriterDetailsAuth({writerId}) {
                             </div>
 
                             <div className="row">
+                                <div className="col overflow-auto" id="feed">
+                                    <h5>Gig Feed</h5>
+                                    <WriterFeed writerId={writerId}/>
+                                </div>
+                            </div>
+
+                            <div className="row">
                                 <div className="col" id="applications">
                                     <h5>Applications</h5>
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <td>Gig Title</td>
-                                                <td>Platform</td>
-                                                <td>Portfolio Submitted</td>
-                                                <td>Status</td>
-                                                <td>Withdraw</td>
+                                                <th id="titleCol">Gig Title</th>
+                                                <th>Platform</th>
+                                                <th>Portfolio Submitted</th>
+                                                <th>Status</th>
+                                                <th>Withdraw</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -91,20 +98,14 @@ function WriterDetailsAuth({writerId}) {
                         </div>
 
                         <div className="col ml-2">
-                            <div className="row">
-                                <div className="col overflow-auto" id="feed">
-                                    <h5>Gig Feed</h5>
-                                    <WriterFeed writerId={writerId}/>
-                                </div>
-                            </div>
+                            
                             
                             <div className="row mt-5">
                                 <div className="col" id="portfolio">
                                     <h5>Portfolios<Link to={`/portfolios/new`} className="float-right"><FaPlus/></Link></h5>
                                     {writer.portfolios.map(p => <PortfolioCard key={p.id} portfolio={p}/>)}
                                 </div>
-                            </div>
-                            <div className="row mt-4">
+
                                 <div className="col">
                                     <h5>Pieces <Link to={`/pieces/new`} className="float-right mr-5"><FaPlus/></Link></h5>
                                     <div className="overflow-auto" id="pieces">
