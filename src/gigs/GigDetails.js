@@ -34,7 +34,6 @@ function GigDetails() {
 
     return(
         <div>
-{console.log(gig)}
             {gig ? 
             <div className="container">
                 <div className="row">

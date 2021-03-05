@@ -107,7 +107,6 @@ function EditWriterProfile({ logout }) {
     };
 
     async function followTag(writerId, tagId) {
-        console.log(notFollowedTags)
         let addedTag = notFollowedTags.splice(notFollowedTags.map(t => t.id).indexOf(tagId), 1)[0];
 
         setNotFollowedTags([...notFollowedTags]);

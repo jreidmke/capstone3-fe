@@ -66,7 +66,6 @@ function PlatformDetailsAuth({platformId}) {
                                 <p>Add headline functionality like status in FB.</p>
                             </div>
                         </div>
-{console.log(platform)}
                         <div className="row mt-5">
                             <div className="col" id="applications">
                                 <h5>Applications</h5>

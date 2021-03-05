@@ -11,10 +11,6 @@ function PlatformFollows() {
             <ul>
                 {platformTagFollows.map(t => <li>{t.title}</li>)}
             </ul>
-
-        {console.log(platformTagFollows)}
-        {console.log(platformWriterFollows)}
-
             <h1>Followed Writers</h1>
             <ul>
                 {platformWriterFollows.map(w => <Link to={`/writers/${w.writerId}`}><li>{w.firstName} {w.lastName}</li></Link>)}

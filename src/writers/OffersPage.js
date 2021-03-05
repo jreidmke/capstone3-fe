@@ -13,7 +13,6 @@ function OffersPage() {
     useEffect(() => {
         async function getOffers() {
             const res = await PrintApi.getOffersByWriterId(writerId);
-            console.log(res);
             setOffers(res);
         };
         getOffers();

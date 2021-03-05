@@ -154,7 +154,6 @@ class PrintApi {
         };
       };
       let res = await this.request(`platforms/${platformId}`, data, "patch");
-      console.log(res);
       return res.updatedPlatform;
     };
 
@@ -324,7 +323,6 @@ class PrintApi {
     };
 
     static async makeOffer(platformId, gigId, writerId, message) {
-      console.log(message);
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}/writers/${writerId}`, message, "post");
       return res.newOffer;
     }
@@ -338,6 +336,11 @@ class PrintApi {
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}/tags/${tagId}`, {}, "delete");
       return res.removedTag;
     };
+
+    static async getRelatedPieces(gigId, tagIds) {
+      let res = await this.request(`gigs/${gigId}/relatedPieces?tagIds=${tagIds}`);
+      return res.pieces;
+    }
 
     //APPLICATION STUFFS
 

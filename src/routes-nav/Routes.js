@@ -32,6 +32,7 @@ import NewGigForm from "../gigs/NewGigForm";
 import ApplyToGigForm from "../applications/ApplyToGigForm";
 import ApplicationDetails from "../applications/ApplicationDetails";
 import OffersPage from "../writers/OffersPage";
+import RelatedPieces from "../gigs/RelatedPieces";
 
 function Routes({ login, register, logout }) {
     return(
@@ -123,6 +124,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/platforms">
                 <PlatformList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/gigs/:gigId/relatedPieces">
+                <RelatedPieces/>
             </PrivateRoute>
 
             <PrivateRoute path="/gigs/:gigId/edit">

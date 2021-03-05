@@ -24,7 +24,6 @@ function WriterHomepage({writer}) {
 
             <div className="container">
                 <div className="row">
-{console.log(platform)}
 
                     {platform ? 
                     <div className="card mr-5" style={{width: 30+'em'}} id="weekCard">
