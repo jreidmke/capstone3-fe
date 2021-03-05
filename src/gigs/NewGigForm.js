@@ -34,21 +34,25 @@ function NewGigForm() {
     };
     
     return(
-        <div>
+        <div className="container">
             <form onSubmit={submit}>
                 <input
                     name="title"
                     value={formData.title}
                     type="text"
                     onChange={handleChange}
-                    placeholder={"Title"}/>
+                    placeholder={"Title"}
+                    className="form-control"
+                    />
 
                 <textarea 
                     name="description"
                     value={formData.description}
                     type="text"
                     onChange={handleChange}
-                    placeholder={"Text"}/>
+                    placeholder={"Text"}
+                    className="form-control"
+                    />
 
                 <input
                     name="compensation"
@@ -56,17 +60,19 @@ function NewGigForm() {
                     type="number"
                     onChange={handleChange}
                     placeholder="Compensation"
+                    className="form-control"
+
                 />
 
             <label htmlFor="isRemote">Is Remote</label>
-                <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange}>
+                <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange} className="form-control">
                     <option value="">--</option>
                     <option value={true}>True</option>
                     <option value={false}>False</option>
                 </select>     
             
             <label htmlFor="isActive">Is Active</label>
-                <select name="isActive" id="isActive" value={formData.isActive} onChange={handleChange}>
+                <select name="isActive" id="isActive" value={formData.isActive} onChange={handleChange} className="form-control">
                     <option value="">--</option>
                     <option value={true}>True</option>
                     <option value={false}>False</option>
@@ -79,6 +85,8 @@ function NewGigForm() {
                     type="number"
                     onChange={handleChange}
                     placeholder="wordCount"
+                    className="form-control"
+
                 />
 
 <button>Sumbit</button>
