@@ -86,6 +86,11 @@ class PrintApi {
     static async getQueriesByWriterId(writerId) {
       let res = await this.request(`writers/${writerId}/queries`);
       return res.queries;
+    };
+
+    static async getApplicationMessagesByWriterId(writerId) {
+      let res = await this.request(`writers/${writerId}/application-messages`);
+      return res.appMsgs;
     }
 
     //WRITER FEEDS
