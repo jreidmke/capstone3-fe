@@ -32,14 +32,14 @@ function NavBar({logout}) {
                 </li>
                 <li className="nav-item">
                     <NavLink to={currentUser.writerId !== null ? `/writers/${currentUser.writerId}` : `/platforms/${currentUser.platformId}`}>
-                        | Profile |
+                        | Profile 
                     </NavLink>
+
+                        {currentUser.writerId ? 
+                        <NavLink to={`/writers/${currentUser.writerId}/queries`} className="ml-1">
+                            <FaEnvelopeSquare/> <span className="badge badge-light">{queries.length + appMsgs.length}</span> |
+                        </NavLink> : ""}
                 </li>
-                {currentUser.writerId ? <li className="nav-item">
-                    <NavLink to={`/writers/${currentUser.writerId}/queries`}>
-                        <FaEnvelopeSquare/> <span className="badge badge-light">{queries.length + appMsgs.length}</span>
-                    </NavLink>
-                </li> : ""}
                 <li className="nav-item">
                     <NavLink to="/" onClick={logout}>
                         | Logout 

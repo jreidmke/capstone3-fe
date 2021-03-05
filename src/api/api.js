@@ -93,6 +93,11 @@ class PrintApi {
       return res.appMsgs;
     }
 
+    static async dismissApplicationMessage(writerId, appMsgId) {
+      await this.request(`writers/${writerId}/application-messages/${appMsgId}`, {}, "delete");
+      return "deleted";
+    };
+
     //WRITER FEEDS
     static async getGigsForFeedFromTags(writerId, tagIds) {
       let res = await this.request(`writers/${writerId}/feed/tags?tag_ids=${tagIds}`);

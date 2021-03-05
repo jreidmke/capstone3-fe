@@ -31,7 +31,7 @@ import EditGigForm from "../gigs/EditGigForm";
 import NewGigForm from "../gigs/NewGigForm";
 import ApplyToGigForm from "../applications/ApplyToGigForm";
 import ApplicationDetails from "../applications/ApplicationDetails";
-import QueryPage from "../writers/QueryPage";
+import MessagePage from "../writers/MessagePage";
 import RelatedPieces from "../gigs/RelatedPieces";
 
 import Faq from "../common/Faq";
@@ -77,7 +77,7 @@ function Routes({ login, register, logout }) {
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/queries">
-                <QueryPage/>
+                <MessagePage/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/make-query">
