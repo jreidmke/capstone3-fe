@@ -98,6 +98,16 @@ class PrintApi {
       return "deleted";
     };
 
+    static async acceptGig(writerId, applicationId) {
+      let res = await this.request(`writers/${writerId}/applications/${applicationId}`, {}, "post");
+      return res.newOngoingGig;
+    };
+
+    static async getOngoingWriterGigs(writerId) {
+      let res = await this.request(`writers/${writerId}/ongoing`);
+      return res.ongoingGigs; 
+    }
+
     //WRITER FEEDS
     static async getGigsForFeedFromTags(writerId, tagIds) {
       let res = await this.request(`writers/${writerId}/feed/tags?tag_ids=${tagIds}`);
@@ -169,6 +179,11 @@ class PrintApi {
 
     static async deletePlatformAccount(platformId) {
       await this.request(`platforms/${platformId}`, {}, "delete");
+    };
+
+    static async getOngoingPlatformGigs(platformId) {
+      const res = await this.request(`platforms/${platformId}/ongoing`);
+      return res.ongoingGigs;
     }
 
     //PLATFORM FEED

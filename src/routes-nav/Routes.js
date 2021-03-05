@@ -35,6 +35,8 @@ import MessagePage from "../writers/MessagePage";
 import RelatedPieces from "../gigs/RelatedPieces";
 
 import Faq from "../common/Faq";
+import OngoingWriterGigs from "../writers/OngoingGigs";
+import OngoingPlatformGigs from "../platforms/OngoingPlatformGigs";
 
 function Routes({ login, register, logout }) {
     return(
@@ -66,6 +68,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/pieces/new">
                 <NewPieceForm/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/writers/:writerId/ongoing">
+                <OngoingWriterGigs/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/pieces">
@@ -110,6 +116,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/pieces">
                 <PieceList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/platforms/:platformId/ongoing">
+                <OngoingPlatformGigs/>
             </PrivateRoute>
             
             <PrivateRoute path="/platforms/:platformId/applications/:appId">

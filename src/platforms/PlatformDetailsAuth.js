@@ -72,11 +72,11 @@ function PlatformDetailsAuth({platformId}) {
                                 <table className="table">
                                     <thead>
                                         <tr>
-                                            <td>Gig Title</td>
-                                            <td>Writer</td>
-                                            <td>Portfolio Submitted</td>
-                                            <td>Status</td>
-                                            <td>Update Status</td>
+                                            <th>Gig Title</th>
+                                            <th>Writer</th>
+                                            <th>Portfolio Submitted</th>
+                                            <th>Status</th>
+                                            <th>Update Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,7 +92,7 @@ function PlatformDetailsAuth({platformId}) {
                                                     <option value="Accepted">Accepted</option>
                                                     <option value="Rejected">Rejected</option>
                                                 </select>
-                                                <button className="btn btn-success mt-1" onClick={() => submit(a.id)}>Update</button>
+                                                <button className="btn btn-success btn-sm mb-1 ml-2" onClick={() => submit(a.id)}>Update</button>
                                             </td>
                                            
                                         </tr>)}

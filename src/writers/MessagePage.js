@@ -9,7 +9,7 @@ function MessagePage() {
     const { writerId } = useParams();
     const length = [queries,appMsgs].flat().length;
 
-    if(currentUser.writerId !== +writerId) return <Redirect to={"/login"}/>
+    if(currentUser.platformId || currentUser.writerId !== +writerId) return <Redirect to={"/login"}/>
 
     const statusColors = {
         "Pending": "yellow",
@@ -17,29 +17,23 @@ function MessagePage() {
         "Rejected": "red"
     };
 
-    async function dismissMessage(msgId) {
-        if(window.confirm("Are you sure you want to dismiss this message? You will not be able to retrieve it.")) {
+    async function acceptGig(applicationId, msgId) {
+        if(window.confirm("You are accepting this position. This will notify the Platform that you are confirming your acceptance. Proceed?")) {
+            await PrintApi.acceptGig(writerId, applicationId);
+            appMsgs.splice(appMsgs.map(a => a.id).indexOf(msgId), 1);
+            setAppMsgs([...appMsgs]);
+        }
+    };
+
+    async function declineGig(msgId) {
+        if(window.confirm("Are you sure you want to decline this gig? This will notify Platform.")) {
             await PrintApi.dismissApplicationMessage(writerId, msgId);
             appMsgs.splice(appMsgs.map(a => a.id).indexOf(msgId), 1);
             setAppMsgs([...appMsgs]);
         };
         return;
-    };
+    } 
 
-    // async function withdrawApplication(writerId, gigId) {
-    //     if(window.confirm("Are you sure you want to withdraw this application?")) {
-    //         await PrintApi.withdrawApplication(writerId, gigId);
-    //         applications.splice(applications.map(a => a.gigId).indexOf(gigId), 1);
-    //         setApplications([...applications]);
-    //     } else {
-    //         return;
-    //     }
-    // };
-
-
-    console.log(appMsgs);
-
-    if(currentUser.platformId || currentUser.writerId !== +writerId) return <Redirect to={"/login"}/>
     return(
         <div className="container">
             <div className="row">
@@ -47,6 +41,7 @@ function MessagePage() {
                     <h1>There are {length} messages for {currentUser.firstName}</h1>
                 </div>
             </div>
+            {queries.length || appMsgs.length ? 
             <div className="row">
                 <div className="col-5">
                     <h4>Gig Queries</h4>
@@ -71,17 +66,19 @@ function MessagePage() {
                     {appMsgs.map(a =>
                     <div key={a.id} className="card py-2 my-2">
                         <div className="card-title">
-                            <FaTimes color="red" className="float-right mr-2" size="2rem" onClick={() => dismissMessage(a.id)}/>
                             <h5>
                                 On {a.createdAt.slice(0, 10)}, your application for Gig: <Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link> was updated to <span style={{color: statusColors[a.status]}}>{a.status}</span>.
                             </h5>
-                            <FaPenFancy color={statusColors[a.status]} size="3rem"/>
+                            <button className="btn btn-sm btn-success mx-3" onClick={() => acceptGig(a.appId, a.id)}>Accept Gig</button>
+                            <button className="btn btn-sm btn-danger mx-3" onClick={() => declineGig(a.id)}>Decline Gig</button>
                             <h6><Link to={`/platforms/${a.platformId}`} className="card-link">Reach Out to {a.displayName}</Link></h6>
                         </div>
                     </div>
                         )}
                 </div>
             </div>
+            :""}
+
         </div>
     )
 }
