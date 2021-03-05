@@ -38,7 +38,7 @@ function PieceDetails() {
 
                         {currentUser.platformId ? <div className="row">
                             <div className="col">
-                                <h4><span className="badge badge-success"><Link to={`/writers/${piece.writerId}/make-offer`}>Make this Writer An Offer</Link></span></h4>
+                                <h4><span className="badge badge-success"><Link to={`/writers/${piece.writerId}/make-query`}>Query This Writer On Gig</Link></span></h4>
                             </div>
                         </div> : ""}
 

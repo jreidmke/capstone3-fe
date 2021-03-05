@@ -5,44 +5,44 @@ import { Redirect, useParams, Link } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 
-function OffersPage() {
+function QueriesPage() {
     const { currentUser } = useContext(UserContext);
-    const [offers, setOffers] = useState();
+    const [queries, setQueries] = useState();
     const { writerId } = useParams();
 
     useEffect(() => {
-        async function getOffers() {
-            const res = await PrintApi.getOffersByWriterId(writerId);
-            setOffers(res);
+        async function getQueries() {
+            const res = await PrintApi.getQueriesByWriterId(writerId);
+            setQueries(res);
         };
-        getOffers();
+        getQueries();
     }, []);
 
     if(currentUser.platformId || currentUser.writerId !== +writerId) return <Redirect to={"/login"}/>
 
     return(
         <div>
-            {offers ? 
+            {queries ? 
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h1>Offers</h1>
+                        <h1>Queries</h1>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
 
                         <Accordion>
-                            {offers.map(o => 
-                            <div key={o.id}>
+                            {queries.map(q => 
+                            <div key={q.id}>
                                 <Accordion.Toggle variant="link" eventKey="0">
-                                    <li className="list-group-item">{o.displayName} made an Offer for Gig ${o.gigTitle}</li>
+                                    <li className="list-group-item">{q.displayName} made an Query for Gig ${q.gigTitle}</li>
                                 </Accordion.Toggle>
 
                                 <Accordion.Collapse eventKey="0">
                                     <div className="row">
                                         <div className="col">
-                                            <p>{o.message}</p>
+                                            <p>{q.message}</p>
                                             <table>
                                                 <thead>
                                                     <tr>
@@ -54,14 +54,14 @@ function OffersPage() {
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>{o.compensation}</td>
-                                                        <td>{o.wordCount}</td>
-                                                        <td>{o.compensation/o.wordCount}</td>
-                                                        <td>{o.isRemote ? <FaCheck color="green"/> : <FaTimes color="red"/>}</td>
+                                                        <td>{q.compensation}</td>
+                                                        <td>{q.wordCount}</td>
+                                                        <td>{q.compensation/q.wordCount}</td>
+                                                        <td>{q.isRemote ? <FaCheck color="green"/> : <FaTimes color="red"/>}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <h6><Link to={`/gigs/${o.gigId}/apply`}>Apply To Job</Link></h6>
+                                            <h6><Link to={`/gigs/${q.gigId}/apply`}>Apply To Job</Link></h6>
                                         </div>
                                     </div>
                                 </Accordion.Collapse>
@@ -77,4 +77,4 @@ function OffersPage() {
     )
 }
 
-export default OffersPage;
+export default QueriesPage;

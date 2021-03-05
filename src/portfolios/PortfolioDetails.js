@@ -34,7 +34,7 @@ function PortfolioDetails() {
                         </h1>
                        <h3>
                            A Portfolio By: <Link to={`/writers/${portfolio.writerId}`}>{portfolio.firstName} {portfolio.lastName}</Link>
-                           {currentUser.platformId ? <h4><span className="badge badge-success"><Link to={`/writers/${portfolio.writerId}/make-offer`}>Make an Offer to this Writer</Link></span></h4> : ""}
+                           {currentUser.platformId ? <h4><span className="badge badge-success"><Link to={`/writers/${portfolio.writerId}/make-query`}>Query this Writer for a Gig</Link></span></h4> : ""}
                         </h3>
                    </div>
                </div>

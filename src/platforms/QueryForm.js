@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, useHistory, Link, Redirect } from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import PrintApi from "../api/api";
-import "./OfferForm.css"
+import "./QueryForm.css"
 
-function OfferForm() {
+function QueryForm() {
     const { currentUser } = useContext(UserContext); 
     const { writerId } = useParams();
     const [platform, setPlatform] = useState();
@@ -32,7 +32,7 @@ function OfferForm() {
 
     async function submit(e) {
         e.preventDefault();
-        await PrintApi.makeOffer(platform.id, formData.gig, writerId, formData);
+        await PrintApi.makeQuery(platform.id, formData.gig, writerId, formData);
         history.push(`/platforms/${platform.id}`);
     }
 
@@ -47,7 +47,7 @@ function OfferForm() {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h1>Make An Offer</h1>
+                        <h1>Query {writer.firstName} for a Gig</h1>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@ function OfferForm() {
                     <div className="col">
                         <form onSubmit={submit}>
                             <div className="row">
-                                <label htmlFor="gig-select">Select the Gig You Would Like to Offer the Writer</label>
+                                <label htmlFor="gig-select">Select the Gig You Would Like to Query the Writer With</label>
                                 <select name="gig" id="gig" value={formData.gig} onChange={handleChange} className="form-control">
                                     <option value="">--</option>
                                     {platform.gigs.map(g => <option value={g.id}>{g.title}</option>)}
@@ -80,7 +80,7 @@ function OfferForm() {
                             </div>
 
                             <div className="row mt-2">
-                                <button className="btn btn-info btn-lg btn-block">Make Offer</button>
+                                <button className="btn btn-info btn-lg btn-block">Make Query</button>
                             </div>
                         </form>
                     </div>
@@ -94,4 +94,4 @@ function OfferForm() {
 
 }
 
-export default OfferForm; 
+export default QueryForm; 

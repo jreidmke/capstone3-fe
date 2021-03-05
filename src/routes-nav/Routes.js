@@ -23,7 +23,7 @@ import EditWriterProfile from "../writers/EditWriterProfile";
 import PlatformList from "../platforms/PlatformList";
 import PlatformDetails from "../platforms/PlatformDetails";
 import EditPlatformProfile from "../platforms/EditPlatformDetails";
-import OfferForm from "../platforms/OfferForm";
+import QueryForm from "../platforms/QueryForm";
 
 import GigList from "../gigs/GigList";
 import GigDetails from "../gigs/GigDetails";
@@ -31,8 +31,10 @@ import EditGigForm from "../gigs/EditGigForm";
 import NewGigForm from "../gigs/NewGigForm";
 import ApplyToGigForm from "../applications/ApplyToGigForm";
 import ApplicationDetails from "../applications/ApplicationDetails";
-import OffersPage from "../writers/OffersPage";
+import QueryPage from "../writers/QueryPage";
 import RelatedPieces from "../gigs/RelatedPieces";
+
+import Faq from "../common/Faq";
 
 function Routes({ login, register, logout }) {
     return(
@@ -45,6 +47,10 @@ function Routes({ login, register, logout }) {
             <Route exact path="/home">
                 <Homepage/>
             </Route>
+
+            <PrivateRoute exact path="/faq">
+                <Faq/>
+            </PrivateRoute>
 
             <Route exact path="/login">
                 <LoginForm login={login}/>
@@ -70,12 +76,12 @@ function Routes({ login, register, logout }) {
                 <NewPortfolioForm/>
             </PrivateRoute>
 
-            <PrivateRoute path="/writers/:writerId/offers">
-                <OffersPage/>
+            <PrivateRoute path="/writers/:writerId/queries">
+                <QueryPage/>
             </PrivateRoute>
 
-            <PrivateRoute path="/writers/:writerId/make-offer">
-                <OfferForm/>
+            <PrivateRoute path="/writers/:writerId/make-query">
+                <QueryForm/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/edit">

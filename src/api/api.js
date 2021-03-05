@@ -83,9 +83,9 @@ class PrintApi {
       return res.apps;
     };
 
-    static async getOffersByWriterId(writerId) {
-      let res = await this.request(`writers/${writerId}/offers`);
-      return res.offers;
+    static async getQueriesByWriterId(writerId) {
+      let res = await this.request(`writers/${writerId}/queries`);
+      return res.queries;
     }
 
     //WRITER FEEDS
@@ -322,9 +322,9 @@ class PrintApi {
       return res;
     };
 
-    static async makeOffer(platformId, gigId, writerId, message) {
+    static async makeQuery(platformId, gigId, writerId, message) {
       let res = await this.request(`platforms/${platformId}/gigs/${gigId}/writers/${writerId}`, message, "post");
-      return res.newOffer;
+      return res.newQuery;
     }
 
     static async addTagToGig(platformId, gigId, tagId) {

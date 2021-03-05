@@ -19,7 +19,7 @@ function App() {
   const [writerTagFollows, setWriterTagFollows] = useState();
   const [platformTagFollows, setPlatformTagFollows] = useState();
   const [platformWriterFollows, setPlatformWriterFollows] = useState();
-  const [offers, setOffers] = useState();
+  const [queries, setQueries] = useState();
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -35,8 +35,8 @@ function App() {
             setWriterPlatformFollows(wPFRes);
             const wTFRes = await PrintApi.getWriterTagFollows(currentUser.writerId);
             setWriterTagFollows(wTFRes);
-            const offerRes = await PrintApi.getOffersByWriterId(currentUser.writerId);
-            setOffers(offerRes);
+            const queryRes = await PrintApi.getQueriesByWriterId(currentUser.writerId);
+            setQueries(queryRes);
           } else {
             const pTFRes = await PrintApi.getPlatformTagFollows(currentUser.platformId);
             setPlatformTagFollows(pTFRes);
@@ -90,7 +90,7 @@ function App() {
                   platformWriterFollows, setPlatformWriterFollows,
                   writerTagFollows, setWriterTagFollows,
                   platformTagFollows, setPlatformTagFollows,
-                  offers, setOffers}}>
+                  queries, setQueries}}>
             <NavBar logout={logout}/>
             <Routes login={login} register={register} logout={logout}/>
           </UserContext.Provider>

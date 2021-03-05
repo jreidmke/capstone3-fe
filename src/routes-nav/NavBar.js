@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import UserContext from "../auth/UserContext";
 import "./NavBar.css";
+import { FaPenFancy } from 'react-icons/fa';
 
 function NavBar({logout}) {
-    const { currentUser, offers } = useContext(UserContext);
+    const { currentUser, queries } = useContext(UserContext);
 
     function authNav() {
         return(
@@ -35,8 +36,8 @@ function NavBar({logout}) {
                     </NavLink>
                 </li>
                 {currentUser.writerId ? <li className="nav-item">
-                    <NavLink to={`/writers/${currentUser.writerId}/offers`}>
-                        Offers <span class="badge badge-light">{offers.length}</span>
+                    <NavLink to={`/writers/${currentUser.writerId}/queries`}>
+                        Queries <span class="badge badge-light">{queries.length}</span>
                     </NavLink>
                 </li> : ""}
                 <li className="nav-item">
@@ -67,7 +68,7 @@ function NavBar({logout}) {
     return(
         <nav className="Navigation navbar navbar-expand-md">
             <Link className="navbar-brand" to="/home">
-                Print
+                <FaPenFancy/>Print
             </Link>
             <button onClick={()=>console.log(currentUser)}>Print User</button>
             {currentUser ? authNav() : noAuthNav()}

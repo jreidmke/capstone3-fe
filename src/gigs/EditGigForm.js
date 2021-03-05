@@ -55,15 +55,15 @@ function EditGigForm() {
     async function submit(e) {
         e.preventDefault();
         let result = await PrintApi.updateGig(currentUser.platformId, gigId, formData);
-        setFormData({
-            title: result.title,
-            description: result.description,
-            compensation: result.compensation,
-            isRemote: result.isRemote,
-            wordCount: result.wordCount,
-            isActive: result.isActive
-        });
-        history.push(`/gigs/${gigId}`)
+        // setFormData({
+        //     title: result.title,
+        //     description: result.description,
+        //     compensation: result.compensation,
+        //     isRemote: result.isRemote,
+        //     wordCount: result.wordCount,
+        //     isActive: result.isActive
+        // });
+        history.push(`/gigs/${gigId}/relatedPieces`)
     };
 
     async function addTagToGig(platformId, gigId, tagId) {
@@ -167,7 +167,6 @@ function EditGigForm() {
             </ul>
 
 
-            <button className="button btn-info" onClick={() => history.push(`/platforms/${currentUser.platformId}`)}>Confirm</button>
             <button className="button btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>DELETE</button>
         </div>
     )
