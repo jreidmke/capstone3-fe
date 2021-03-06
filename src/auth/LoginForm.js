@@ -65,11 +65,17 @@ function LoginForm({ login }) {
                                 id="passwordInput"
                                 required
                             />
-                        </div>          
-                        {formErrors.length ?
-                        <Alert type="danger" messages={formErrors}/>
-                        : ""}
+                        </div>         
                     </div>
+
+                    <div className="row mt-3">
+                            <div className="col">
+                                {formErrors.length ?
+                                <Alert type="danger" messages={formErrors}/>
+                                : ""}
+                            </div>    
+                    </div> 
+
                     <div className="row mt-4">
                             <div className="col">
                                 <button className="btn btn-info btn-lg btn-block">Login</button>
