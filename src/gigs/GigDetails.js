@@ -3,6 +3,7 @@ import PrintApi from '../api/api';
 import { useParams, Link, useHistory } from "react-router-dom";
 import UserContext from '../auth/UserContext';
 import {FaCheck, FaTimes} from 'react-icons/fa';
+import RelatedItems from "./RelatedItems";
 
 function GigDetails() {
     const { currentUser } = useContext(UserContext);
@@ -97,10 +98,12 @@ function GigDetails() {
                 
                 : ""}
 
-                {gig.platformId === currentUser.platformId ? <button className="btn btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button> : ""}
 
             </div>
             : ""}
+            <RelatedItems/>
+            {gig.platformId === currentUser.platformId ? <button className="btn btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button> : ""}
+
         </div>
     )};
 

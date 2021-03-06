@@ -367,6 +367,11 @@ class PrintApi {
       return res.pieces;
     }
 
+    static async getRelatedWriters(gigId, tagIds) {
+      let res = await this.request(`gigs/${gigId}/relatedWriters?tagIds=${tagIds}`);
+      return res.writers;
+    }
+
     //APPLICATION STUFFS
 
     static async getApplicationById(platformId, applicationId) {

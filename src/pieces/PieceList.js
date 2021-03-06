@@ -1,21 +1,27 @@
 import {useState, useEffect} from 'react';
 import PieceCard from './PieceCard';
 import PrintApi from '../api/api';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./PieceList.css";
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 function PieceList() {
     const [pieces, setPieces] = useState([]);
     const [tags, setTags] = useState([]);
     const [formData, setFormData] = useState({
-        tagTitle: "",
-        text: ""
+        tagTitle: ""
     })
     const history = useHistory();
+    const query = useQuery();
+    console.log();
     
     useEffect(() => {
         async function getPieces() {
-            const piecesRes = await PrintApi.getAllPieces();
+            let q = query.get("tag-title") ? query.get("tag-title") : ""
+            const piecesRes = await PrintApi.getAllPieces({tagTitle: q});
             setPieces(piecesRes);
             const tagRes = await PrintApi.getAllTags();
             setTags(tagRes);

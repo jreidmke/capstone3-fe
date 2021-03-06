@@ -32,7 +32,7 @@ import NewGigForm from "../gigs/NewGigForm";
 import ApplyToGigForm from "../applications/ApplyToGigForm";
 import ApplicationDetails from "../applications/ApplicationDetails";
 import MessagePage from "../writers/MessagePage";
-import RelatedPieces from "../gigs/RelatedPieces";
+import RelatedItems from "../gigs/RelatedItems";
 
 import Faq from "../common/Faq";
 import OngoingWriterGigs from "../writers/OngoingGigs";
@@ -142,8 +142,8 @@ function Routes({ login, register, logout }) {
                 <PlatformList/>
             </PrivateRoute>
 
-            <PrivateRoute path="/gigs/:gigId/relatedPieces">
-                <RelatedPieces/>
+            <PrivateRoute path="/gigs/:gigId/related-items">
+                <RelatedItems/>
             </PrivateRoute>
 
             <PrivateRoute path="/gigs/:gigId/edit">
