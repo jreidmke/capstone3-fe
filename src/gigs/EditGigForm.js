@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
+import { FaTimes, FaPlus } from 'react-icons/fa';
+import "./EditGigForm.css";
 
 function EditGigForm() {
     //what we need: User ID, PortfolioId, list of all user pieces
@@ -19,7 +21,7 @@ function EditGigForm() {
         compensation: "",
         isRemote: "",
         wordCount: "",
-        isActive: ""
+        deadline: ""
     });
 
     useEffect(() => {
@@ -33,13 +35,14 @@ function EditGigForm() {
                 compensation: gigRes.compensation,
                 isRemote: gigRes.isRemote,
                 wordCount: gigRes.wordCount,
-                isActive: gigRes.isActive
+                deadline: gigRes.deadline
             });
 
             if(gigRes.platformId !== currentUser.platformId) history.push("/login");
 
             const tagRes = await PrintApi.getAllTags();
             setTagsOff(removeFromArr(tagRes, gigRes.tags));
+            console.log(removeFromArr(tagRes, gigRes.tags));
         };
         getItems();
     }, []);
@@ -67,9 +70,9 @@ function EditGigForm() {
     };
 
     async function addTagToGig(platformId, gigId, tagId) {
-        // //remove piece from pices out on fe
+        console.log(tagsOff.length)
         let addedTag = tagsOff.splice(tagsOff.map(t => t.id).indexOf(tagId), 1)[0];
-
+        console.log(tagsOff.length)
         setTagsOff(tagsOff)
 
         await PrintApi.addTagToGig(platformId, gigId, tagId);
@@ -96,78 +99,129 @@ function EditGigForm() {
     };
     
     return(
-        <div>
-            <form onSubmit={submit}>
-                <input
-                    name="title"
-                    value={formData.title}
-                    type="text"
-                    onChange={handleChange}
-                    placeholder={gig ? gig.title : "Title"}/>
+        <div className="container">
+            <div className="row">
+                <div className="col">
+                <form>
+                            <div className="row">
+                                <div className="col">
+                                    <label>Gig Title</label>
+                                    <input
+                                        name="title"
+                                        value={formData.title}
+                                        type="text"
+                                        onChange={handleChange}
+                                        placeholder="Title"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
 
-                <textarea 
-                    name="description"
-                    value={formData.description}
-                    type="text"
-                    onChange={handleChange}
-                    placeholder={gig ? gig.title : "Text"}/>
+                            <div className="row">
+                                <div className="col">
+                                    <label>Gig Description</label>
+                                    <textarea 
+                                        name="description"
+                                        value={formData.description}
+                                        type="text"
+                                        onChange={handleChange}
+                                        placeholder={"Text"}
+                                        className="form-control"
+                                        rows="5"
+                                        />
+                                </div>
+                            </div>
 
-                <input
-                    name="compensation"
-                    value={formData.compensation}
-                    type="number"
-                    onChange={handleChange}
-                    placeholder="Compensation"
-                />
+                            <div className="row">
+                                <div className="col">
+                                    <label>Compensation</label>
+                                    <input
+                                        name="compensation"
+                                        value={formData.compensation}
+                                        type="number"
+                                        onChange={handleChange}
+                                        placeholder="$100"
+                                        className="form-control"
+                                        />
+                                </div>
 
-            <label htmlFor="isRemote">Is Remote</label>
-                <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange}>
-                    <option value="">--</option>
-                    <option value={true}>True</option>
-                    <option value={false}>False</option>
-                </select>     
+                                <div className="col">
+                                    <label>Is Remote</label>
+                                    <select name="isRemote" id="isRemote" value={formData.isRemote} onChange={handleChange} className="form-control">
+                                        <option value="">--</option>
+                                        <option value={true}>True</option>
+                                        <option value={false}>False</option>
+                                    </select>  
+                                </div>
+
+                                <div className="col">
+                                    <label htmlFor="wordCount">Word Count</label>  
+                                    <input name="wordCount"
+                                        value={formData.wordCount}
+                                        type="number"
+                                        onChange={handleChange}
+                                        placeholder="5000"
+                                        className="form-control"
+                                    />
+                                </div>
+
+                                <div className="col">
+                                    <label>Deadline</label>
+                                    <input type="date"
+                                        name="deadline"
+                                        value={formData.deadline}
+                                        onChange={handleChange}
+                                        min="2020-03-06"
+                                        className="form-control"
+                                    />
+                                </div>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+            <div className="row mt-3">
+                <div className="col">
+                    <h3>Gig Tags</h3>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-2"/>
+                <div className="col-4" id="tagCol">
+                    <h4>Tagged</h4>
+                    <ul>
+                        {tagsOn ? tagsOn.map(t => 
+                        <li>
+                            {t.title} <FaTimes onClick={()=>removeTagFromGig(currentUser.platformId, gigId, t.id)} color="red"/>
+                        </li>
+                        ) : ""}
+                    </ul>
+                </div>
+                <div className="col-4" id="tagCol">
+                    <h4>Not Tagged</h4>
+                    <ul>
+                        {tagsOff ? tagsOff.map(t => 
+                        <li>
+                            {t.title} <FaPlus onClick={()=>addTagToGig(currentUser.platformId, gigId, t.id)} color="green"/>
+                        </li>) 
+                        : ""}
+                    </ul>
+                </div>
+
+                <div className="col-2">
+                    <div className="row">
+                        <button className="btn btn-info" onClick={submit}>Update Gig</button>
+                        <button className="btn btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button>
+                    </div>
+                </div>
+            </div>
+
             
-            <label htmlFor="isActive">Is Active</label>
-                <select name="isActive" id="isActive" value={formData.isActive} onChange={handleChange}>
-                    <option value="">--</option>
-                    <option value={true}>True</option>
-                    <option value={false}>False</option>
-                </select> 
 
-            <label htmlFor="wordCount">Word Count</label>  
-                <input
-                    name="wordCount"
-                    value={formData.wordCount}
-                    type="number"
-                    onChange={handleChange}
-                    placeholder="wordCount"
-                />
-
-<button>Sumbit</button>
-
-            </form>
+            
 
 
-            <h4>Tags</h4>
-            <ul>
-                {tagsOn ? tagsOn.map(t => 
-                <li>
-                    {t.title} <button onClick={()=>removeTagFromGig(currentUser.platformId, gigId, t.id)}>X</button>
-                </li>
-                ) : ""}
-            </ul>
-
-            <h4>Not Tagged</h4>
-            <ul>
-                {tagsOff ? tagsOff.map(t => 
-                <li>
-                    {t.title} <button onClick={()=>addTagToGig(currentUser.platformId, gigId, t.id)}>O</button>
-                </li>) 
-                : ""}
-            </ul>
-
-
-            <button className="button btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>DELETE</button>
         </div>
     )
 };

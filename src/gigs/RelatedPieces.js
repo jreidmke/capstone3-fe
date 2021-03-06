@@ -15,7 +15,7 @@ function RelatedPieces() {
         async function getItems() {
             const gigRes = await PrintApi.getGigById(gigId);
             setGig(gigRes);
-            setTags(gigRes.tags.map(t => t.title))
+            setTags(gigRes.tags.slice(0, 3).map(t => t.title))
             const pieceRes = await PrintApi.getRelatedPieces(gigId, gigRes.tags.map(t => t.id));
             setPieces(pieceRes);
         };
