@@ -151,6 +151,11 @@ class PrintApi {
       return res.unfollowed;
     };
 
+    static async ignoreQuery(writerId, queryId) {
+      let res = await this.request(`writers/${writerId}/queries/${queryId}`, {}, "delete");
+      return res.ignoredQuery;
+    };
+
     //PLATFORM STUFFS
     static async getAllPlatforms(queryParams) {
       let res = await this.request(`platforms`, queryParams);

@@ -1,7 +1,8 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import UserContext from '../auth/UserContext';
+import GigCard from "../gigs/GigCard";
 
 function ApplyToGigForm() {
     const { currentUser } = useContext(UserContext);
@@ -15,8 +16,6 @@ function ApplyToGigForm() {
     const [gig, setGig] = useState();
     const [portfolios, setPortfolios] = useState();
     const [applied, setApplied] = useState(false);
-
-    //come back and let people update what profile they selected
 
     useEffect(() => {
         async function getGig() {
@@ -47,15 +46,38 @@ function ApplyToGigForm() {
     };
 
     return(
-        <form onSubmit={submit}>
-            <label htmlFor="portfolioId">Select Your Portfolio</label>
-            <select name="portfolioId" id="portfolioId" value={formData.portfolioId} onChange={handleChange}>
-                <option value="">--</option>
-                {portfolios ? portfolios.map(p => <option value={p.id}>{p.title}</option>) : ""}
-            </select>
+        <div>
+            {gig && portfolios ? 
+            <div className="container">
+                <div className="row">
+                    <div className="col"><h1>Apply to {gig.title}</h1></div>
+                </div>
+                <div className="row">
+                    <div className="col"><GigCard gig={gig}/></div>
+                </div>
 
-            <button>Submit</button>
-        </form>
+                <div className="row">
+                    <div className="col"><h4>Read Your Portfolio Before Submitting</h4></div>
+                </div>
+
+                <div className="row">
+                    <div className="col">{portfolios.map(p => <Link to={`/portfolios/${p.id}`}><p>{p.title}</p></Link>)}</div>
+                </div>
+
+                <form onSubmit={submit}>
+                    <label htmlFor="portfolioId">Select Your Portfolio</label>
+                    <select name="portfolioId" id="portfolioId" value={formData.portfolioId} onChange={handleChange} className="form-control"> 
+                        <option value="">--</option>
+                        {portfolios ? portfolios.map(p => <option value={p.id}>{p.title}</option>) : ""}
+                    </select>
+
+                    <button className="btn btn-lg btn-info btn-block">Submit</button>
+                </form>
+            </div> 
+            : ""}
+        </div>
+
+        
     )
 };
 

@@ -5,7 +5,7 @@ import { FaPenFancy, FaTimes } from 'react-icons/fa';
 import PrintApi from '../api/api';
 
 function MessagePage() {
-    const { currentUser, queries, appMsgs, setAppMsgs } = useContext(UserContext);
+    const { currentUser, queries, setQueries, appMsgs, setAppMsgs } = useContext(UserContext);
     const { writerId } = useParams();
     const length = [queries,appMsgs].flat().length;
 
@@ -32,8 +32,18 @@ function MessagePage() {
             setAppMsgs([...appMsgs]);
         };
         return;
-    } 
+    };
 
+    async function ignoreQuery(queryId) {
+        if(window.confirm("You are ignoring this query. Are you sure?")) {
+            await PrintApi.ignoreQuery(writerId, queryId);
+            queries.splice(queries.map(q => q.id).indexOf(queryId), 1);
+            setQueries([...queries]);
+        };
+        return;
+    }
+
+    console.log(queries)
     return(
         <div className="container">
             <div className="row">
@@ -55,7 +65,8 @@ function MessagePage() {
                             <div className="card-body">
                                 <p><b>Gig Description: </b>{q.gigDescription}</p>
                                 <p>Message From {q.displayName}: {q.message}</p>
-                                <Link to={`gigs/${q.gigId}/apply`} className="card-link">Apply Now!</Link>
+                                <button className="btn btn-success"><Link to={`/gigs/${q.gigId}/apply`} className="card-link">Apply Now!</Link></button>
+                                <button className="btn btn-danger" onClick={()=>ignoreQuery(q.id)}>Ignore</button>
                             </div>
                         </div>
                         )}
