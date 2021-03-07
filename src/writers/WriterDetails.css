@@ -1,4 +1,10 @@
-#pictureBox {
+#profile-image {
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+}
+
+/* #pictureBox {
     height: 15rem;
     width: 15rem;
     border-radius: 50%;
@@ -36,6 +42,6 @@
     width: 20rem;
 } */
 
-table {
+/* table {
     width: 20rem;
-}
+} */
