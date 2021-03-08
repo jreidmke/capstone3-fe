@@ -67,7 +67,7 @@ function WriterDetailsAuth({writerId}) {
                         </div>
                     </div>
                     <div className="col-4" id="btn-col">
-                        <button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button>
+                        <button id="edit-btn"><Link to={`/writers/${writerId}/edit`}><FaEdit className="m-1"/><small>Edit Profile</small></Link></button>
                     </div>
                 </div>
                 <div id="writer-nav">
@@ -199,7 +199,7 @@ function WriterDetailsAuth({writerId}) {
                             <div className="row mt-3">
                                 <div className="col-6">
                                     <ul className="list-group text-center">
-                                        <li className="list-group-item"><b>Pieces</b><FaPlus color="green" className="float-right"/></li>
+                                        <li className="list-group-item"><b>Pieces</b><Link to={`/pieces/new`}><FaPlus color="green" className="float-right"/></Link></li>
                                         {pieces.map(p => 
                                             <li key={p.id} className="list-group-item">
                                                 <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b><Link to={`/portfolios/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></small><br/>
@@ -211,7 +211,7 @@ function WriterDetailsAuth({writerId}) {
 
                                 <div className="col-6">
                                     <ul className="list-group text-center">
-                                        <li className="list-group-item"><b>Portfolios</b><FaPlus color="green" className="float-right"/></li>
+                                        <li className="list-group-item"><b>Portfolios</b><Link to={`/portfolios/new`}><FaPlus color="green" className="float-right"/></Link></li>
                                         
                                         {writer.portfolios.map(p =>                                        
                                             <li className="list-group-item">

@@ -35,7 +35,7 @@
 }
 
 #edit-btn {
-    background-color: slategray;
+    background-color: white;
     color: white;
     border: 2px solid lightgrey;
     padding: .3rem;
@@ -69,7 +69,7 @@
 }
 
 #edit-btn:hover {
-    background-color: green;
+    background-color: lightgrey;
     color: black;
 }
 
@@ -86,4 +86,8 @@
     margin: 2rem;
     text-align: center;
     padding: 1rem;
+}
+
+li:hover, tr:hover {
+    background-color: whitesmoke;
 }
