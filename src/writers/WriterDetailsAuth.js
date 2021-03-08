@@ -91,7 +91,7 @@ function WriterDetailsAuth({writerId}) {
                     </div>
                 </div>
                 <div id="writer-nav">
-                    <Tabs defaultActiveKey="third" title="writer navigation" id="writer-nav">
+                    <Tabs defaultActiveKey="second" title="writer navigation" id="writer-nav">
                         <Tab eventKey="first" title="About the Author">
                             <div className="row" id="info-row">
                                 <div className="col-4">                            
@@ -105,7 +105,7 @@ function WriterDetailsAuth({writerId}) {
                                             <FaBirthdayCake color="lightgrey"/>
                                             <small className="ml-2">Age: <b>{writer.age}</b></small>
                                         </li>
-                                        <li className="list-group-item">
+                                        {writer.twitterUserName ? <li className="list-group-item">
                                             <FaTwitter color="lightblue"/>
                                             <small className="ml-2">Twitter: 
                                                 <b className="ml-1">
@@ -114,8 +114,8 @@ function WriterDetailsAuth({writerId}) {
                                                     </a>
                                                 </b>
                                             </small>
-                                        </li>
-                                        <li className="list-group-item">
+                                        </li> : ""}
+                                        {writer.facebookUsername ? <li className="list-group-item">
                                             <FaFacebook color="blue"/>
                                             <small className="ml-2">Facebook: 
                                                 <b className="ml-1">
@@ -124,8 +124,8 @@ function WriterDetailsAuth({writerId}) {
                                                     </a>
                                                 </b>
                                             </small>
-                                        </li>
-                                        <li className="list-group-item">
+                                        </li> : ""}
+                                        {writer.youtubeUsername ? <li className="list-group-item">
                                             <FaYoutube color="red"/>
                                             <small className="ml-2">Youtube: 
                                                 <b className="ml-1">
@@ -134,7 +134,7 @@ function WriterDetailsAuth({writerId}) {
                                                     </a>
                                                 </b>
                                             </small>
-                                        </li>
+                                        </li> : ""}
                                         <li className="list-group-item">
                                             <FaRegEnvelopeOpen color="lightgrey"/>
                                             <small className="ml-2">Email: <b>{writer.email}</b></small>
@@ -230,7 +230,7 @@ function WriterDetailsAuth({writerId}) {
                                         <li className="list-group-item"><b>Pieces</b><Link to={`/pieces/new`}><FaPlus color="green" className="float-right"/></Link></li>
                                         {pieces.map(p => 
                                             <li key={p.id} className="list-group-item">
-                                                <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b><Link to={`/portfolios/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></small><br/>
+                                                <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b><Link to={`/pieces/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></small><br/>
                                                 <small>Submitted On: {p.createdAt.slice(0, 10)}</small>
                                             </li>
                                         )}
