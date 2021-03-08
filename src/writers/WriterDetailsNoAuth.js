@@ -1,9 +1,7 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import PortfolioCard from '../portfolios/PortfolioCard';
 import UserContext from '../auth/UserContext';
-import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaUserMinus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave } from 'react-icons/fa';
-import PieceCard from '../pieces/PieceCard';
+import { FaTwitter, FaFacebook, FaYoutube, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaUserMinus, FaBookReader } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import "./WriterDetails.css";
 import {Tabs, Tab} from "react-bootstrap";
@@ -161,7 +159,7 @@ function WriterDetailsNoAuth({writerId}) {
                                         <li className="list-group-item"><b>Pieces</b><FaPlus color="green" className="float-right"/></li>
                                         {pieces.map(p => 
                                             <li key={p.id} className="list-group-item">
-                                                <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b><Link to={`/portfolios/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></small><br/>
+                                                <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b></small><br/>
                                                 <small>Submitted On: {p.createdAt.slice(0, 10)}</small>
                                             </li>
                                         )}
@@ -174,7 +172,7 @@ function WriterDetailsNoAuth({writerId}) {
                                         
                                         {writer.portfolios.map(p =>                                        
                                             <li className="list-group-item">
-                                                <small><b><Link to={`/portfolios/${p.id}`}>{p.title}</Link><Link to={`/portfolios/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></b></small><br/>
+                                                <small><b><Link to={`/portfolios/${p.id}`}>{p.title}</Link></b></small><br/>
                                                 <small>Submitted On: {p.createdAt.slice(0, 10)}</small>
                                             </li>
                                         )}

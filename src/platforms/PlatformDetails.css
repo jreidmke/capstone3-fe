@@ -73,7 +73,7 @@
     color: black;
 }
 
-#writer-nav {
+#platform-nav {
     margin-top: 2rem;
 }
 
@@ -81,8 +81,8 @@
     margin-top: .5rem;
 }
 
-#ongoing-gig-card {
-    width: 18rem;
+#open-gig-card {
+    width: 20rem;
     margin: 2rem;
     text-align: center;
     padding: 1rem;

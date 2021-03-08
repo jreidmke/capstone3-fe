@@ -102,7 +102,7 @@ function GigDetails() {
             </div>
             : ""}
             <RelatedItems/>
-            {gig.platformId === currentUser.platformId ? <button className="btn btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button> : ""}
+            {gig && gig.platformId === currentUser.platformId ? <button className="btn btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button> : ""}
 
         </div>
     )};
