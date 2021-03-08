@@ -1,14 +1,10 @@
 #platformImg {
-    height: 7rem;
-    width: 7rem;
+    height: 10rem;
+    width: 10rem;
     border-radius: 50%;
 }
 
 #gigCard {
     outline: lightgray 1px solid;
     padding: 1rem;
-}
-
-#gigCard:hover {
-    background-color: lightgrey;
 }

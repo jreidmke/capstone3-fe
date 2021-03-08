@@ -4,6 +4,7 @@ import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
 import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave } from 'react-icons/fa';
 import {Tabs, Tab} from "react-bootstrap";
+import WriterFeed from "./WriterFeed"
 
 function WriterDetailsAuth({writerId}) {
     const [writer, setWriter] = useState();
@@ -242,7 +243,7 @@ function WriterDetailsAuth({writerId}) {
                                         <li className="list-group-item"><b>Portfolios</b><Link to={`/portfolios/new`}><FaPlus color="green" className="float-right"/></Link></li>
                                         
                                         {writer.portfolios.map(p =>                                        
-                                            <li className="list-group-item">
+                                            <li key={p.id} className="list-group-item">
                                                 <small><b><Link to={`/portfolios/${p.id}`}>{p.title}</Link><Link to={`/portfolios/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></b></small><br/>
                                                 <small>Submitted On: {p.createdAt.slice(0, 10)}</small>
                                             </li>
@@ -250,6 +251,9 @@ function WriterDetailsAuth({writerId}) {
                                     </ul>
                                 </div>
                             </div>
+                        </Tab>
+                        <Tab eventKey="fifth" title="Gig Feed">
+                            <WriterFeed writerId={writerId}/>
                         </Tab>
                     </Tabs>
                 </div>
