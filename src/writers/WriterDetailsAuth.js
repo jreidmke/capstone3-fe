@@ -1,10 +1,11 @@
+import "./WriterDetails.css";
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
 import WriterFeed from "./WriterFeed";
-import "./WriterDetails.css";
-import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader } from 'react-icons/fa';
+import {Tabs, Tab} from "react-bootstrap";
 
 function WriterDetailsAuth({writerId}) {
     const [writer, setWriter] = useState();
@@ -40,35 +41,175 @@ function WriterDetailsAuth({writerId}) {
     };
 
     return(
-        <div>
-            {console.log(writer)}
             <div className="container">
+                {console.log(writer)}
                 <div className="row mt-4">
-                        <div className="col-2 mr-3">
-                            <img src="https://searchengineland.com/figz/wp-content/seloads/2018/09/writer-writing-ss-1920.jpg" alt="writer image" id="profile-image"/>
-                        </div>
-                        <div className="col-2 mt-5 mr-5 border-right">
+                    <div className="col-2">
+                        <img src="https://searchengineland.com/figz/wp-content/seloads/2018/09/writer-writing-ss-1920.jpg" alt="writer image" id="profile-image"/>
+                    </div>
+                    <div className="col-2 border-right" id="name-col">
+                        <div className="row">
                             <h5 className="float-left">Writer Name</h5>
+                        </div>
+                        <div className="row">
                             <p className="float-left">City, State</p>
                         </div>
-                        <div className="col-4">
-                            <div className="row mt-5">
-                                <FaRegClock className="mt-1"/>
-                                <p className="ml-3"><span className="text-secondary">Last Login At:</span> 2021-07-03</p>
-                            </div>
-                            <div className="row">
-                                <FaSearch className="mt-1"/>
-                                <p className="ml-3"><span className="text-secondary">Gig Search: </span>Active</p>
-                            </div>
+                    </div>
+                    <div className="col-3" id="status-col">
+                        <div className="row my-3">
+                            <FaRegClock id="status-icon"/>
+                            <small><span className="text-secondary">Last Login At:</span> 2021-07-03</small>
                         </div>
+                        <div className="row">
+                            <FaSearch id="status-icon"/>
+                            <small id="statusIcon"><span className="text-secondary">Gig Search: </span>Active</small>
+                        </div>
+                    </div>
+                    <div className="col-4" id="btn-col">
+                        <div className="row">
+                            <button id="query-btn"><FaPenAlt className="m-1"/><small>Query Writer</small></button>
+                            <button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button>
+                        </div>
+                    </div>
+                </div>
+            <div>
+                <div id="writer-nav">
+                    <Tabs defaultActiveKey="first" title="writer navigation" id="writer-nav">
+                        <Tab eventKey="first" title="About the Author">
+                            <div className="row" id="info-row">
+                                <div className="col-4">                            
+                                    <ul className="list-group">
+                                        <li className="list-group-item"><small><b>About the Author</b></small></li>
+                                        <li className="list-group-item">
+                                            <FaBookReader color="lightgrey"/>
+                                            <small className="ml-2">Expertise: <b>Humor</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaBirthdayCake color="lightgrey"/>
+                                            <small className="ml-2">Age: <b>32</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaRegEnvelopeOpen color="lightgrey"/>
+                                            <small className="ml-2">Email: <b>jreidmke@gmail.com</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaCity color="lightgrey"/>
+                                            <small className="ml-2">Location: <b>Milwaukee, WI</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaHome color="lightgrey"/>
+                                            <small className="ml-2">Street Address: <b>3180 South Brust Ave.</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaBuilding color="lightgrey"/>
+                                            <small className="ml-2">Address Two: <b>Apt. 202</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaPhone color="lightgrey"/>
+                                            <small className="ml-2">Phone: <b>(630)338-5693</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaUserPlus color="lightgrey"/>
+                                            <small className="ml-2">Account Created: <b>2020-12-11</b></small>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="col">
+                                    <p>Biography: </p>
+                                    <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br/>
+                                    <br/>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br/>
+                                    <br/>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    </small>
+                                </div>
+                            </div>
+                        </Tab>
 
+
+                        {/* address1: "3180 S. Brust Ave."
+address2: "Apt. 202"
+age: 32
+bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+city: "Milwaukee"
+expertise1: 9
+expertise2: 12
+facebookUsername: null
+firstName: "James"
+id: 2
+imageUrl: "https://searchengineland.com/figz/wp-content/seloads/2018/09/writer-writing-ss-1920.jpg"
+lastLoginAt: "2021-03-08T14:26:45.507Z"
+lastName: "Reid"
+phone: "630-338-5693"
+portfolios: (3) [{…}, {…}, {…}]
+postalCode: 53202
+state: "WI"
+twitterUsername: null
+youtubeUsername: "jreidmke"
+__proto__: Object */}
+
+
+
+
+                        <Tab eventKey="second" title="Applications">
+                            <h1>Applciations</h1>
+                        </Tab>
+                        <Tab eventKey="third" title="Ongoing Gigs">
+                            <h1>Ongoing Gigs</h1>
+                        </Tab>
+                        <Tab eventKey="fourth" title="Pieces and Portfolios">
+                            <h1>Pieces and Portfolios</h1>
+                        </Tab>
+                    </Tabs>
                 </div>
             </div>
-        </div>
+
+
+            </div>
     )
 };
 
 export default WriterDetailsAuth
+
+
+// <div className="row" id="writer-nav">
+//                     <Tab.Container defaultActiveKey="first">
+//                         <div className="row">
+//                             <Nav variant="tabs">
+//                                 <Nav.Item>
+//                                     <Nav.Link eventKey="first">About the Author</Nav.Link>
+//                                 </Nav.Item>
+//                                 <Nav.Item>
+//                                     <Nav.Link eventKey="second">Applications</Nav.Link>
+//                                 </Nav.Item>
+//                                 <Nav.Item>
+//                                     <Nav.Link eventKey="third">Ongoing Gigs</Nav.Link>
+//                                 </Nav.Item>
+//                                 <Nav.Item>
+//                                     <Nav.Link eventKey="fourth">Pieces and Portfolios</Nav.Link>
+//                                 </Nav.Item>
+//                             </Nav>
+//                             <div className="col">
+//                             <Tab.Content>
+//                                 <Tab.Pane eventKey="first">
+//                                     <h1>1</h1>
+//                                 </Tab.Pane>
+//                                 <Tab.Pane eventKey="second">
+//                                     <h1>2</h1>
+//                                 </Tab.Pane>
+//                                 <Tab.Pane eventKey="third">
+//                                     <h1>3</h1>
+//                                 </Tab.Pane>
+//                                 <Tab.Pane eventKey="fourth">
+//                                     <h1>4</h1>
+//                                 </Tab.Pane>
+//                             </Tab.Content>
+//                             </div>
+//                         </div>
+//                     </Tab.Container>
+//                 </div>
 
 // <div>
 //             {writer && applications && pieces ?

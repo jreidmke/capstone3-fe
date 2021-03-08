@@ -1,47 +1,58 @@
 #profile-image {
     border-radius: 50%;
-    height: 10rem;
-    width: 10rem;
+    height: 8rem;
+    width: 8rem;
 }
 
-/* #pictureBox {
-    height: 15rem;
-    width: 15rem;
-    border-radius: 50%;
+#name-col {
+    margin-top: 2rem;
 }
 
-#contactInfo {
-    padding-top: 2rem;
-    height: 15rem;
+#status-col {
+    margin: 2rem;
 }
 
-#feed {
-    height: 23rem;
-    outline: lightgray 1px solid;
-    padding: 1rem;
-    width: 40rem;
+#status-icon {
+    margin-right: 1rem;
+    margin-top: .2rem;
 }
 
-#bio {
-    height: 20rem;
-    outline: lightgray 1px solid;
-    padding-top: 2rem;
+#btn-col {
+    margin-top: 2rem;
 }
 
-#pieces {
-    height: 10rem;
-    width: 30rem;
-    margin-top: 0;
+#query-btn {
+    background-color: lightgrey;
+    color: black;
+    border: 2px solid slategray;
+    padding: .3rem;
+    border-radius: 5px;
 }
 
-#piecesNoAuth {
-    height: 30rem;
+#query-btn:hover {
+    background-color: green;
+    color: white;
+    border: none;
 }
 
-/* #titleCol {
-    width: 20rem;
-} */
+#edit-btn {
+    background-color: slategray;
+    color: white;
+    border: 2px solid lightgrey;
+    padding: .3rem;
+    border-radius: 5px;
+}
 
-/* table {
-    width: 20rem;
-} */
+#edit-btn:hover {
+    background-color: lightblue;
+    color: black;
+    border: none;
+}
+
+#writer-nav {
+    margin-top: 2rem;
+}
+
+#info-row {
+    margin-top: .5rem;
+}
