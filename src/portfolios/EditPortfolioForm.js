@@ -84,58 +84,69 @@ function EditPortfolioForm() {
     };
     
     return(
-        <div className="container">
-            <div className="row mt-3">
-                <div className="col">
-                    <form onSubmit={submit}>
-                        <input
-                            name="title"
-                            value={formData.title}
-                            type="text"
-                            onChange={handleChange}
-                            placeholder={portfolio ? portfolio.title : "Title"}
-                            id="portfolioTitleInput"/>
-                        <button className="btn btn-outline-secondary mb-1">Submit</button>
-                    </form>
+        <div>
+            {portfolio ? 
+            <div className="container">
+                <div className="row mt-3">
+                    <div className="col">
+                        <h4 className="text-center">Edit Portfolio: {portfolio.title}</h4>
+                        <hr/>
+                    </div>
                 </div>
-            </div>
+                <div className="row">
+                    <div className="col-6">
+                        <form onSubmit={submit}>
+                            <input
+                                name="title"
+                                value={formData.title}
+                                type="text"
+                                onChange={handleChange}
+                                placeholder={portfolio ? portfolio.title : "Title"}
+                                id="portfolioTitleInput"
+                                className="form-control"/>
+                            <button className="btn btn-info btn-lg btn-block">Update Portfolio</button>
+                        </form>
+                        <button className="btn btn-danger btn-lg btn-block" onClick={() => deletePortfolio(currentUser.writerId, portfolioId)}>Delete Portfolio</button>
 
-            <div className="row mt-3">
-                <div className="col">
-                    <h6>Select the pieces you want in this portfolio below.</h6>
-                    <h6>Try to select pieces of a consistent theme as this is your submission material for <Link to={`/gigs`}>gigs.</Link></h6>
-                </div>
-            </div>
-            
-            <div className="row">
-                <div className="col">
-                    <h4 className="text-success">In Portfolio</h4>
-                    <ul>
-                        {piecesIn ? piecesIn.map(p => 
-                        <li>
-                            <Link to={`/pieces/${p.id}`}>{p.title}</Link>
-                            <FaTimes onClick={()=>removePieceFromPortfolio(currentUser.writerId, portfolio.id, p.id)} color="red"/>
-                        </li>
-                        ) : ""}
-                    </ul>
+                    </div>
+                    <div className="col-1"/>
+                    <div className="col-4">
+                        <div className="row">
+                            <h6 className="text-center">Select the pieces you want in this portfolio below. Try to select pieces of a consistent theme as this is your submission material for <Link to={`/gigs`}>gigs.</Link></h6>
+                        </div>
+                        <div className="row">
+
+                            <div className="col">
+                                <h4 className="text-success text-center">In</h4>
+                                <ul>
+                                    {piecesIn ? piecesIn.map(p => 
+                                    <li>
+                                        <Link to={`/pieces/${p.id}`}>{p.title}</Link>
+                                        <FaTimes onClick={()=>removePieceFromPortfolio(currentUser.writerId, portfolio.id, p.id)} color="red"/>
+                                    </li>
+                                    ) : ""}
+                                </ul>
+                            </div>
+
+                            <div className="col">
+                                <h4 className="text-danger text-center">Not In</h4>
+                                <ul>
+                                    {piecesOut ? piecesOut.map(p => 
+                                    <li>
+                                        <Link to={`/pieces/${p.id}`}>{p.title}</Link>
+                                        <FaPlus onClick={()=>addPieceToPortfolio(currentUser.writerId, portfolio.id, p.id)} color="green"/>
+                                    </li>) 
+                                    : ""}
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>  
                 </div>
 
-                <div className="col">
-                    <h4 className="text-danger">Not In Portfolio</h4>
-                    <ul>
-                        {piecesOut ? piecesOut.map(p => 
-                        <li>
-                            <Link to={`/pieces/${p.id}`}>{p.title}</Link>
-                            <FaPlus onClick={()=>addPieceToPortfolio(currentUser.writerId, portfolio.id, p.id)} color="green"/>
-                        </li>) 
-                        : ""}
-                    </ul>
-                </div>
             </div>
-
-            <button className="btn btn-info" onClick={submit}>Save Changes</button>
-            <br/><br/>
-            <button className="btn btn-danger" onClick={() => deletePortfolio(currentUser.writerId, portfolioId)}>DELETE PORTFOLIO</button>
+            : ""}
         </div>
     )
 };

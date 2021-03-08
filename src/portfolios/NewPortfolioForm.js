@@ -24,17 +24,26 @@ function NewPortfolioForm() {
     };
 
     return(
-        <div>
-            <p>Simply title your portfolio right now. You'll add pieces to it after you create the title!</p>
-            <form onSubmit={submit}>
-                <input 
-                    type="text"
-                    name="title"
-                    onChange={handleChange}
-                    value={formData.title}
-                    placeholder="Portfolio Title"/>
-                <button>Submit</button>
-            </form>
+        <div className="container mt-3">
+            <div className="row my-3">
+                <div className="col">
+                    <h4 className="text-center">Simply title your portfolio right now. You'll add pieces to it after you create the title!</h4>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <form onSubmit={submit}>
+                        <input 
+                            type="text"
+                            name="title"
+                            onChange={handleChange}
+                            value={formData.title}
+                            placeholder="Portfolio Title"
+                            className="form-control"/>
+                        <button className="btn btn-lg btn-block btn-info mt-3">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 };

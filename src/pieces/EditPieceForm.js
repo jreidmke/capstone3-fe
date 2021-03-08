@@ -78,9 +78,9 @@ function EditPieceForm() {
         setTagsOff([...tagsOff, removedTag]);
     };
 
-    async function deletePiece(writerId, pieceId) {
+    async function deletePiece() {
         if(window.confirm("Are you sure you want to delete this piece?")) {
-            await PrintApi.deletePiece(writerId, pieceId);
+            await PrintApi.deletePiece(piece.writerId, pieceId);
             history.push(`/writers/${currentUser.writerId}`);
         } else {
             return;
@@ -88,62 +88,45 @@ function EditPieceForm() {
     };
     
     return(
-        <div className="container">
+        <div>
             {piece ? 
             <div className="container">
 
-                <div className="row">
-                    <div className="col"><h1>Edit Piece: {piece.title} <FaTimes color="red" onClick={()=> deletePiece(piece.writerId, piece.id)}/></h1></div>
-                </div>
-
-                <div className="row">
-                    <div className="col">
-                        <div className="row">
-                            <div className="col-2">
-                                <label className="mr-2">Piece Title: </label>
-                            </div>
-                            <div className="col">
-                                <label className="mr-2">Piece Text: </label>
-
-                            </div>
-                        </div>
-
-                        <form onSubmit={submit}>
-                            <div className="row">
-                                <div className="col-2">
-                                    <input
-                                        name="title"
-                                        value={formData.title}
-                                        type="text"
-                                        onChange={handleChange}
-                                        placeholder={piece ? piece.title : "Title"}/>
-                                </div>
-
-                                <div className="col">
-                                    <textarea 
-                                        name="text"
-                                        value={formData.text}
-                                        type="text"
-                                        onChange={handleChange}
-                                        placeholder={piece ? piece.title : "Text"}
-                                        rows="10"
-                                        cols="80"/>
-                                </div>
-                            </div>
-                            
-                            <button className="btn btn-info">Commit Changes</button>
-                        </form>
-                    </div>
-                </div>
-            
                 <div className="row mt-3">
                     <div className="col">
-                        <h6>Select Tags to Add to Your Piece</h6>
+                        <h4 className="text-center">Edit Piece: {piece.title}</h4>
                     </div>
                 </div>
 
                 <div className="row">
-                    <div className="col">
+                    <div className="col-6">
+                        <form>
+                            <div className="row my-1">
+                                <input 
+                                    type="text"
+                                    name="title"
+                                    onChange={handleChange}
+                                    value={formData.title}
+                                    placeholder="Piece Title"
+                                    className="form-control"
+                                    required/>
+                            </div>
+                            <div className="row">
+                                <textarea 
+                                    type="text"
+                                    name="text"
+                                    onChange={handleChange}
+                                    value={formData.text}
+                                    placeholder="Piece Text"
+                                    rows="15" 
+                                    cols="50"
+                                    className="form-control"
+                                    required/>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div className="col-4">
                         <h4>Tags</h4>
                             <ul>
                                 {tagsOn ? tagsOn.map(p => 
@@ -163,8 +146,15 @@ function EditPieceForm() {
                                 : ""}
                             </ul>
                     </div>
-
                 </div>
+                <div className="row">
+                        <button className="btn btn-lg btn-block btn-info" onClick={submit}>Submit</button>
+                        <button className="btn btn-lg btn-block btn-danger" onClick={deletePiece}>Delete Piece</button>
+                </div>
+                
+
+                    
+                
 
                     
 
