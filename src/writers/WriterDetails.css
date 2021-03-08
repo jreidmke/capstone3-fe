@@ -30,9 +30,8 @@
 }
 
 #query-btn:hover {
-    background-color: green;
+    background-color: lightblue;
     color: white;
-    border: none;
 }
 
 #edit-btn {
@@ -43,10 +42,35 @@
     border-radius: 5px;
 }
 
-#edit-btn:hover {
-    background-color: lightblue;
+#follow-btn {
+    background-color: green;
+    color: white;
+    border: 2px solid lightgrey;
+    padding: .3rem;
+    border-radius: 5px;
+}
+
+#unfollow-btn {
+    background-color: red;
+    color: white;
+    border: 2px solid lightgrey;
+    padding: .3rem;
+    border-radius: 5px;
+}
+
+#follow-btn:hover {
+    background-color: lightgreen;
     color: black;
-    border: none;
+}
+
+#unfollow-btn:hover {
+    background-color: pink;
+    color: black;
+}
+
+#edit-btn:hover {
+    background-color: green;
+    color: black;
 }
 
 #writer-nav {

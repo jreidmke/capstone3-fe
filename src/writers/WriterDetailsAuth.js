@@ -1,10 +1,8 @@
 import "./WriterDetails.css";
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
 import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
-import PortfolioCard from '../portfolios/PortfolioCard';
-import WriterFeed from "./WriterFeed";
-import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave } from 'react-icons/fa';
 import {Tabs, Tab} from "react-bootstrap";
 
 function WriterDetailsAuth({writerId}) {
@@ -44,10 +42,11 @@ function WriterDetailsAuth({writerId}) {
     };
     return(
         <div>
-            {writer && applications && gigs && pieces ? <div className="container">
+            {writer && applications && gigs && pieces ? 
+            <div className="container">
                 <div className="row mt-4">
                     <div className="col-2">
-                        <img src="https://searchengineland.com/figz/wp-content/seloads/2018/09/writer-writing-ss-1920.jpg" alt="writer image" id="profile-image"/>
+                        <img src={writer.imageUrl} alt="writer image" id="profile-image"/>
                     </div>
                     <div className="col-2 border-right" id="name-col">
                         <div className="row">
@@ -68,7 +67,6 @@ function WriterDetailsAuth({writerId}) {
                         </div>
                     </div>
                     <div className="col-4" id="btn-col">
-                        {/* <button id="query-btn"><FaPenAlt className="m-1"/><small>Query Writer</small></button> */}
                         <button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button>
                     </div>
                 </div>
@@ -201,7 +199,7 @@ function WriterDetailsAuth({writerId}) {
                             <div className="row mt-3">
                                 <div className="col-6">
                                     <ul className="list-group text-center">
-                                        <li className="list-group-item"><b>Pieces</b></li>
+                                        <li className="list-group-item"><b>Pieces</b><FaPlus color="green" className="float-right"/></li>
                                         {pieces.map(p => 
                                             <li key={p.id} className="list-group-item">
                                                 <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b><Link to={`/portfolios/${p.id}/edit`}><FaEdit className="ml-2 mb-1"/></Link></small><br/>
@@ -210,11 +208,10 @@ function WriterDetailsAuth({writerId}) {
                                         )}
                                     </ul>
                                 </div>
-                                {console.log(pieces)}
 
                                 <div className="col-6">
                                     <ul className="list-group text-center">
-                                        <li className="list-group-item"><b>Portfolios</b></li>
+                                        <li className="list-group-item"><b>Portfolios</b><FaPlus color="green" className="float-right"/></li>
                                         
                                         {writer.portfolios.map(p =>                                        
                                             <li className="list-group-item">
