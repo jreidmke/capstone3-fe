@@ -56,3 +56,10 @@
 #info-row {
     margin-top: .5rem;
 }
+
+#ongoing-gig-card {
+    width: 18rem;
+    margin: 2rem;
+    text-align: center;
+    padding: 1rem;
+}

@@ -4,19 +4,22 @@ import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
 import PortfolioCard from '../portfolios/PortfolioCard';
 import WriterFeed from "./WriterFeed";
-import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave } from 'react-icons/fa';
 import {Tabs, Tab} from "react-bootstrap";
 
 function WriterDetailsAuth({writerId}) {
     const [writer, setWriter] = useState();
     const [applications, setApplications] = useState();
     const [pieces, setPieces] = useState();
-    
+    const [gigs, setGigs] = useState();
+
     useEffect(() => {
         async function getWriter() {
             const writerRes = await PrintApi.getWriterById(writerId);
             const appRes = await PrintApi.getApplicationsByWriterId(writerId);
             const pieceRes = await PrintApi.getPiecesByWriterId(writerId);
+            const gigRes = await PrintApi.getOngoingWriterGigs(writerId);
+            setGigs(gigRes);
             setWriter(writerRes);
             setApplications(appRes);
             setPieces(pieceRes);
@@ -42,7 +45,6 @@ function WriterDetailsAuth({writerId}) {
 
     return(
             <div className="container">
-                {console.log(writer)}
                 <div className="row mt-4">
                     <div className="col-2">
                         <img src="https://searchengineland.com/figz/wp-content/seloads/2018/09/writer-writing-ss-1920.jpg" alt="writer image" id="profile-image"/>
@@ -74,7 +76,7 @@ function WriterDetailsAuth({writerId}) {
                 </div>
             <div>
                 <div id="writer-nav">
-                    <Tabs defaultActiveKey="first" title="writer navigation" id="writer-nav">
+                    <Tabs defaultActiveKey="fourth" title="writer navigation" id="writer-nav">
                         <Tab eventKey="first" title="About the Author">
                             <div className="row" id="info-row">
                                 <div className="col-4">                            
@@ -87,6 +89,36 @@ function WriterDetailsAuth({writerId}) {
                                         <li className="list-group-item">
                                             <FaBirthdayCake color="lightgrey"/>
                                             <small className="ml-2">Age: <b>32</b></small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaTwitter color="lightblue"/>
+                                            <small className="ml-2">Twitter: 
+                                                <b className="ml-1">
+                                                    <a href={`http://twitter.com/jreidmke`}>
+                                                        jreidmke
+                                                    </a>
+                                                </b>
+                                            </small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaFacebook color="blue"/>
+                                            <small className="ml-2">Facebook: 
+                                                <b className="ml-1">
+                                                    <a href={`http://facebook.com/jreidmke`}>
+                                                        jreidmke
+                                                    </a>
+                                                </b>
+                                            </small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <FaYoutube color="red"/>
+                                            <small className="ml-2">Youtube: 
+                                                <b className="ml-1">
+                                                    <a href={`http://youtube.com/jreidmke`}>
+                                                        jreidmke
+                                                    </a>
+                                                </b>
+                                            </small>
                                         </li>
                                         <li className="list-group-item">
                                             <FaRegEnvelopeOpen color="lightgrey"/>
@@ -128,39 +160,97 @@ function WriterDetailsAuth({writerId}) {
                             </div>
                         </Tab>
 
-
-                        {/* address1: "3180 S. Brust Ave."
-address2: "Apt. 202"
-age: 32
-bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-city: "Milwaukee"
-expertise1: 9
-expertise2: 12
-facebookUsername: null
-firstName: "James"
-id: 2
-imageUrl: "https://searchengineland.com/figz/wp-content/seloads/2018/09/writer-writing-ss-1920.jpg"
-lastLoginAt: "2021-03-08T14:26:45.507Z"
-lastName: "Reid"
-phone: "630-338-5693"
-portfolios: (3) [{…}, {…}, {…}]
-postalCode: 53202
-state: "WI"
-twitterUsername: null
-youtubeUsername: "jreidmke"
-__proto__: Object */}
-
-
-
-
                         <Tab eventKey="second" title="Applications">
-                            <h1>Applciations</h1>
+                            <table className="table mt-3">
+                                <thead className="text-center">
+                                    <tr>
+                                        <th>Platform</th>
+                                        <th>Gig Title</th>
+                                        <th>Submission</th>
+                                        <th>Date Applied</th>
+                                        <th>Status</th>
+                                        <th>Withdraw</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className="text-center">
+                                        <td><Link to={`/platforms/2`}>Sci Fi</Link></td>
+                                        <td><Link to={`/gigs/3`}>We Need A New Star Wars</Link></td>
+                                        <td><Link to={`/portfolios/3`}>Future Stuff</Link></td>
+                                        <td>20201/03/12</td>
+                                        <td style={{backgroundColor: statusColors["Accepted"]}}>Accepted</td>
+                                        <td><FaTimes color="red"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </Tab>
+
                         <Tab eventKey="third" title="Ongoing Gigs">
-                            <h1>Ongoing Gigs</h1>
+                            <div className="card" id="ongoing-gig-card">
+                                <p className="card-title"><b><Link to={`/gigs/3`}>Come Write the Stargate Reboot</Link></b></p>
+                                <small><FaClock color="red" className="mr-1"/><b>Deadline:</b> 2021-03-10</small>
+                                <small>Posted By <b><Link to={`/platforms/2`}>Sci Fi</Link></b></small>
+                                
+                                <small className="mt-2"><b>Gig Description:</b> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</small>
+
+                                <small><FaRegKeyboard color="lightgrey" className="mr-2"/>Word Count: 500</small>
+                                <small><FaMoneyBillWave color="lightgrey" className="mr-2"/>Compensation: $740.00</small>
+                                                                
+                            </div>
                         </Tab>
                         <Tab eventKey="fourth" title="Pieces and Portfolios">
-                            <h1>Pieces and Portfolios</h1>
+                            <div className="row mt-3">
+                                <div className="col-6">
+                                    <ul className="list-group text-center">
+                                        <li className="list-group-item"><b>Pieces</b></li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="col-6">
+                                    <ul className="list-group text-center">
+                                        <li className="list-group-item"><b>Portfolios</b></li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                        <li className="list-group-item">
+                                            <small><b>Pizza</b></small><br/>
+                                            <small>Submitted On: 2020-01-24</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </Tab>
                     </Tabs>
                 </div>
