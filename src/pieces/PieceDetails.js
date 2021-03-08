@@ -29,9 +29,9 @@ function PieceDetails() {
     };
 
     return(
-        <div className="container">
+        <div>
             {piece ? 
-            <div>
+            <div className="container">
                 <div className="row mt-3">
                     <div className="col-4">
                         <img src={piece.imageUrl} id="writerImage"/>
@@ -54,7 +54,6 @@ function PieceDetails() {
                         <h1>{piece.title} {currentUser.writerId===piece.writerId ? 
                         <span>
                             <Link to={`/pieces/${piece.id}/edit`} className="ml-1"><FaEdit/></Link>
-                            <FaTimes onClick={() => deletePiece(piece.writerId, piece.pieceId)} color='red' className="ml-3" id="deleteBtn"/>
                         </span>
                         : ""}</h1>
                         <p className="mt-3">{piece.text}</p>
