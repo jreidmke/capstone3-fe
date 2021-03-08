@@ -35,6 +35,26 @@ function WriterDetailsAuth({writerId}) {
         }
     };
 
+    async function acceptGig(applicationId) {
+        if(window.confirm("You are accepting this position. This will notify the Platform that you are confirming your acceptance. Proceed?")) {
+            await PrintApi.acceptGig(writerId, applicationId);
+            applications.splice(applications.map(a => a.id).indexOf(applicationId), 1);
+            setApplications([...applications]);
+        } else {
+            return;
+        }
+    };
+
+
+    async function declineGig(applicationId) {
+        if(window.confirm("Are you sure you want to decline this gig? This will notify Platform.")) {
+            await PrintApi.declineGig(writerId, applicationId);
+            applications.splice(applications.map(a => a.id).indexOf(applicationId), 1);
+            setApplications([...applications]);
+        };
+        return;
+    };
+
     const statusColors = {
         "Pending": "yellow",
         "Accepted": "green",
@@ -163,13 +183,21 @@ function WriterDetailsAuth({writerId}) {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {console.log(applications)}
                                     {applications.map(a => 
                                         <tr key={a.id} className="text-center">
                                             <td><Link to={`/platforms/${a.platformId}`}>{a.platformName}</Link></td>
                                             <td><Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link></td>
                                             <td><Link to={`/portfolios/${a.portfolioId}`}>{a.portfolioTitle}</Link></td>
                                             <td>{a.createdAt.slice(0,10)}</td>
+                                            
+                                            {a.status === "Accepted" ? 
+                                            <td style={{backgroundColor: "lightgreen"}}>
+                                                <button className="btn btn-sm btn-success" onClick={() => acceptGig(a.id)}>Accept Gig</button>
+                                                <button className="btn btn-sm btn-danger" onClick={() => declineGig(a.id)}>Decline Gig</button>
+                                            </td> :
                                             <td style={{backgroundColor: statusColors[a.status]}}>{a.status}</td>
+                                            }
                                             <td onClick={() => withdrawApplication(a.gigId)}><FaTimes color="red"/></td>
                                         </tr>
                                     )}

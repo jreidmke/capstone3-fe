@@ -93,7 +93,7 @@ class PrintApi {
       return res.appMsgs;
     }
 
-    static async dismissApplicationMessage(writerId, appMsgId) {
+    static async declineGig(writerId, appMsgId) {
       await this.request(`writers/${writerId}/application-messages/${appMsgId}`, {}, "delete");
       return "deleted";
     };
