@@ -10,3 +10,13 @@
 #landing-page {
     text-align: center;
 }
+
+#writer-week-img {
+    height: 15rem;
+    width: 15rem;
+    border-radius: 50%;
+}
+
+#writer-week-name {
+    margin-bottom: 0;
+}
