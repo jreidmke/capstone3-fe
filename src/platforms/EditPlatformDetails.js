@@ -5,6 +5,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromFollowedArray from '../helpers/removeFromFollowedArray';
+import { FaPlus, FaTimes } from 'react-icons/fa';
+import Alert from '../common/Alert';
 
 function EditPlatformProfile( {logout} ) {
     const { currentUser, platformTagFollows, setPlatformTagFollows } = useContext(UserContext);
@@ -28,6 +30,8 @@ function EditPlatformProfile( {logout} ) {
         facebookUsername: "",
         youtubeUsername: ""
     });
+    const [formErrors, setFormErrors] = useState([]);
+    const [isUpdated, setIsUpdated] = useState(false);
 
     if(currentUser.platformId != platformId) history.push("/login");
 
@@ -85,24 +89,29 @@ function EditPlatformProfile( {logout} ) {
         };
 
         const result = await PrintApi.updatePlatformProfile(platformId, submissionData);
-
-        setFormData({
-            imageUrl: result.imageUrl,
-            address1: result.address1,
-            address2: result.address2,
-            city: result.city,
-            state: result.state,
-            postalCode: result.postalCode,
-            phone: result.phone,
-            twitterUsername: result.twitterUsername,
-            facebookUsername: result.facebookUsername,
-            youtubeUsername: result.youtubeUsername,
-            displayName: result.displayName,
-            description: result.description
-        });
+        if(result) {
+            setFormData({
+                imageUrl: result.imageUrl,
+                address1: result.address1,
+                address2: result.address2,
+                city: result.city,
+                state: result.state,
+                postalCode: result.postalCode,
+                phone: result.phone,
+                twitterUsername: result.twitterUsername,
+                facebookUsername: result.facebookUsername,
+                youtubeUsername: result.youtubeUsername,
+                displayName: result.displayName,
+                description: result.description
+            });
+            setIsUpdated(true);
+        } else {
+            setFormErrors(result.errors);
+        }
+        
     };
 
-    async function followTag(platformId, tagId) {
+    async function followTag(tagId) {
         // //remove piece from pices out on fe
         let addedTag = notFollowedTags.splice(notFollowedTags.map(t => t.id).indexOf(tagId), 1)[0];
 
@@ -113,7 +122,7 @@ function EditPlatformProfile( {logout} ) {
         setFollowedTags([...followedTags, addedTag]);
     };
 
-    async function unfollowTag(platformId, tagId) {
+    async function unfollowTag(tagId) {
         let removedTag = followedTags.splice(followedTags.map(f => f.tagId).indexOf(tagId), 1)[0];
 
         setFollowedTags([...followedTags]);
@@ -122,7 +131,7 @@ function EditPlatformProfile( {logout} ) {
         setNotFollowedTags([...notFollowedTags, removedTag]);
     };
 
-    async function deleteProfile(platformId) {
+    async function deleteProfile() {
         if(window.confirm("Are you sure you want to delete this profile?")) {
             await PrintApi.deletePlatformAccount(platformId);
             logout();
@@ -134,121 +143,194 @@ function EditPlatformProfile( {logout} ) {
 
 
     return(
-        <div>
-            <h1>Update Writer Form</h1>
-            <form onSubmit={submit}>
+        <div className="container">
+            <form>
+                
+                <div className="row">
+                    <div className="col">
+                        <label>Display Name</label>
+                        <input 
+                            name="displayName"
+                            value={formData.displayName}
+                            onChange={handleChange}
+                            placeholder="Display Name"
+                            className="form-control"
 
-    <br/>
+                        />
+                    </div>
+                </div>
 
-                <label>Image Url</label>
-                <input
-                    name="imageUrl"
-                    value={formData.imageUrl}
-                    onChange={handleChange}
-                    placeholder="Image Url"
-                />
-                <br/>
-                <label>Street Address</label>
-                <input
-                    name="address1"
-                    value={formData.address1}
-                    onChange={handleChange}
-                    placeholder="Street Address"
-                />
-                <br/>
-                <label>Address 2</label>
-                <input
-                    name="address2"
-                    value={formData.address2}
-                    onChange={handleChange}
-                    placeholder="Address 2"
-                />
+                <div className="row">
+                    <div className="col-4">
+                        <label>City</label>
+                        <input
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                            placeholder="City"
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-4">
+                        <label>State (Come back and make this a select)</label>
+                        <input
+                            name="state"
+                            value={formData.state}
+                            onChange={handleChange}
+                            placeholder="State"
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-4">
+                        <label>Phone</label>
+                        <input
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            placeholder="Phone Number"
+                            className="form-control"
+                        />
+                    </div>
+                </div>
 
-                <label>City</label>
-                <input
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    placeholder="City"
-                />
-                <label>State</label>
-                <input
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    placeholder="State"
-                />
+                <div className="row">
+                    <div className="col-4">
+                        <label>Street Address</label>
+                        <input
+                            name="address1"
+                            value={formData.address1}
+                            onChange={handleChange}
+                            placeholder="Street Address"
+                            className="form-control"
 
-                <br/>
-                <label>Zip Code</label>
-                <input
-                    name="postalCode"
-                    value={formData.postalCode}
-                    onChange={handleChange}
-                    placeholder="Zip Code"
-                />
-                <br/>
-                <label>Phone</label>
-                <input
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Phone Number"
-                />
-                <br/>
-                <label>Twitter Username</label>
-                <input
-                    name="twitterUsername"
-                    value={formData.twitterUsername}
-                    onChange={handleChange}
-                    placeholder="Twitter Username"
-                />
-                <br/>
-                <label>Facebook Username</label>
-                <input
-                    name="facebookUsername"
-                    value={formData.facebookUsername}
-                    onChange={handleChange}
-                    placeholder="Facebook Username"
-                />
-                <label>Youtube Username</label>
-                <input 
-                    name="youtubeUsername"
-                    value={formData.youtubeUsername}
-                    onChange={handleChange}
-                    placeholder="Youtube Username"
-                />
-    <br/>
-                <label>Display Name</label>
-                <input 
-                    name="displayName"
-                    value={formData.displayName}
-                    onChange={handleChange}
-                    placeholder="First Name"
-                />
-                <label>Description</label>
-                <input
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Last Name"
-                />
+                        />
+                    </div>
+                    <div className="col-4">
+                        <label>Additional Address (Ex: Suite Number)</label>
+                        <input
+                            name="address2"
+                            value={formData.address2}
+                            onChange={handleChange}
+                            placeholder="Address 2"
+                            className="form-control"
 
-            <button>Submit</button>
+                        />
+                    </div>
+                    <div className="col-4">
+                        <label>Postal Code</label>
+                        <input
+                            name="postalCode"
+                            value={formData.postalCode}
+                            onChange={handleChange}
+                            placeholder="Zip Code"
+                            className="form-control"
+
+                        />
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-3">
+                        <label>Twitter Username</label>
+                        <input
+                            name="twitterUsername"
+                            value={formData.twitterUsername}
+                            onChange={handleChange}
+                            placeholder="Twitter Username"
+                            className="form-control"
+
+                        />
+                    </div>
+                    <div className="col-3">
+                        <label>Facebook Username</label>
+                        <input
+                            name="facebookUsername"
+                            value={formData.facebookUsername}
+                            onChange={handleChange}
+                            placeholder="Facebook Username"
+                            className="form-control"
+
+                        />
+                    </div>
+                    <div className="col-3">
+                        <label>Youtube Username</label>
+                        <input 
+                            name="youtubeUsername"
+                            value={formData.youtubeUsername}
+                            onChange={handleChange}
+                            placeholder="Youtube Username"
+                            className="form-control"
+                        />
+                    </div>
+                    <div className="col-3">
+                        <label>Image Url</label>
+                        <input
+                            name="imageUrl"
+                            value={formData.imageUrl}
+                            onChange={handleChange}
+                            placeholder="Image Url"
+                            className="form-control"
+
+                        />
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col">
+                        <label>About Your Platform</label>
+                        <textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            placeholder="About Your Platform"
+                            className="form-control"
+                            rows="5"
+                            cols="10"
+                        />
+                    </div>
+                </div>
+                {formErrors.length ?
+                <Alert type="danger" messages={formErrors}/>
+                : ""}
+                
             </form>
+            <div className="row">
+                <div className="col-6">
+                    {isUpdated ? <Alert type="success" messages={["Profile Successfully Updated"]}/> : ""}
+                    <button onClick={submit} className="btn btn-info btn-lg btn-block">Update Profile!</button>
+                    <button onClick={deleteProfile} className="btn btn-danger btn-lg btn-block">Delete Profile</button>
+                </div>
+                <div className="col-6 text-center">
+                    <div className="row">
+                        <h4 className="ml-5">Select the Tags You Want to Follow</h4>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <h6 className="text-success text-center">Followed</h6>
+                            <ul>
+                                {followedTags ? followedTags.map(t => 
+                                <li>
+                                    <small>{t.title}
+                                    <FaTimes onClick={()=>unfollowTag(t.tagId)} color="red"/></small>
+                                </li>
+                                ) : ""}
+                            </ul>
+                        </div>
 
-            <div>
-                <h1>Followed Tags</h1>
-                {followedTags ? followedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => unfollowTag(currentUser.platformId, t.tagId)}>X</button></li>) : ""}
-
-                <h1>Not Followed Tags</h1>
-                {notFollowedTags ? notFollowedTags.map(t => <li key={t.id}>{t.title} <button onClick={() => followTag(currentUser.platformId, t.id)}>O</button></li>) : ""}
-            </div>
-
-            <div>
-                <button className="button btn-danger" onClick={() => deleteProfile(currentUser.platformId)}>Delete Account</button>
-            </div>
-
+                        <div className="col">
+                            <h6 className="text-danger text-center">Not Followed</h6>
+                            <ul>
+                                {notFollowedTags ? notFollowedTags.map(t => 
+                                <li>
+                                    <small>{t.title}
+                                    <FaPlus onClick={()=>followTag(t.id)} color="green"/></small>
+                                </li>) 
+                                : ""}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         </div>
     )
 };
