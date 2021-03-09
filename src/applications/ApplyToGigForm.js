@@ -44,7 +44,7 @@ function ApplyToGigForm() {
         await PrintApi.applyToGig(currentUser.writerId, gigId, formData);
         history.push(`/writers/${currentUser.writerId}`);
     };
-
+console.log(gig)
     return(
         <div>
             {gig && portfolios ? 
@@ -57,22 +57,25 @@ function ApplyToGigForm() {
                 </div>
 
                 <div className="row">
-                    <div className="col"><h4>Read Your Portfolio Before Submitting</h4></div>
+                    <div className="col"><p>Read Your Portfolio Before Submitting</p></div>
                 </div>
 
                 <div className="row">
                     <div className="col">{portfolios.map(p => <Link to={`/portfolios/${p.id}`}><p>{p.title}</p></Link>)}</div>
+                    <div className="col">
+                        <form onSubmit={submit}>
+                            <label htmlFor="portfolioId">Select Your Portfolio</label>
+                            <select name="portfolioId" id="portfolioId" value={formData.portfolioId} onChange={handleChange} className="form-control"> 
+                                <option value="">--</option>
+                                {portfolios ? portfolios.map(p => <option value={p.id}>{p.title}</option>) : ""}
+                            </select>
+
+                            <button className="btn btn-lg btn-info btn-block">Submit</button>
+                        </form>
+                    </div>
                 </div>
 
-                <form onSubmit={submit}>
-                    <label htmlFor="portfolioId">Select Your Portfolio</label>
-                    <select name="portfolioId" id="portfolioId" value={formData.portfolioId} onChange={handleChange} className="form-control"> 
-                        <option value="">--</option>
-                        {portfolios ? portfolios.map(p => <option value={p.id}>{p.title}</option>) : ""}
-                    </select>
-
-                    <button className="btn btn-lg btn-info btn-block">Submit</button>
-                </form>
+                
             </div> 
             : ""}
         </div>
