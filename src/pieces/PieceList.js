@@ -16,7 +16,6 @@ function PieceList() {
     })
     const history = useHistory();
     const query = useQuery();
-    console.log();
     
     useEffect(() => {
         async function getPieces() {
@@ -48,25 +47,15 @@ function PieceList() {
                 <div className="row">
                     <div className="col-4">
                         <label htmlFor="tags">Filter By Tag:</label>
-                        <select name="tagTitle" id="filter" value={formData.city} onChange={handleChange}>
+                        <select name="tagTitle" id="filter" value={formData.city} onChange={handleChange} className="form-control">
                             <option value={null}></option>
                             {!tags.length ? <option></option> : tags.map(t => {
                                 return <option value={t.title} key={t.id}>{t.title}</option>
                             })}
                         </select>
+                    <   button className="btn btn-outline-secondary" id="submitFilterBtn">Submit</button>
                     </div>
 
-                    <div className="col-4">
-                        <label htmlFor="text">Search By Text:</label>
-                        <input
-                            type='text'
-                            name='text'
-                            onChange={handleChange}
-                            placeholder="Text"
-                            id="filter"/>
-                    </div>
-
-                    <button className="btn btn-outline-secondary" id="submitFilterBtn">Submit</button>
                 </div>
             </form>
                     {!pieces.length ? "Loading..." : pieces.map(p => <PieceCard key={p.id} piece={p}/>)}

@@ -36,19 +36,30 @@ function WriterList() {
     }
 
     return(
-        <div>
-            <form onSubmit={submit}>
-                <label htmlFor="city" id="filter">Filter By City:</label>
+        <div className="container">
+            <div className="row">
+                <div className="col">
+                    <form onSubmit={submit}>
+                        <label htmlFor="city" id="filter">Filter By City:</label>
 
-                <select name="city" id="filter" value={formData.city} onChange={handleChange}>
-                    <option value={null}></option>
-                    {!cities.length ? <option></option> : cities.map(c => {
-                        return <option value={c} key={c}>{c}</option>
-                    })}
-                </select>
-                <button className="btn btn-outline-secondary mb-1">Submit</button>
-            </form>
-            {!writers.length ? "Loading..." : writers.map(w => <WriterCard key={w.id} writer={w}/>)}
+                        <select name="city" id="filter" value={formData.city} onChange={handleChange} className="form-control">
+                            <option value={null}></option>
+                            {!cities.length ? <option></option> : cities.map(c => {
+                                return <option value={c} key={c}>{c}</option>
+                            })}
+                        </select>
+                        <button className="btn btn-outline-secondary mb-1">Submit</button>
+                    </form>
+                </div>
+            
+            </div>
+
+            {!writers.length ? "Loading..." : writers.map(w => 
+            <div className="row">
+                <WriterCard key={w.id} writer={w}/>
+            </div>
+            
+            )}
         </div>
     )
 };

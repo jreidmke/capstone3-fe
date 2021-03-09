@@ -8,7 +8,7 @@ function WriterCard({writer}) {
             <div className="row text-center">
                 <div className="col-2">
                     <img src={writer.imageUrl} id="piece-img"/>
-                    <p  id="writer-name"><Link to={`/writers/${writer.id}`}>{writer.firstName} {writer.lastName}</Link></p>
+                    <p  id="name"><Link to={`/writers/${writer.id}`}>{writer.firstName} {writer.lastName}</Link></p>
                     <small>{writer.city}, {writer.state}</small><br/>
                     <span className="badge badge-info">Current Pieces: {writer.pieceCount}</span>
                 </div>

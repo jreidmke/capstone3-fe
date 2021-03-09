@@ -13,7 +13,7 @@ function PieceCard({piece}) {
             <div className="row">
                 <div className="col-2">
                     <img src={piece.imageUrl} id="piece-img"/>
-                    <p id="writer-name"><Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></p>
+                    <p id="name"><Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></p>
                     <small>Submitted: {piece.createdAt.slice(0,10)}</small>
                 </div>
                 <div className="col">

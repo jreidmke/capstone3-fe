@@ -184,7 +184,6 @@ function WriterDetailsAuth({writerId}) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {console.log(applications)}
                                     {applications.map(a => 
                                         <tr key={a.id} className="text-center">
                                             <td><Link to={`/platforms/${a.platformId}`}>{a.platformName}</Link></td>

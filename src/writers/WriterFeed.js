@@ -9,7 +9,9 @@ function WriterFeed({writerId}) {
     const [gigs, setGigs] = useState();
 
     function removeFromArray(gigArr, appArr) {
-        for(let i = 0; i < gigArr.length; i++) {
+        console.log(gigArr);
+        console.log(appArr);
+        for(let i = 0; i < gigArr.length - 1; i++) {
             for(let v of appArr) {
                 if(gigArr[i].id === v.gigId) {
                     gigArr.splice(i, 1);

@@ -37,11 +37,12 @@ function PlatformList() {
     }
 
     return(
-        <div>
+        <div className="container">
+            <div className="row">
             <form onSubmit={submit}>
                 <label htmlFor="city" id='filter'>Filter By City:</label>
 
-                <select name="city" id="filter" value={formData.city} onChange={handleChange}>
+                <select name="city" id="filter" value={formData.city} onChange={handleChange} className="form-control">
                     <option value={null}></option>
                     {!cities.length ? <option></option> : cities.map(c => {
                         return <option value={c} key={c}>{c}</option>
@@ -50,7 +51,12 @@ function PlatformList() {
 
                 <button className="btn btn-outline-secondary mb-1">Submit</button>
             </form>
-            {!platforms.length ? "Loading..." : platforms.map(p => <PlatformCard key={p.id} platform={p}/>)}
+            </div>
+            {!platforms.length ? "Loading..." : platforms.map(p => 
+            <div key={p.id} className="row">
+                <PlatformCard platform={p}/>
+            </div>
+            )}
         </div>
     )
 };

@@ -8,7 +8,7 @@ function PlatformCard({platform}) {
             <div className="row text-center">
                 <div className="col-2">
                     <img src={platform.imageUrl} id="piece-img"/>
-                    <p  id="writer-name"><Link to={`/platforms/${platform.id}`}>{platform.displayName}</Link></p>
+                    <p  id="name"><Link to={`/platforms/${platform.id}`}>{platform.displayName}</Link></p>
                     <small>{platform.city}, {platform.state}</small><br/>
                     <span className="badge badge-info">Current Gigs: {platform.gigCount}</span>
                 </div>
