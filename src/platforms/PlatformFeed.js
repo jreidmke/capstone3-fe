@@ -15,7 +15,7 @@ function PlatformFeed({platformId}) {
             if(platformTagFollows.length) {
                 tagRes = await PrintApi.getPiecesForFeedFromTags(platformId, platformTagFollows.map(f => f.tagId));
             }
-            if(platformTagFollows.length) {
+            if(platformWriterFollows.length) {
                 writerRes = await PrintApi.getPiecesForFeedFromWriters(platformId, platformWriterFollows.map(f => f.writerId));
             }
             const feed = shuffle([writerRes, tagRes].flat().filter(x => x !== undefined));

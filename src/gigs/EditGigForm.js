@@ -66,7 +66,7 @@ function EditGigForm() {
         //     wordCount: result.wordCount,
         //     isActive: result.isActive
         // });
-        history.push(`/gigs/${gigId}/relatedPieces`)
+        history.push(`/platforms/${gig.platformId}`)
     };
 
     async function addTagToGig(platformId, gigId, tagId) {
@@ -101,8 +101,8 @@ function EditGigForm() {
     return(
         <div className="container">
             <div className="row">
-                <div className="col">
-                <form>
+                <div className="col-6">
+                    <form>
                             <div className="row">
                                 <div className="col">
                                     <label>Gig Title</label>
@@ -178,44 +178,38 @@ function EditGigForm() {
                             </div>
                         </form>
                 </div>
+
+                    <div className="col-3" id="tagCol">
+                        <h4>Tagged</h4>
+                        <ul>
+                            {tagsOn ? tagsOn.map(t => 
+                            <li>
+                                {t.title} <FaTimes onClick={()=>removeTagFromGig(currentUser.platformId, gigId, t.id)} color="red"/>
+                            </li>
+                            ) : ""}
+                        </ul>
+                    </div>
+                    <div className="col-3" id="tagCol">
+                        <h4>Not Tagged</h4>
+                        <ul>
+                            {tagsOff ? tagsOff.map(t => 
+                            <li>
+                                {t.title} <FaPlus onClick={()=>addTagToGig(currentUser.platformId, gigId, t.id)} color="green"/>
+                            </li>) 
+                            : ""}
+                        </ul>
+                    </div>
+                
             </div>
 
-            <div className="row mt-3">
+                
+
                 <div className="col">
-                    <h3>Gig Tags</h3>
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="col-2"/>
-                <div className="col-4" id="tagCol">
-                    <h4>Tagged</h4>
-                    <ul>
-                        {tagsOn ? tagsOn.map(t => 
-                        <li>
-                            {t.title} <FaTimes onClick={()=>removeTagFromGig(currentUser.platformId, gigId, t.id)} color="red"/>
-                        </li>
-                        ) : ""}
-                    </ul>
-                </div>
-                <div className="col-4" id="tagCol">
-                    <h4>Not Tagged</h4>
-                    <ul>
-                        {tagsOff ? tagsOff.map(t => 
-                        <li>
-                            {t.title} <FaPlus onClick={()=>addTagToGig(currentUser.platformId, gigId, t.id)} color="green"/>
-                        </li>) 
-                        : ""}
-                    </ul>
-                </div>
-
-                <div className="col-2">
                     <div className="row">
-                        <button className="btn btn-info" onClick={submit}>Update Gig</button>
-                        <button className="btn btn-danger" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button>
+                        <button className="btn btn-info btn-lg btn-block" onClick={submit}>Update Gig</button>
+                        <button className="btn btn-danger btn-lg btn-block" onClick={() => deleteGig(currentUser.platformId, gigId)}>Delete Gig</button>
                     </div>
                 </div>
-            </div>
 
             
 

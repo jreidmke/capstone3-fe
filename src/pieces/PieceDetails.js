@@ -33,13 +33,13 @@ function PieceDetails() {
         {piece ? 
         <div className="container">
             <div className="row mt-3">
-                <div className="col-4">
+                <div className="col-4 text-center">
                     <h4>{piece.title}{currentUser.writerId === piece.writerId ? 
                     <Link to={`/piece/${pieceId}/edit`}><FaEdit className="mb-1"/></Link> : 
                     
                     <small><Link to={`/writers/${piece.writerId}/make-query`}><button id="query-btn"><FaPenAlt className="m-1"/></button></Link></small>
 }</h4>
-                    <img src={piece.imageUrl} id="platformImg"/>
+                    <img src={piece.imageUrl} id="writer-img"/>
                     <h5>A piece By: <Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></h5>
                     <h6>Created On: {piece.createdAt.slice(0, 10)}</h6>
                     <ul>

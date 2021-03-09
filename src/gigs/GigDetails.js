@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import UserContext from '../auth/UserContext';
 import {FaCheck, FaTimes, FaEdit} from 'react-icons/fa';
 import RelatedItems from "./RelatedItems";
@@ -11,7 +11,6 @@ function GigDetails() {
     const { gigId } = useParams();
     const [gig, setGig] = useState();
     const [applications, setApplications] = useState();
-    const history = useHistory();
     const [formData, setFormData] = useState({
         status: ""
     });
@@ -96,7 +95,8 @@ function GigDetails() {
                     <Link to={`/gigs/${gigId}/apply`}><button className="btn btn-info">Apply!</button></Link>
                 </div> 
                 : ""}
-                {currentUser.platformId === gig.platformId && applications ? 
+                {console.log(applications)}
+                {currentUser.platformId === gig.platformId && applications && applications.length ? 
                 <div>
                     <div className="row mt-2">
                                 <div className="col" id="applications">
@@ -136,7 +136,7 @@ function GigDetails() {
                 <div className="row">
                     {currentUser.platformId === gig.platformId ? 
                     <div className="col mt-5">
-                        <p className="text-center">Writers and Pieces with Related Tags</p>
+                        <p className="text-center"><b>Writers and Pieces with Related Tags</b></p>
                         <RelatedItems/> 
                     </div>
                     : "" }

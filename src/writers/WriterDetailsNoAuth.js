@@ -88,7 +88,7 @@ function WriterDetailsNoAuth({writerId}) {
                                             <FaBirthdayCake color="lightgrey"/>
                                             <small className="ml-2">Age: <b>{writer.age}</b></small>
                                         </li>
-                                        <li className="list-group-item">
+                                        {writer.twitterUserName ? <li className="list-group-item">
                                             <FaTwitter color="lightblue"/>
                                             <small className="ml-2">Twitter: 
                                                 <b className="ml-1">
@@ -97,8 +97,8 @@ function WriterDetailsNoAuth({writerId}) {
                                                     </a>
                                                 </b>
                                             </small>
-                                        </li>
-                                        <li className="list-group-item">
+                                        </li> : ""}
+                                        {writer.facebookUsername ? <li className="list-group-item">
                                             <FaFacebook color="blue"/>
                                             <small className="ml-2">Facebook: 
                                                 <b className="ml-1">
@@ -107,8 +107,8 @@ function WriterDetailsNoAuth({writerId}) {
                                                     </a>
                                                 </b>
                                             </small>
-                                        </li>
-                                        <li className="list-group-item">
+                                        </li> : ""}
+                                        {writer.youtubeUsername ? <li className="list-group-item">
                                             <FaYoutube color="red"/>
                                             <small className="ml-2">Youtube: 
                                                 <b className="ml-1">
@@ -117,7 +117,7 @@ function WriterDetailsNoAuth({writerId}) {
                                                     </a>
                                                 </b>
                                             </small>
-                                        </li>
+                                        </li> : ''}
                                         <li className="list-group-item">
                                             <FaRegEnvelopeOpen color="lightgrey"/>
                                             <small className="ml-2">Email: <b>{writer.email}</b></small>

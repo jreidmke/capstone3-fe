@@ -122,12 +122,13 @@ function PlatformDetailsAuth({platformId}) {
                                         <FaTwitter color="lightblue"/>
                                         <small className="ml-2">Twitter: 
                                             <b className="ml-1">
-                                                <a href={`http://twitter.com/${platform.twitterUserName}`}>
-                                                    {platform.twitterUserName}
+                                                <a href={`http://twitter.com/${platform.twitterUsername}`}>
+                                                    {platform.twitterUsername}
                                                 </a>
                                             </b>
                                         </small>
                                     </li>
+                                    {console.log(platform)}
                                     <li className="list-group-item">
                                         <FaFacebook color="blue"/>
                                         <small className="ml-2">Facebook: 

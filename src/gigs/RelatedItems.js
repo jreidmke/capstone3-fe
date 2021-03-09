@@ -56,7 +56,7 @@ function RelatedPieces() {
                      : ""}
                     <div className="row">
                         <div className="col">
-                            <p>Writers with Expertise that Matches Your Gig</p> 
+                            <p><b>Writers with Expertise that Matches Your Gig</b></p> 
                         </div>
                     </div>
                     <div className="row">
