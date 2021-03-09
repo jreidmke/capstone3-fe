@@ -3,7 +3,7 @@ import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
 import PlatformFeed from "./PlatformFeed";
 import "./PlatformDetails.css";
-import { FaTwitter, FaFacebook, FaYoutube, FaPlus, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaMailBulk, FaUserMinus, FaBookReader, FaEdit, FaClock, FaRegKeyboard, FaMoneyBillWave, FaAddressBook } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaPlusCircle, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaMailBulk, FaUserMinus, FaBookReader, FaEdit, FaClock, FaRegKeyboard, FaMoneyBillWave, FaAddressBook } from 'react-icons/fa';
 import {Tabs, Tab} from "react-bootstrap";
 
 
@@ -76,7 +76,9 @@ function PlatformDetailsAuth({platformId}) {
                         </div>
                     </div>
                     <div className="col-4" id="btn-col">
-                        <button id="edit-btn"><Link to={`/platforms/${platformId}/edit`}><FaEdit className="m-1"/><small>Edit Profile</small></Link></button>
+                    <Link to={`/platforms/${platformId}/edit`}><button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button></Link>
+                    <Link to={`/gigs/new`}><button id="add-gig-btn"><FaPlusCircle className="m-1"/><small>Add Gig</small></button></Link>
+
                     </div>
                 </div>
                 <div id="platform-nav">

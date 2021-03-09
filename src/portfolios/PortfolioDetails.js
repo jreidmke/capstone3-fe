@@ -28,7 +28,7 @@ function PortfolioDetails() {
                         <h4>{portfolio.title}{currentUser.writerId === portfolio.writerId ? 
                         <Link to={`/portfolios/${portfolioId}/edit`}><FaEdit className="mb-1"/></Link> : 
                         
-                        <small><Link to={`/writers/${portfolio.writerId}/make-query`}><button id="query-btn"><FaPenAlt className="m-1"/><small>Query Writer</small></button></Link></small>
+                        <small><Link to={`/writers/${portfolio.writerId}/make-query`}><button id="query-btn"><FaPenAlt className="m-1"/></button></Link></small>
 }</h4>
                         <h5>A Portfolio By: <Link to={`/writers/${portfolio.writerId}`}>{portfolio.firstName} {portfolio.lastName}</Link></h5>
                         <h6>Created On: {portfolio.createdAt.slice(0, 10)}</h6>

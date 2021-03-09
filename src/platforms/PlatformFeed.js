@@ -20,9 +20,7 @@ function PlatformFeed({platformId}) {
             }
             const feed = shuffle([writerRes, tagRes].flat().filter(x => x !== undefined));
             const pieceIds = feed.map(p => p.pieceId);
-            console.log(feed)
             const filterd = feed.filter(({pieceId}, index) => !pieceIds.includes(pieceId, index+1));
-            console.log(filterd)
             setPieces(filterd);
         };
         getGigs();

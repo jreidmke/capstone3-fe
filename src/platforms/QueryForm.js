@@ -47,7 +47,7 @@ function QueryForm() {
             <div className="container">
                 <div className="row" id="query-form">
                     <div className="col-2">
-                        <img src={writer.imageUrl} id="writerImg"/>
+                        <img src={writer.imageUrl} id="writerImg" className="ml-2"/>
                         <h6 className="text-center" id="writer-name"><Link to={`/writers/${writerId}`}>{writer.firstName} {writer.lastName}</Link></h6>
                         <p className="text-center"><small>{writer.city}, {writer.state}</small></p>
                         <ul className="list-group">

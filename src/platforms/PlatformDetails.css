@@ -35,8 +35,24 @@
 }
 
 #edit-btn {
-    background-color: white;
+    background-color: grey;
     color: white;
+    border: 2px solid lightgrey;
+    padding: .3rem;
+    border-radius: 5px;
+}
+
+#add-gig-btn {
+    background-color: green;
+    color: white;
+    border: 2px solid lightgrey;
+    padding: .3rem;
+    border-radius: 5px;
+}
+
+#add-gig-btn:hover {
+    background-color: lightgreen;
+    color: black;
     border: 2px solid lightgrey;
     padding: .3rem;
     border-radius: 5px;
