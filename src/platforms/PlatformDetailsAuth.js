@@ -3,7 +3,7 @@ import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
 import PlatformFeed from "./PlatformFeed";
 import "./PlatformDetails.css";
-import { FaTwitter, FaFacebook, FaYoutube, FaPlusCircle, FaRegClock, FaSearch, FaPenAlt, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaMailBulk, FaUserMinus, FaBookReader, FaEdit, FaClock, FaRegKeyboard, FaMoneyBillWave, FaAddressBook } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaPlusCircle, FaRegClock, FaBriefcase, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaMailBulk, FaBookReader, FaEdit, FaClock, FaRegKeyboard, FaMoneyBillWave, FaAddressBook, FaTasks, FaUsers } from 'react-icons/fa';
 import {Tabs, Tab} from "react-bootstrap";
 
 
@@ -71,8 +71,16 @@ function PlatformDetailsAuth({platformId}) {
                             <small><span className="text-secondary">Last Login At:</span> {platform.lastLoginAt.slice(0, 10)}</small>
                         </div>
                         <div className="row">
-                            <FaSearch id="status-icon"/>
+                            <FaTasks id="status-icon"/>
                             <small id="statusIcon"><span className="text-secondary">Open Gigs: </span><span className="badge badge-success">{openGigs.length}</span></small>
+                        </div>
+                        <div className="row">
+                            <FaBriefcase id="status-icon"/>
+                            <small id="statusIcon"><span className="text-secondary">Ongoing Gigs: <span className="badge badge-info">{ongoingGigs.length}</span></span></small>
+                        </div>
+                        <div className="row">
+                            <FaUsers id="status-icon"/>
+                            <small id="statusIcon"><span className="text-secondary">Pending Applications: <span className="badge badge-warning">{applications.filter(a => a.status==="Pending").length}</span></span></small>
                         </div>
                     </div>
                     <div className="col-4" id="btn-col">
