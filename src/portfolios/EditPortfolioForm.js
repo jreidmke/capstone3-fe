@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import removeFromArr from '../helpers/removeFromArr';
-import "./EditPortfolioForm.css";
+import "./PortfolioForm.css";
 import { FaTimes, FaPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 

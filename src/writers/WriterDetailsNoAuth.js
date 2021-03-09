@@ -69,7 +69,7 @@ function WriterDetailsNoAuth({writerId}) {
                             <button id="follow-btn" onClick={() => follow(currentUser.platformId)}><FaUserPlus className="m-1"/>Follow Writer</button> : 
                             <button id="unfollow-btn" onClick={() => unfollow(currentUser.platformId)}><FaUserMinus className="m-1"/>Unfollow Writer</button>
                             }
-                            <button id="query-btn"><FaPenAlt className="m-1"/><small>Query Writer</small></button>
+                            <Link to={`/writers/${writerId}/make-query`}><button id="query-btn"><FaPenAlt className="m-1"/><small>Query Writer</small></button></Link>
                         </div> :""}
                     </div>
 
@@ -171,7 +171,7 @@ function WriterDetailsNoAuth({writerId}) {
                                         <li className="list-group-item"><b>Portfolios</b><FaPlus color="green" className="float-right"/></li>
                                         
                                         {writer.portfolios.map(p =>                                        
-                                            <li className="list-group-item">
+                                            <li key={p.id} className="list-group-item">
                                                 <small><b><Link to={`/portfolios/${p.id}`}>{p.title}</Link></b></small><br/>
                                                 <small>Submitted On: {p.createdAt.slice(0, 10)}</small>
                                             </li>

@@ -1,0 +1,17 @@
+ul {
+    list-style: none;
+}
+
+#portfolioTitleInput {
+    margin: 1rem;
+    font-size: 20px;
+}
+
+#new-portfolio-form {
+    margin-top: 15%;
+    margin-bottom: 5rem;
+}
+
+#new-portfolio-input {
+    font-size: 20px;
+}

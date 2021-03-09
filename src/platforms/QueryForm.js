@@ -56,6 +56,10 @@ function QueryForm() {
                         <img src={writer.imageUrl} id="writerImg"/>
                         <h3><Link to={`/writers/${writerId}`}>{writer.firstName} {writer.lastName}</Link></h3>
                         <h6>{writer.city}, {writer.state}</h6>
+                        <ul>
+                            fdajkl;'
+                            '
+                        </ul>
                     </div>
 
                     <div className="col">
