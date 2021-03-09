@@ -1,12 +1,14 @@
 import "./WriterDetails.css";
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import PrintApi from '../api/api';
 import { Link } from "react-router-dom";
-import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaSearch, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaYoutube, FaTimes, FaEdit, FaPlus, FaRegClock, FaFileExport, FaBirthdayCake, FaRegEnvelopeOpen, FaCity, FaHome, FaBuilding, FaPhone, FaUserPlus, FaBookReader, FaClock, FaRegKeyboard, FaMoneyBillWave, FaBriefcase, FaSearch } from 'react-icons/fa';
 import {Tabs, Tab} from "react-bootstrap";
 import WriterFeed from "./WriterFeed"
+import UserContext from "../auth/UserContext";
 
 function WriterDetailsAuth({writerId}) {
+    const { queries } = useContext(UserContext);
     const [writer, setWriter] = useState();
     const [applications, setApplications] = useState();
     const [pieces, setPieces] = useState();
@@ -83,9 +85,19 @@ function WriterDetailsAuth({writerId}) {
                             <small><span className="text-secondary">Last Login At:</span> {writer.lastLoginAt.slice(0, 10)}</small>
                         </div>
                         <div className="row">
-                            <FaSearch id="status-icon"/>
-                            <small id="statusIcon"><span className="text-secondary">Gig Search: </span><span className="badge badge-success">Active</span></small>
+                            <FaFileExport id="status-icon"/>
+                            <small id="statusIcon"><span className="text-secondary">Pending Applications: <span className="badge badge-warning">{applications.filter(a => a.status==="Pending").length}</span></span></small>
+                        </div> 
+                        <div className="row">
+                            <FaBriefcase id="status-icon"/>
+                            <small id="statusIcon"><span className="text-secondary">Ongoing Gigs: <span className="badge badge-info">{gigs.length}</span></span></small>
                         </div>
+                        <div className="row">
+                            <FaSearch id="status-icon"/>
+                            <small id="statusIcon"><span className="text-secondary">Queries: </span><span className="badge badge-success">{queries.length}</span></small>
+                        </div>
+                        
+                       
                     </div>
                     <div className="col-4" id="btn-col">
                     <Link to={`/writers/${writerId}/edit`}><button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button></Link>
