@@ -5,7 +5,7 @@ import PieceCard from '../pieces/PieceCard';
 import shuffle from '../helpers/arrayShuffle';
 
 function PlatformFeed({platformId}) {
-    const { currentUser, platformWriterFollows, platformTagFollows } = useContext(UserContext);
+    const { platformWriterFollows, platformTagFollows } = useContext(UserContext);
     const [pieces, setPieces] = useState();
 
     useEffect(() => {
@@ -19,14 +19,18 @@ function PlatformFeed({platformId}) {
                 writerRes = await PrintApi.getPiecesForFeedFromWriters(platformId, platformWriterFollows.map(f => f.writerId));
             }
             const feed = shuffle([writerRes, tagRes].flat().filter(x => x !== undefined));
-            setPieces(feed);
+            const pieceIds = feed.map(p => p.pieceId);
+            console.log(feed)
+            const filterd = feed.filter(({pieceId}, index) => !pieceIds.includes(pieceId, index+1));
+            console.log(filterd)
+            setPieces(filterd);
         };
         getGigs();
     }, []);
 
     return(
         <div>
-            {pieces ? pieces.map(p => <PieceCard key={p.id * Math.random()} piece={p}/>) : ""}
+            {pieces ? pieces.map(p => <PieceCard key={p.pieceId * Math.random()} piece={p}/>) : ""}
         </div>
     )
 };

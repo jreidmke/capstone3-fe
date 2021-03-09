@@ -224,6 +224,12 @@ function PlatformDetailsAuth({platformId}) {
                                 </div>
                         </div>
                     </Tab>
+                    <Tab eventKey="fifth" title="Piece Feed">
+                        <div className="row overflow-auto" id="feed-div">
+                            <PlatformFeed platformId={platformId}/>
+
+                        </div>
+                    </Tab>
                 </Tabs>
                 </div>  
 

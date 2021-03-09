@@ -7,7 +7,6 @@ import shuffle from "../helpers/arrayShuffle";
 function WriterFeed({writerId}) {
     const { writerPlatformFollows, writerTagFollows } = useContext(UserContext);
     const [gigs, setGigs] = useState();
-    const [applied, setApplied] = useState();
 
     function removeFromArray(gigArr, appArr) {
         for(let i = 0; i < gigArr.length; i++) {
@@ -22,8 +21,7 @@ function WriterFeed({writerId}) {
 
     useEffect(() => {
         async function getGigs() {
-            const appliedRes = await PrintApi.getApplicationsByWriterId(writerId)
-            console.log(appliedRes);
+            const appliedRes = await PrintApi.getApplicationsByWriterId(writerId);
             let tagRes;
             let platformRes;
             if(writerTagFollows.length) {

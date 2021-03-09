@@ -1,5 +1,16 @@
+#pieceImg {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+}
+
 #pieceCard {
     padding: 1rem;
     outline: 1px lightgrey dashed;
     margin: 1rem;
+    width: 95%;
+}
+
+#writer-name {
+    margin-bottom: 0;
 }

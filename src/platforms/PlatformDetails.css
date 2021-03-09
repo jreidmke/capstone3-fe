@@ -91,3 +91,8 @@
 .list-group-item:hover, tr:hover {
     background-color: whitesmoke;
 }
+
+#feed-div {
+    height: 30rem;
+    width: 100%;
+}
