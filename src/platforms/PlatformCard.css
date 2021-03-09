@@ -1,7 +1,0 @@
-#platformCard {
-    outline: 1px lightgray dashed;
-}
-
-#platformCard:hover {
-    background-color: lightgray;
-}

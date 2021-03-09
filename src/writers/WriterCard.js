@@ -1,24 +1,33 @@
 import { Link } from 'react-router-dom';
 import { FaTwitter, FaYoutube, FaFacebook } from 'react-icons/fa';
-import "./WriterCard.css";
+import "../pieces/PieceCard.css";
 
 function WriterCard({writer}) {
     return(
-        <div className="container my-5" id="writerCard">
-            <div className="row">
-                <div className="col-3">
-                    <img src={writer.imageUrl} className="mt-2" id="platformImg"/>
-                    <h5><Link to={`/writers/${writer.id}`}>{writer.firstName} {writer.lastName}</Link></h5>
-                    <p>{writer.city}, {writer.state}</p>
+        <div className="container" id="piece-card">
+            <div className="row text-center">
+                <div className="col-2">
+                    <img src={writer.imageUrl} id="piece-img"/>
+                    <p  id="writer-name"><Link to={`/writers/${writer.id}`}>{writer.firstName} {writer.lastName}</Link></p>
+                    <small>{writer.city}, {writer.state}</small><br/>
+                    <span className="badge badge-info">Current Pieces: {writer.pieceCount}</span>
                 </div>
                 <div className="col">
-                    <p className="mt-3">About {writer.firstName}: {writer.bio}</p>
-                    <h2>
-                        <a href={`https://www.facebook.com/${writer.facebookUsername}`} className="mr-2"><FaFacebook color="blue"/></a>
-                        <a href={`https://www.twitter.com/${writer.twitterUsername}`} className='mx-5'><FaTwitter color="lightblue"/></a>
-                        <a href={`https://www.youtube.com/${writer.youtubeUsername}`} className='ml-2'><FaYoutube color="red"/></a>
-                    </h2>
-                </div>
+                    <div className="row" id="description">
+                        <small><b>Writer Description</b>: {writer.bio.length > 700 ? <span>{writer.bio.slice(0, 700)}...</span> : writer.bio}</small>
+                    </div>
+                    <div className="row" id="socials">
+                        <div className="col-4">
+                            <h1><a href={`https://www.facebook.com/${writer.facebookUsername}`}><FaFacebook color="blue"/></a></h1>
+                        </div>
+                        <div className="col-4">
+                            <h1><a href={`https://www.twitter.com/${writer.twitterUsername}`}><FaTwitter color="lightblue"/></a></h1>
+                        </div>
+                        <div className="col-4">
+                            <h1><a href={`https://www.youtube.com/${writer.youtubeUsername}`} className='ml-2'><FaYoutube color="red"/></a></h1>
+                        </div>
+                    </div>         
+                </div>              
             </div>
         </div>
     )

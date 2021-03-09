@@ -1,24 +1,33 @@
 import { Link } from 'react-router-dom';
 import { FaTwitter, FaYoutube, FaFacebook } from 'react-icons/fa';
-import "./PlatformCard.css";
+import "../pieces/PieceCard.css";
 
 function PlatformCard({platform}) {
     return(
-        <div className="container my-5" id="platformCard">
-            <div className="row">
-                <div className="col-3">
-                    <img src={platform.imageUrl} className="mt-2" id="platformImg"/>
-                    <h5><Link to={`/platforms/${platform.id}`}>{platform.displayName}</Link></h5>
-                    <p>{platform.city}, {platform.state}</p>
+        <div className="container" id="piece-card">
+            <div className="row text-center">
+                <div className="col-2">
+                    <img src={platform.imageUrl} id="piece-img"/>
+                    <p  id="writer-name"><Link to={`/platforms/${platform.id}`}>{platform.displayName}</Link></p>
+                    <small>{platform.city}, {platform.state}</small><br/>
+                    <span className="badge badge-info">Current Gigs: {platform.gigCount}</span>
                 </div>
                 <div className="col">
-                    <p className="mt-3">About {platform.displayName}: {platform.description}</p>
-                    <h2>
-                        <a href={`https://www.facebook.com/${platform.facebookUsername}`} className="mr-2"><FaFacebook color="blue"/></a>
-                        <a href={`https://www.twitter.com/${platform.twitterUsername}`} className='mx-5'><FaTwitter color="lightblue"/></a>
-                        <a href={`https://www.youtube.com/${platform.youtubeUsername}`} className='ml-2'><FaYoutube color="red"/></a>
-                    </h2>
-                </div>
+                    <div className="row" id="description">
+                        <small><b>Platform Description</b>: {platform.description.length > 700 ? <span>{platform.description.slice(0, 700)}...</span> : platform.description}</small>
+                    </div>
+                    <div className="row" id="socials">
+                        <div className="col-4">
+                            <h1><a href={`https://www.facebook.com/${platform.facebookUsername}`}><FaFacebook color="blue"/></a></h1>
+                        </div>
+                        <div className="col-4">
+                            <h1><a href={`https://www.twitter.com/${platform.twitterUsername}`}><FaTwitter color="lightblue"/></a></h1>
+                        </div>
+                        <div className="col-4">
+                            <h1><a href={`https://www.youtube.com/${platform.youtubeUsername}`} className='ml-2'><FaYoutube color="red"/></a></h1>
+                        </div>
+                    </div>         
+                </div>              
             </div>
         </div>
     )

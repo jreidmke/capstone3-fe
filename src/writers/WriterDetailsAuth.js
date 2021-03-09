@@ -88,7 +88,7 @@ function WriterDetailsAuth({writerId}) {
                         </div>
                     </div>
                     <div className="col-4" id="btn-col">
-                        <button id="edit-btn"><Link to={`/writers/${writerId}/edit`}><FaEdit className="m-1"/><small>Edit Profile</small></Link></button>
+                    <Link to={`/writers/${writerId}/edit`}><button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button></Link>
                     </div>
                 </div>
                 <div id="writer-nav">

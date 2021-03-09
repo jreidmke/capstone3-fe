@@ -9,10 +9,10 @@ function PieceCard({piece}) {
     console.log(piece);
     return(
         
-        <div className="container" id="pieceCard">
+        <div className="container" id="piece-card">
             <div className="row">
                 <div className="col-2">
-                    <img src={piece.imageUrl} id="pieceImg"/>
+                    <img src={piece.imageUrl} id="piece-img"/>
                     <p id="writer-name"><Link to={`/writers/${piece.writerId}`}>{piece.firstName} {piece.lastName}</Link></p>
                     <small>Submitted: {piece.createdAt.slice(0,10)}</small>
                 </div>
