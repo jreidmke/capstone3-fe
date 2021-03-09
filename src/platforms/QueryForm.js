@@ -45,20 +45,16 @@ function QueryForm() {
             {platform && writer ? 
             
             <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <h1>Query {writer.firstName} for a Gig</h1>
-                    </div>
-                </div>
-
-                <div className="row">
-                    <div className="col">
+                <div className="row" id="query-form">
+                    <div className="col-2">
                         <img src={writer.imageUrl} id="writerImg"/>
-                        <h3><Link to={`/writers/${writerId}`}>{writer.firstName} {writer.lastName}</Link></h3>
-                        <h6>{writer.city}, {writer.state}</h6>
-                        <ul>
-                            fdajkl;'
-                            '
+                        <h6><Link to={`/writers/${writerId}`}>{writer.firstName} {writer.lastName}</Link></h6>
+                        <small>{writer.city}, {writer.state}</small>
+                        <ul className="list-group">
+                            <li className="list-group-item"><small><b>Portfolios</b></small></li>
+                            {writer.portfolios.map(p => 
+                                <li className="list-group-item"><small><b><Link to={`/portfolios/${p.id}`}>{p.title}</Link></b></small></li>
+                                )}
                         </ul>
                     </div>
 
@@ -80,7 +76,7 @@ function QueryForm() {
                                     onChange={handleChange}
                                     placeholder={"Message"}
                                     className="form-control"
-                                    rows="5"/>
+                                    rows="12"/>
                             </div>
 
                             <div className="row mt-2">
