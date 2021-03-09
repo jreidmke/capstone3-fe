@@ -4,7 +4,7 @@ import PrintApi from '../api/api';
 import UserContext from '../auth/UserContext';
 import { Link } from 'react-router-dom';
 import "./PortfolioDetails.css";
-import {FaEdit} from 'react-icons/fa';
+import {FaEdit, FaPenAlt} from 'react-icons/fa';
 
 function PortfolioDetails() {
     const { currentUser } = useContext(UserContext);
@@ -25,7 +25,11 @@ function PortfolioDetails() {
             <div className="container">
                 <div className="row mt-3">
                     <div className="col-4">
-                        <h4>{portfolio.title} <Link to={`/portfolios/${portfolioId}/edit`}><FaEdit className="mb-1"/></Link></h4>
+                        <h4>{portfolio.title}{currentUser.writerId === portfolio.writerId ? 
+                        <Link to={`/portfolios/${portfolioId}/edit`}><FaEdit className="mb-1"/></Link> : 
+                        
+                        <small><Link to={`/writers/${portfolio.writerId}/make-query`}><button id="query-btn"><FaPenAlt className="m-1"/><small>Query Writer</small></button></Link></small>
+}</h4>
                         <h5>A Portfolio By: <Link to={`/writers/${portfolio.writerId}`}>{portfolio.firstName} {portfolio.lastName}</Link></h5>
                         <h6>Created On: {portfolio.createdAt.slice(0, 10)}</h6>
                         <ul>
