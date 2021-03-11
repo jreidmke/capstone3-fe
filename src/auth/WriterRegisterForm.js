@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Alert from '../common/Alert';
+import PrintApi from "../api/api";
+
 /** Login form.
  *
  * Shows form and manages update to state on changes.
@@ -30,13 +32,23 @@ function WriterRegisterForm({ register }) {
         firstName: "",
         lastName: "",
         age: "",
-        bio: ""
+        bio: "",
+        expertise1: ""
     });
-
+    const [tags, setTags] = useState();
     const [formErrors, setFormErrors] = useState([]);
+
+    useEffect(() => {
+        async function getTags() {
+            const tagRes = await PrintApi.getAllTags();
+            setTags(tagRes);
+        };
+        getTags();
+    }, [])
 
     async function submit(e) {
         e.preventDefault();
+        console.log(formData);
         let result = await register(formData);
         if(result.success) {
             history.push("/home");
@@ -52,6 +64,8 @@ function WriterRegisterForm({ register }) {
             [name]: value
         }));
     };
+
+    const states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
     return(
         <div className="container">
@@ -108,7 +122,14 @@ function WriterRegisterForm({ register }) {
 
                             />
                     </div>
-                    <div className="col-4">
+                    <div className="col-2">
+                        <label>Select an Expertise</label>
+                        <select name="expertise1" id="expertise1" onChange={handleChange} value={formData.expertise1} className="form-control">
+                            <option value="">--</option>
+                            {tags ? tags.map(t => <option key={t.id} value={t.id}>{t.title}</option>) : ""}
+                        </select>
+                    </div>
+                    <div className="col-2">
                         <label>Age</label>
                         <input
                             name="age"
@@ -131,17 +152,14 @@ function WriterRegisterForm({ register }) {
                             className="form-control"
                         />
                     </div>
-                    <div className="col-4">
-                        <label>State (Come back and make this a select)</label>
-                        <input
-                            name="state"
-                            value={formData.state}
-                            onChange={handleChange}
-                            placeholder="State"
-                            className="form-control"
-                        />
+                    <div className="col-2">
+                        <label>State</label>
+                        <select name="state" id="state" onChange={handleChange} className="form-control">
+                            <option value="">--</option>
+                            {states.map(s => <option key={s} value={s}>{s}</option>)}
+                        </select>
                     </div>
-                    <div className="col-4">
+                    <div className="col">
                         <label>Phone</label>
                         <input
                             name="phone"
@@ -239,7 +257,7 @@ function WriterRegisterForm({ register }) {
                     <div className="col">
                         <label>About the Author</label>
                         <textarea
-                            name="biography"
+                            name="bio"
                             value={formData.bio}
                             onChange={handleChange}
                             placeholder="About the Author"

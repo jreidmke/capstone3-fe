@@ -106,10 +106,10 @@ function PlatformDetailsAuth({platformId}) {
                                         <FaHome color="lightgrey"/>
                                         <small className="ml-2">Street Address: <b>{platform.address1}</b></small>
                                     </li>
-                                    <li className="list-group-item">
+                                    {platform.address2 ?<li className="list-group-item">
                                         <FaBuilding color="lightgrey"/>
                                         <small className="ml-2">Address Two: <b>{platform.address2}</b></small>
-                                    </li>
+                                    </li> : ""}
                                     <li className="list-group-item">
                                         <FaMailBulk color="lightgrey"/>
                                         <small className="ml-2">Postal Code: <b>{platform.postalCode}</b></small>
@@ -169,6 +169,8 @@ function PlatformDetailsAuth({platformId}) {
                     </Tab>
                     <Tab eventKey="second" title="Open Gigs">
                     <div className="row">
+                        <h1>You don't have any gigs posted. <Link to={`/gigs/new`}>Create One Now!</Link></h1>
+
                         {openGigs.map(g => 
                             <div key={g.id} className="card" id="open-gig-card">
                                 <p className="card-title"><b><Link to={`/gigs/${g.id}`}>{g.title}</Link> <Link to={`/gigs/${g.id}/edit`}><FaEdit/></Link></b></p>

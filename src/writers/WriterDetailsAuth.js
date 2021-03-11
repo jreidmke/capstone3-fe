@@ -100,7 +100,8 @@ function WriterDetailsAuth({writerId}) {
                        
                     </div>
                     <div className="col-4" id="btn-col">
-                    <Link to={`/writers/${writerId}/edit`}><button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button></Link>
+                        <Link to={`/writers/${writerId}/edit`}><button id="edit-btn"><FaEdit className="m-1"/><small>Edit Profile</small></button></Link>
+                        <Link to={`/pieces/new`}><button id="follow-btn"><FaRegKeyboard className="m-1"/><small>Write Piece</small></button></Link>
                     </div>
                 </div>
                 <div id="writer-nav">

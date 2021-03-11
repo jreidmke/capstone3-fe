@@ -33,9 +33,9 @@ function PieceDetails() {
         {piece ? 
         <div className="container">
             <div className="row mt-3">
-                <div className="col-4 text-center">
+                <div className="col-5 text-center">
                     <h4>{piece.title}{currentUser.writerId === piece.writerId ? 
-                    <Link to={`/piece/${pieceId}/edit`}><FaEdit className="mb-1"/></Link> : 
+                    <Link to={`/piece/${pieceId}/edit`}><FaEdit className="ml-2 mb-1"/></Link> : 
                     
                     <small><Link to={`/writers/${piece.writerId}/make-query`}><button id="query-btn"><FaPenAlt className="m-1"/></button></Link></small>
 }</h4>

@@ -43,7 +43,6 @@ function MessagePage() {
         return;
     }
 
-    console.log(queries)
     return(
         <div className="container">
             <div className="row">
@@ -80,8 +79,8 @@ function MessagePage() {
                             <h5>
                                 On {a.createdAt.slice(0, 10)}, your application for Gig: <Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link> was updated to <span style={{color: statusColors[a.status]}}>{a.status}</span>.
                             </h5>
-                            <button className="btn btn-sm btn-success mx-3" onClick={() => acceptGig(a.appId, a.id)}>Accept Gig</button>
-                            <button className="btn btn-sm btn-danger mx-3" onClick={() => declineGig(a.id)}>Decline Gig</button>
+                            {a.status==="Accepted" ? <div><button className="btn btn-sm btn-success mx-3" onClick={() => acceptGig(a.appId, a.id)}>Accept Gig</button>
+                            <button className="btn btn-sm btn-danger mx-3" onClick={() => declineGig(a.id)}>Decline Gig</button></div> : ""}
                             <h6><Link to={`/platforms/${a.platformId}`} className="card-link">Reach Out to {a.displayName}</Link></h6>
                         </div>
                     </div>

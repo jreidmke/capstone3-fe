@@ -37,6 +37,7 @@ import RelatedItems from "../gigs/RelatedItems";
 import Faq from "../common/Faq";
 import OngoingWriterGigs from "../writers/OngoingGigs";
 import OngoingPlatformGigs from "../platforms/OngoingPlatformGigs";
+import WriterFaqs from "../faqs/WriterFaqs";
 
 function Routes({ login, register, logout }) {
     return(
@@ -68,6 +69,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/pieces/new">
                 <NewPieceForm/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/writers/faqs">
+                <WriterFaqs/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/ongoing">
