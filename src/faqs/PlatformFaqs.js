@@ -16,12 +16,12 @@ function PlatformFaqs() {
     const { currentUser } = useContext(UserContext);
     return(
         <div className="container">
-            <div className="row">
+            <div className="row" id="top-row">
                 <div className="col">
                     <h1 className="display-4 text-center">How to Use Print as a Platform</h1>
                 </div>
             </div>
-            <div className="row" id="step-row">
+            <div className="row">
                 <div className="col text-center">
                     <p>Welcome to <b>Print.</b> A place to connect your platform with the best writers available.</p>
                     <p>We use AI to help put you in touch with writers who share expertise with your needs.</p>
