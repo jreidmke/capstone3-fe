@@ -36,6 +36,18 @@
     width: 50rem;
 }
 
+#three-down {
+    margin-top: 3rem;
+}
+
+#fiveDown {
+    margin-top: 5rem;
+}
+
+#sevenDown {
+    margin-top: 7rem;
+}
+
 #ten {
     width: 10rem;
 }
@@ -54,4 +66,9 @@
 
 #fiftyRem {
     width: 50rem;
+}
+
+#step-row {
+    margin-bottom: 8rem;
+    margin-top: 8rem;
 }
