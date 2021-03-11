@@ -90,7 +90,7 @@ function EditPieceForm() {
     return(
         <div>
             {piece ? 
-            <div className="container">
+            <div className="container text-center">
 
                 <div className="row mt-3">
                     <div className="col">
@@ -99,6 +99,28 @@ function EditPieceForm() {
                 </div>
 
                 <div className="row">
+                    
+                    <div className="col-4">
+                        <h4>Tagged</h4>
+                            <ul>
+                                {tagsOn ? tagsOn.map(p => 
+                                <li>
+                                    {p.title} <FaTimes onClick={()=>removeTagFromPiece(currentUser.writerId, piece.id, p.id)} color="red"/>
+                                </li>
+                                ) : ""}
+                            </ul>
+                    </div>
+                    <div className="col">
+                        <h4>Not Tagged</h4>
+                            <ul>
+                                {tagsOff ? tagsOff.map(t => 
+                                <li>
+                                    {t.title} <FaPlus onClick={()=>addTagToPiece(currentUser.writerId, pieceId, t.id)} color="green"/>
+                                </li>) 
+                                : ""}
+                            </ul>
+                    </div>
+
                     <div className="col-6">
                         <form>
                             <div className="row my-1">
@@ -124,27 +146,6 @@ function EditPieceForm() {
                                     required/>
                             </div>
                         </form>
-                    </div>
-
-                    <div className="col-4">
-                        <h4>Tags</h4>
-                            <ul>
-                                {tagsOn ? tagsOn.map(p => 
-                                <li>
-                                    {p.title} <FaTimes onClick={()=>removeTagFromPiece(currentUser.writerId, piece.id, p.id)} color="red"/>
-                                </li>
-                                ) : ""}
-                            </ul>
-                    </div>
-                    <div className="col">
-                        <h4>Not Tagged</h4>
-                            <ul>
-                                {tagsOff ? tagsOff.map(t => 
-                                <li>
-                                    {t.title} <FaPlus onClick={()=>addTagToPiece(currentUser.writerId, pieceId, t.id)} color="green"/>
-                                </li>) 
-                                : ""}
-                            </ul>
                     </div>
                 </div>
                 <div className="row">
