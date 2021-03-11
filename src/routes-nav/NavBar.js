@@ -70,7 +70,7 @@ function NavBar({logout}) {
             <Link className="navbar-brand" to="/home">
                 <FaPenFancy/>Print
             </Link>
-            <Link to={`/writers/faqs`}>FAQs</Link>
+            <Link to={`/platforms/faqs`}>FAQs</Link>
             {currentUser ? authNav() : noAuthNav()}
         </nav>
     );

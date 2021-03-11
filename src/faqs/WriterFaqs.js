@@ -15,7 +15,7 @@ import mail from "../images/wMail.png";
 import acceptGig from "../images/wAcceptGig.png";
 import ongoingGigs from "../images/wOngoingGigs.png";
 
-import "./WriterFaqs.css";
+import "./Faqs.css";
 
 function WriterFaqs() {
     return(

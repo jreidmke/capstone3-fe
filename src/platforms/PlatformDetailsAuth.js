@@ -136,7 +136,7 @@ function PlatformDetailsAuth({platformId}) {
                                             </b>
                                         </small>
                                     </li>
-                                    {console.log(platform)}
+                                    {console.log(applications)}
                                     <li className="list-group-item">
                                         <FaFacebook color="blue"/>
                                         <small className="ml-2">Facebook: 

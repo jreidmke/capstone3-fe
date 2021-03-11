@@ -36,14 +36,22 @@
     width: 50rem;
 }
 
-#fiftyRem {
-    width: 50rem;
+#ten {
+    width: 10rem;
 }
 
 #twentyRem {
     width: 20rem;
 }
 
+#thirty {
+    width: 30rem;
+}
+
 #fortyRem {
     width: 40rem;
+}
+
+#fiftyRem {
+    width: 50rem;
 }

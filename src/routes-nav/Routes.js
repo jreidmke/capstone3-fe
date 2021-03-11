@@ -38,6 +38,7 @@ import Faq from "../common/Faq";
 import OngoingWriterGigs from "../writers/OngoingGigs";
 import OngoingPlatformGigs from "../platforms/OngoingPlatformGigs";
 import WriterFaqs from "../faqs/WriterFaqs";
+import PlatformFaqs from "../faqs/PlatformFaqs";
 
 function Routes({ login, register, logout }) {
     return(
@@ -121,6 +122,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/pieces">
                 <PieceList/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/platforms/faqs">
+                <PlatformFaqs/>
             </PrivateRoute>
 
             <PrivateRoute path="/platforms/:platformId/ongoing">
