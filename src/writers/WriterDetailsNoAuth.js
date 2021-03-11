@@ -156,7 +156,7 @@ function WriterDetailsNoAuth({writerId}) {
                             <div className="row mt-3">
                                 <div className="col-6">
                                     <ul className="list-group text-center">
-                                        <li className="list-group-item"><b>Pieces</b><FaPlus color="green" className="float-right"/></li>
+                                        <li className="list-group-item"><b>Pieces</b></li>
                                         {pieces.map(p => 
                                             <li key={p.id} className="list-group-item">
                                                 <small><b><Link to={`/pieces/${p.id}`}>{p.title}</Link></b></small><br/>
@@ -168,7 +168,7 @@ function WriterDetailsNoAuth({writerId}) {
 
                                 <div className="col-6">
                                     <ul className="list-group text-center">
-                                        <li className="list-group-item"><b>Portfolios</b><FaPlus color="green" className="float-right"/></li>
+                                        <li className="list-group-item"><b>Portfolios</b></li>
                                         
                                         {writer.portfolios.map(p =>                                        
                                             <li key={p.id} className="list-group-item">

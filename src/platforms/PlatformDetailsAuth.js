@@ -169,7 +169,6 @@ function PlatformDetailsAuth({platformId}) {
                     </Tab>
                     <Tab eventKey="second" title="Open Gigs">
                     <div className="row">
-                        <h1>You don't have any gigs posted. <Link to={`/gigs/new`}>Create One Now!</Link></h1>
 
                         {openGigs.map(g => 
                             <div key={g.id} className="card" id="open-gig-card">

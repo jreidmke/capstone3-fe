@@ -47,15 +47,15 @@ function MessagePage() {
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <h1>There are {length} messages for {currentUser.firstName}</h1>
+                    <h1 className="text-center">There {length===1 ? "is" : "are" } {length} new message{length===1 ? "" : "s"} for {currentUser.firstName}</h1>
                 </div>
             </div>
             {queries.length || appMsgs.length ? 
             <div className="row">
-                <div className="col-5">
+                <div className="col-5 text-center">
                     <h4>Gig Queries</h4>
                     {queries.map(q => 
-                        <div key={q.id} className="card py-2 my-2">
+                        <div key={q.id} className="card p-2 my-2">
                             <div className="card-title">
                                 <h5><Link to={`/gigs/${q.gigId}`}>{q.gigTitle}</Link></h5>
                                 <h6>Posted By: <Link to={`/platforms/${q.platformId}`}>{q.displayName}</Link></h6>
@@ -64,17 +64,17 @@ function MessagePage() {
                             <div className="card-body">
                                 <p><b>Gig Description: </b>{q.gigDescription}</p>
                                 <p>Message From {q.displayName}: {q.message}</p>
-                                <button className="btn btn-success"><Link to={`/gigs/${q.gigId}/apply`} className="card-link">Apply Now!</Link></button>
+                                <Link to={`/gigs/${q.gigId}/apply`} className="card-link"><button className="btn btn-success">Apply Now!</button></Link>
                                 <button className="btn btn-danger" onClick={()=>ignoreQuery(q.id)}>Ignore</button>
                             </div>
                         </div>
                         )}
                 </div>
                 <div className="col"/>
-                <div className="col-5">
+                <div className="col-5 text-center">
                     <h4>Application Updates</h4>
                     {appMsgs.map(a =>
-                    <div key={a.id} className="card py-2 my-2">
+                    <div key={a.id} className="card p-2 my-2 ">
                         <div className="card-title">
                             <h5>
                                 On {a.createdAt.slice(0, 10)}, your application for Gig: <Link to={`/gigs/${a.gigId}`}>{a.gigTitle}</Link> was updated to <span style={{color: statusColors[a.status]}}>{a.status}</span>.
