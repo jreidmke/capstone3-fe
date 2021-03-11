@@ -44,9 +44,8 @@ function ApplyToGigForm() {
         await PrintApi.applyToGig(currentUser.writerId, gigId, formData);
         history.push(`/writers/${currentUser.writerId}`);
     };
-console.log(gig)
     return(
-        <div>
+        <div className="text-center">
             {gig && portfolios ? 
             <div className="container">
                 <div className="row">
@@ -57,16 +56,15 @@ console.log(gig)
                 </div>
 
                 <div className="row">
-                    <div className="col"><p>Read Your Portfolio Before Submitting</p></div>
-                </div>
+                    <div className="col">
+                        <p>Read Your Portfolio Before Submitting</p>
+                        {portfolios.map(p => <Link to={`/portfolios/${p.id}`}><p>{p.title}</p></Link>)}
+                    </div>
 
-                <div className="row">
-                    <div className="col">{portfolios.map(p => <Link to={`/portfolios/${p.id}`}><p>{p.title}</p></Link>)}</div>
                     <div className="col">
                         <form onSubmit={submit}>
-                            <label htmlFor="portfolioId">Select Your Portfolio</label>
                             <select name="portfolioId" id="portfolioId" value={formData.portfolioId} onChange={handleChange} className="form-control"> 
-                                <option value="">--</option>
+                                <option value="">Select Your Portfolio</option>
                                 {portfolios ? portfolios.map(p => <option value={p.id}>{p.title}</option>) : ""}
                             </select>
 

@@ -17,6 +17,33 @@
 }
 
 #newPortfolioBtn {
-    height: 5rem;
-    width: 30rem;
+    width: 50rem;
+}
+
+#newPortfolioForm {
+    width: 50rem;
+}
+
+#addPieceToPortfolio {
+    width: 50rem;
+}
+
+#gigFeed {
+    width: 50rem;
+}
+
+#applyToGig {
+    width: 50rem;
+}
+
+#fiftyRem {
+    width: 50rem;
+}
+
+#twentyRem {
+    width: 20rem;
+}
+
+#fortyRem {
+    width: 40rem;
 }
