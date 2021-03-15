@@ -30,7 +30,6 @@ function App() {
           const { userId } = jwt.decode(token);
           let currentUser = await PrintApi.getCurrentUser(userId);
           setCurrentUser(currentUser);
-
           if(currentUser.writerId !== null) {
             const wPFRes = await PrintApi.getWriterPlatformFollows(currentUser.writerId);
             setWriterPlatformFollows(wPFRes);
