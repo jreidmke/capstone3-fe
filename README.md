@@ -1,6 +1,26 @@
 # Print Front-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Temporarily deployed at: http://accidental-game.surge.sh/
+
+Print is a tool created for both writers and publishing platforms. Both writers and platforms can create accounts and either post their work and apply to gigs or post gig openings and hire writers.
+
+This app uses the print-project-api which can be found at https://github.com/jreidmke/capstone3-be/.
+
+# Installation
+
+To install, follow these steps:
+
+- Via Downloading from GitHub:
+
+Download this repository onto your machine by clicking the "Clone or Download" button or Fork the repo into your own Github account Download and extract the zip file to a directory of your choice.
+
+- Via Command Line: 
+
+`$ git clone https://github.com/jreidmke/capstone3-fe`
+
+- Install Dependencies
+
+`$npm i`
 
 ## Available Scripts
 
