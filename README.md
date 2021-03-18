@@ -6,7 +6,8 @@ Print is a tool created for both writers and publishing platforms. Both writers 
 
 This app uses the print-project-api which can be found at https://github.com/jreidmke/capstone3-be/.
 
-<img src="/images/wApplyToGig.png"/>
+![image.png](attachment:images/wApplyToGig.png)
+
 
 # Installation
 
