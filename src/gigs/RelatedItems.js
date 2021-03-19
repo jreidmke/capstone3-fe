@@ -50,7 +50,7 @@ function RelatedPieces() {
                     {tags.length > 3 ? 
                             <div className="col">
                                 <p>Click to See Pieces Marked With Gig's Other Tags: 
-                                {tags.slice(3).map(t => <Link to={`/pieces?tag-title=${t}`}> {t[0].toUpperCase() + t.slice(1)} </Link>)}</p>
+                                {tags.slice(3).map(t => <Link key={t} to={`/pieces?tag-title=${t}`}> {t[0].toUpperCase() + t.slice(1)} </Link>)}</p>
 
                             </div>
                      : ""}
@@ -61,7 +61,7 @@ function RelatedPieces() {
                     </div>
                     <div className="row">
                         {writers.slice(0, 3).map(w => 
-                        <div className="col">
+                        <div key={w.id} className="col">
                             <div className="card my-2 pt-2">
                                 <div className="col">
                                     <img src={w.imageUrl} id="piece-img"/>
