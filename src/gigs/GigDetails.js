@@ -95,7 +95,6 @@ function GigDetails() {
                     <Link to={`/gigs/${gigId}/apply`}><button className="btn btn-info">Apply!</button></Link>
                 </div> 
                 : ""}
-                {console.log(applications)}
                 {currentUser.platformId === gig.platformId && applications && applications.length ? 
                 <div>
                     <div className="row mt-2">

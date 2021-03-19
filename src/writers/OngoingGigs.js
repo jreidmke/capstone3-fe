@@ -20,7 +20,6 @@ function OngoingGigs() {
 
     return(
         <div>
-            {console.log(gigs)}
             {gigs ? 
             <div className="container">
                 <div className="row">

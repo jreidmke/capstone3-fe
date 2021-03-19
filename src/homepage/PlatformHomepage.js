@@ -48,12 +48,12 @@ function PlatformHomepage({platform}) {
                         <small>{writer.bio.slice(0, 200)}...</small>
                         <br/>
                         <small><b>Expertise In: </b>{writer.expertise1Title[0].toUpperCase() + writer.expertise1Title.slice(1)}</small><br/>
-                        <small><b>Recent Portfolios<br/></b>{writer.portfolios.map(p => <span><Link to={`/portfolios/${p.id}`}>-{p.title}</Link><br/></span>)}</small>
+                        <small><b>Recent Portfolios<br/></b>{writer.portfolios.map(p => <span><Link key={p.id} to={`/portfolios/${p.id}`}>-{p.title}</Link><br/></span>)}</small>
                     </div>
                     <div className="col"/>
                     <div className="col-8">
                         <p>Most Recent Pieces</p>
-                        {pieces.slice(0, 2).map(p => <PieceCard piece={p}/>)}
+                        {pieces.slice(0, 2).map(p => <PieceCard key={p.id} piece={p}/>)}
                     </div>
                 </div>
             </div>

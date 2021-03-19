@@ -24,7 +24,6 @@ function WriterHomepage({writer}) {
         };
         getItemsOfTheWeek();
     }, []);
-    console.log(writer)
     return(
         <div>
             {applications && ongoingGigs && platform && gigs ? 

@@ -9,8 +9,6 @@ function WriterFeed({writerId}) {
     const [gigs, setGigs] = useState();
 
     function removeFromArray(gigArr, appArr) {
-        console.log(gigArr);
-        console.log(appArr);
         for(let i = 0; i < gigArr.length - 1; i++) {
             for(let v of appArr) {
                 if(gigArr[i].id === v.gigId) {
@@ -41,7 +39,6 @@ function WriterFeed({writerId}) {
 
     return(
         <div>
-            {console.log(gigs)}
             {gigs ? gigs.map(g => <GigCard key={g.id * Math.random()} gig={g}/>) : ""}
         </div>
     )

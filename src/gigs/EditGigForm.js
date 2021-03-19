@@ -42,7 +42,6 @@ function EditGigForm() {
 
             const tagRes = await PrintApi.getAllTags();
             setTagsOff(removeFromArr(tagRes, gigRes.tags));
-            console.log(removeFromArr(tagRes, gigRes.tags));
         };
         getItems();
     }, []);
@@ -70,9 +69,7 @@ function EditGigForm() {
     };
 
     async function addTagToGig(platformId, gigId, tagId) {
-        console.log(tagsOff.length)
         let addedTag = tagsOff.splice(tagsOff.map(t => t.id).indexOf(tagId), 1)[0];
-        console.log(tagsOff.length)
         setTagsOff(tagsOff)
 
         await PrintApi.addTagToGig(platformId, gigId, tagId);

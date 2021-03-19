@@ -29,7 +29,6 @@ function NewGigForm() {
 
     async function submit(e) {
         e.preventDefault();
-        console.log(formData)
         let result = await PrintApi.createGig(currentUser.platformId, formData);
         history.push(`/gigs/${result.id}/edit`);
     };

@@ -48,7 +48,6 @@ function WriterRegisterForm({ register }) {
 
     async function submit(e) {
         e.preventDefault();
-        console.log(formData);
         let result = await register(formData);
         if(result.success) {
             history.push("/home");

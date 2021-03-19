@@ -6,7 +6,6 @@ import "../pieces/PieceCard";
 
 function GigCard({gig}) {
     const { currentUser } = useContext(UserContext);
-    console.log(gig);
     return(
         <div className="container" id="piece-card">
             <div className="row text-center">
