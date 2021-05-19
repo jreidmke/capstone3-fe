@@ -34,7 +34,6 @@ import ApplicationDetails from "../applications/ApplicationDetails";
 import MessagePage from "../writers/MessagePage";
 import RelatedItems from "../gigs/RelatedItems";
 
-import Faq from "../common/Faq";
 import OngoingWriterGigs from "../writers/OngoingGigs";
 import OngoingPlatformGigs from "../platforms/OngoingPlatformGigs";
 import WriterFaqs from "../faqs/WriterFaqs";
@@ -51,10 +50,6 @@ function Routes({ login, register, logout }) {
             <Route exact path="/home">
                 <Homepage/>
             </Route>
-
-            <PrivateRoute exact path="/faq">
-                <Faq/>
-            </PrivateRoute>
 
             <Route exact path="/login">
                 <LoginForm login={login}/>
@@ -74,6 +69,10 @@ function Routes({ login, register, logout }) {
 
             <PrivateRoute path="/writers/faqs">
                 <WriterFaqs/>
+            </PrivateRoute>
+
+            <PrivateRoute path="/platforms/faqs">
+                <PlatformFaqs/>
             </PrivateRoute>
 
             <PrivateRoute path="/writers/:writerId/ongoing">
