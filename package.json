@@ -18,12 +18,12 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start": "node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
