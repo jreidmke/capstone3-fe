@@ -22,6 +22,9 @@ function App() {
   const [queries, setQueries] = useState();
   const [appMsgs, setAppMsgs] = useState();
 
+
+  
+
   useEffect(() => {
     async function getCurrentUser() {
       if(token) {
