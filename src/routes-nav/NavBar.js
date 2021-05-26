@@ -70,6 +70,8 @@ function NavBar({logout}) {
         <nav className="Navigation navbar navbar-expand-md">
             <Link className="navbar-brand" to="/home">
                 <FaPenFancy/>Print
+                {currentUser && currentUser.writerId ? <Link to={`/writers/faqs`}>FAQs</Link> : ""}
+                {currentUser && currentUser.platformId ? <Link to={`/platforms/faqs`}>FAQS</Link> : ""}
             </Link>
             {currentUser ? authNav() : noAuthNav()}
         </nav>
@@ -78,4 +80,4 @@ function NavBar({logout}) {
 
 export default NavBar;
 
-{/* <Link to={`/${currentUser !== null && currentUser.writerId ? "writers" : "platforms"}/faqs`}>FAQs</Link> */}
+
