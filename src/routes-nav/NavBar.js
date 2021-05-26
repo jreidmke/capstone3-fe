@@ -71,10 +71,11 @@ function NavBar({logout}) {
             <Link className="navbar-brand" to="/home">
                 <FaPenFancy/>Print
             </Link>
-            <Link to={`/${currentUser !== null && currentUser.writerId ? "writers" : "platforms"}/faqs`}>FAQs</Link>
             {currentUser ? authNav() : noAuthNav()}
         </nav>
     );
 };
 
 export default NavBar;
+
+{/* <Link to={`/${currentUser !== null && currentUser.writerId ? "writers" : "platforms"}/faqs`}>FAQs</Link> */}
