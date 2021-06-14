@@ -6,7 +6,6 @@ import { FaPenFancy, FaEnvelopeSquare } from 'react-icons/fa';
 
 function NavBar({logout}) {
     const { currentUser, queries, appMsgs } = useContext(UserContext);
-    console.log(currentUser);
 
     function authNav() {
         return(
@@ -69,9 +68,9 @@ function NavBar({logout}) {
     return(
         <nav className="Navigation navbar navbar-expand-md">
             <Link className="navbar-brand" to="/home">
-                <FaPenFancy/>Print
-                {currentUser && currentUser.writerId ? <Link to={`/writers/faqs`}>FAQs</Link> : ""}
-                {currentUser && currentUser.platformId ? <Link to={`/platforms/faqs`}>FAQS</Link> : ""}
+                <FaPenFancy/>Print || 
+                 {currentUser && currentUser.writerId ? <Link to={`/writers/faqs`}>FAQs</Link> : ""}
+                 {currentUser && currentUser.platformId ? <Link to={`/platforms/faqs`}>FAQS</Link> : ""}
             </Link>
             {currentUser ? authNav() : noAuthNav()}
         </nav>

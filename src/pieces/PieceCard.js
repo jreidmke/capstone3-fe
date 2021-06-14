@@ -16,10 +16,10 @@ function PieceCard({piece}) {
                     <small>Submitted: {piece.createdAt.slice(0,10)}</small>
                 </div>
                 <div className="col">
-                    <p><Link to={`/pieces/${piece.id || piece.pieceId}`}>{piece.title}</Link> {currentUser.writerId===piece.writerId ? <Link to={`/pieces/${piece.id}/edit`} className="ml-3"><FaEdit/></Link> : ""}</p>
+                    <p><Link to={`/pieces/${piece.pieceId}`}>{piece.title}</Link> {currentUser.writerId===piece.writerId ? <Link to={`/pieces/${piece.id}/edit`} className="ml-3"><FaEdit/></Link> : ""}</p>
                     <small>{piece.text.length > 500 ? `${piece.text.slice(0, 400)}...` : piece.text}</small>
                     <br/>
-                    <small><Link to={`/pieces/${piece.id}`}>Click to read more!</Link></small>
+                    <small><Link to={`/pieces/${piece.pieceId}`}>Click to read more!</Link></small>
                 </div>
             </div>
         </div>
